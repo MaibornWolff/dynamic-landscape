@@ -1,100 +1,44 @@
-# Dynamic Landscape
-[![Build Status](https://travis-ci.com/MaibornWolff/dynamic-landscape.svg?branch=master)](https://travis-ci.com/MaibornWolff/dynamic-landscape)
-> Dynamic Landscape - [Online demo](http://cloudlandscape.fe-in-der-cloud.de/)
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Jump to Section
- - [What is Dynamic Landscape](#What-is-Dynamic-Landscape)
- - [Getting started](#Getting-started)
- - [Using your own data](#Using-your-own-data)
- - [Further dependencies](#Further-dependencies)
- - [Used libraries](#Used-libraries)
+## Available Scripts
 
-## What is Dynamic Landscape
-Dynamic Landscape is a web-based visualization tool. It was initially designed to visualize the set of cloud services provided by Microsoft (Azure), Amazon (AWS) and Google (GCP). This project includes the respective database for demonstration purposes. Our Dynamic Landscape tool also provides a basic search functionality for the items in your database as well as the possibility to show connections between items. In the context of cloud services these connections represent service dependencies for different scenarios. 
-Try out the [online demo](http://cloudlandscape.fe-in-der-cloud.de/) for cloud services.
+In the project directory, you can run:
 
+### `npm start`
 
-## Getting started
-### Installation
-In order to run the tool with the database provided by us you only need a http server of your choice. Using Node.js this would look like this:
+Runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-- Download or clone the repo
-- install server `npm install http-server -g`
-- run server in projects root dir `http-server`
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
 
-### Functionality overview
-At the top of the page you will find the search input. The search runs using the logical “AND” so an item has to match all of the entered keywords. In order to zoom the contents of the page use the zoom buttons to the left of the search bar. You can either zoom everything (left toolbox) or only the text (right toolbox). Press the button between the two toolboxes to reset the zoom.
+### `npm test`
 
-![Dynamic Landscape](https://github.com/MaibornWolff/dynamic-landscape/blob/master/screenshots/screenshot_1.png)
+Launches the test runner in the interactive watch mode.<br />
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-If you click on any of the icons the page will show the outputs and inputs of this service. Currently this functionality can only be observed for AWS Lambda and Elastic Beanstalk. Additionally, an icon with a document will pop up. By clicking on it you will open a detailed view of the selected service.
+### `npm run build`
 
-![Dynamic Landscape Dependencies](https://github.com/MaibornWolff/dynamic-landscape/blob/master/screenshots/screenshot_2.png)
+Builds the app for production to the `build` folder.<br />
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
+The build is minified and the filenames include the hashes.<br />
+Your app is ready to be deployed!
 
-![Dynamic Landscape Details](https://github.com/MaibornWolff/dynamic-landscape/blob/master/screenshots/screenshot_3.png)
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+### `npm run eject`
 
-## Using your own data
-In order to you use your own data each entry in your database must be assignable to exactly two categories. In the provided example these are the cloud service providers (e.g. Amazon) and the actual cloud service category (e.g. “Storage”). Every entry must match the following JSON format:
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-    {
-        "categoryA": "Name for the first category (y-axis)",
-        "categoryAIcon": "./img/CategoryALogo.svg",
-        "categoryB": [
-            "Name for the second category (x-axis)"
-        ],
-        "item": "Name of the item",
-        "webLink": "https://maibornwolff.de",
-        "img": ".\\img\\logos\\ItemLogo.svg",
-        "description": "Item description goes here",
-        "keywords": [],
-        "metadata": [],
-        "connections": {
-            "in": [],
-            "out": []
-        }
-    }
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Or taking an actual example from our database:
+Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-    {
-        "provider": "Amazon",
-        "providerIcon": "./img/logos/AWS/General/AWS_Simple_Icons_AWS_Cloud.svg",
-        "category": [
-            "Analytics"
-        ],
-        "service": "Amazon Athena",
-        "webLink": "https://aws.amazon.com/athena/?nc2=h_mo",
-        "img": ".\\img\\logos\\AWS\\Analytics\\Analytics_AmazonAthena.svg",
-        "description": "Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL. Athena is serverless, so there is no infrastructure to manage, and you pay only for the queries that you run.",
-        "keywords": [],
-        "metadata": [],
-        "connections": {
-            "in": [],
-            "out": []
-        }
-    }
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-Please use the **data.json** as an example. You also have to set the name for the keys in the **config.json** in order to run the **convertDatabase.js** properly. Name your database file **"data.json"** and place it in the database dir. The database converter is located in the tools dir. In order to run it, you need to install **lodash** module inside this dir:
+## Learn More
 
-`npm i lodash`
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-Then you can run `node createDatabase.js`
-
-## Further dependencies
-_All of these go into the tools dir._
-
- - backend PDF generator (**headlessPrint.js**) requiers **puppeteer** module: `npm i puppeteer`
- - we use **colors** to provide better readability for console messages: `npm i colors`
-
-
-## Used libraries
-- D3 (v.4): <https://github.com/d3/d3>
-- jsPlumb Community Edition: <https://jsplumbtoolkit.com/>
-- blooming-menu: <https://github.com/caiogondim/blooming-menu.js>
-- jQuery: <https://jquery.com/>
-- jQuery UI: <https://jqueryui.com/>
-- jQuery Tags Input Plugin (revisited): <https://github.com/underovsky/jquery-tagsinput-revisited>
-
-
+To learn React, check out the [React documentation](https://reactjs.org/).

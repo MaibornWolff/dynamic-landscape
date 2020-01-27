@@ -9,13 +9,15 @@
 .DS_Store
 
 #npm
-/tools/package-lock.json
-/tools/node_modules
-/server/package-lock.json
-/server/node_modules
-/test/package-lock.json
-/test/node_modules
+_v1/tools/package-lock.json
+_v1/tools/node_modules
+_v1/server/package-lock.json
+_v1/server/node_modules
+_v1/test/package-lock.json
+_v1/test/node_modules
+node_modules
 
+.gitignore
 
 #python
 .py
