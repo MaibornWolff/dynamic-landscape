@@ -1,0 +1,25 @@
+language: node_js
+node_js:
+  - stable
+cache:
+  directories:
+    - node_modules
+branches:
+  only:
+    - V2
+install: npm install
+script: npm run build
+before_deploy:
+  - ls build -a
+deploy:
+  provider: s3
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+  bucket: dynamiclandscape
+  acl: public_read
+  region: eu-central-1
+  skip_cleanup: true
+  local_dir: build
+  on:
+    repo: MaibornWolff/dynamic-landscape
+    branch: V2
