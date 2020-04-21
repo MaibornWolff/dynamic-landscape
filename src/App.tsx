@@ -32,7 +32,6 @@ const App: React.FC = () => {
               </Route>
               <Route path="/">
                 <Map />
-                />
               </Route>
             </Switch>
           </Router>
