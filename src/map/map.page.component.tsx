@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
-import { Dispatch } from 'redux';
-import { IState } from '../reducers';
+import {connect} from 'react-redux';
+import {Switch, Route} from 'react-router-dom';
+import {Dispatch} from 'redux';
+import {IState} from '../reducers';
 import {
   getLoadingStatus,
   getDetailService,
@@ -14,12 +14,13 @@ import {
   deleteDetailService
 } from './actions/map.actions';
 
-import { Grid } from '@material-ui/core';
-import { DemoData } from '../assets/data/dataType';
+import {Grid} from '@material-ui/core';
+import {DemoData} from '../assets/data/dataType';
 import DetailModal from './components/detailModal/detailModal.component';
 import Loading from './components/laoding/loading.component';
 import MapTable from './components/maptable/maptable.component';
 import fetchAllServices from '../shared/mongodbConnection';
+import Landscape from "./components/landscape/landscape.component";
 
 interface IProps {
   laoding: boolean;
@@ -61,7 +62,7 @@ class MapComponant extends React.Component<IProps> {
         direction="row"
         justify="center"
         alignItems="center"
-        style={{ minHeight: 600, marginTop: 40 }}
+        style={{minHeight: 600, marginTop: 40}}
       >
         {Object.keys(this.props.detailService).length !== 0 && (
           <DetailModal
@@ -70,11 +71,14 @@ class MapComponant extends React.Component<IProps> {
           />
         )}
         {this.props.laoding ? (
-          <Loading />
+          <Loading/>
         ) : (
           <Switch>
             <Route path="/landscape">
-              <p>asdfasdf</p>
+              <Landscape
+                content={this.props.content}
+                setDetailService={this.props.setDetailService}
+              />
             </Route>
             <Route path="/">
               <MapTable
