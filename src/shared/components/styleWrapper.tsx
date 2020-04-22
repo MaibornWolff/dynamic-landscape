@@ -13,6 +13,6 @@ const Wrapper = styled('div')({
   
 });
 
-export default function StypeWrapper(props: any) {
+export default function StyleWrapper(props: any) {
   return <Wrapper>{props.children}</Wrapper>;
 }

@@ -15,7 +15,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 //Views
 import { Map } from './map/map.page.component';
 import { Navigation } from './shared/components/navigation/navigation.container.component';
-import StypeWrapper from './shared/components/styleWrapper';
+import StyleWrapper from './shared/components/styleWrapper';
 
 const App: React.FC = () => {
   const store = configureStore();
@@ -23,7 +23,7 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={Theme}>
       <Provider store={store}>
-        <StypeWrapper>
+        <StyleWrapper>
           <Router>
             <Navigation />
             <Switch>
@@ -35,7 +35,7 @@ const App: React.FC = () => {
               </Route>
             </Switch>
           </Router>
-        </StypeWrapper>
+        </StyleWrapper>
       </Provider>
     </ThemeProvider>
   );

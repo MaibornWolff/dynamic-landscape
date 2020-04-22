@@ -63,7 +63,7 @@ export function serviceFilter(
             typeof content === 'string' &&
             content.includes(filterSet.fulltext[i])
           ) {
-            console.log('accapt');
+            console.log('accept');
             return true;
           }
         }
