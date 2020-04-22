@@ -68,7 +68,6 @@ export function serviceFilter(
           }
         }
       }
-
       return false;
     });
   }
