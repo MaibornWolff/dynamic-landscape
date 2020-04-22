@@ -33,7 +33,7 @@ export default class MapComponant extends React.Component<IProps> {
     try {
       this.props.setContent(JSON.parse(sessionStorage.serviceContent));
     } catch (error) {
-      console.log(error);
+      console.log('erroasdfasdfafsr');
     }
   }
 
