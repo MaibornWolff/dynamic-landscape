@@ -1,18 +1,5 @@
 import * as React from 'react';
-import {connect} from 'react-redux';
-import {Switch, Route} from 'react-router-dom';
-import {Dispatch} from 'redux';
-import {IState} from '../reducers';
-import {
-  getLoadingStatus,
-  getDetailService,
-  getContent, getUnfilteredContent
-} from './selectors/map.selector';
-import {
-  setContent,
-  setDetailService,
-  deleteDetailService
-} from './actions/map.actions';
+import { Switch, Route } from 'react-router-dom';
 
 import {Grid} from '@material-ui/core';
 import {DemoData} from '../assets/data/dataType';
@@ -32,7 +19,7 @@ interface IProps {
   deleteDetailService: () => void;
 }
 
-class MapComponant extends React.Component<IProps> {
+export default class MapComponant extends React.Component<IProps> {
 
   componentDidMount() {
     fetchAllServices().then((data: DemoData[]) => this.props.setContent(data));
@@ -76,21 +63,3 @@ class MapComponant extends React.Component<IProps> {
     );
   }
 }
-
-const mapStateToProps = (state: IState) => ({
-  laoding: getLoadingStatus(state.Map),
-  content: getContent(state.Map),
-  unfilteredContent: getUnfilteredContent(state.Map),
-  detailService: getDetailService(state.Map)
-});
-
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setContent: (content: Array<DemoData>) => dispatch(setContent(content)),
-  setDetailService: (service: DemoData) => dispatch(setDetailService(service)),
-  deleteDetailService: () => dispatch(deleteDetailService())
-});
-
-export const Map = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MapComponant);
