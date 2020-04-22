@@ -13,7 +13,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 //Views
-import { Map } from './map/map.page.component';
+import { Map } from './map/map.page.container.component';
 import { Navigation } from './shared/components/navigation/navigation.container.component';
 import StypeWrapper from './shared/components/styleWrapper';
 
