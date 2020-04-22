@@ -6,7 +6,7 @@ import {IState} from '../reducers';
 import {
   getLoadingStatus,
   getDetailService,
-  getContent
+  getContent, getUnfilteredContent
 } from './selectors/map.selector';
 import {
   setContent,
@@ -26,30 +26,13 @@ interface IProps {
   laoding: boolean;
   detailService: DemoData;
   content: Array<DemoData>;
+  unfilteredContent: Array<DemoData>;
   setContent: (object: Array<DemoData>) => void;
   setDetailService: (object: DemoData) => void;
   deleteDetailService: () => void;
 }
 
 class MapComponant extends React.Component<IProps> {
-  // constructor(props: IProps) {
-  //   super(props);
-  //   // Don't call this.setState() here!
-  // }
-
-  private fetchData() {
-    // if (this.props.laoding) {
-    //   fetchAllServices().then((data: DemoData[]) => {
-    //     sessionStorage.serviceContent = JSON.stringify(data);
-    //     this.props.setContent(data);
-    //   });
-    // }
-    try {
-      this.props.setContent(JSON.parse(sessionStorage.serviceContent));
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   componentDidMount() {
     fetchAllServices().then((data: DemoData[]) => this.props.setContent(data));
@@ -77,6 +60,7 @@ class MapComponant extends React.Component<IProps> {
             <Route path="/landscape">
               <Landscape
                 content={this.props.content}
+                unfilteredContent={this.props.unfilteredContent}
                 setDetailService={this.props.setDetailService}
               />
             </Route>
@@ -96,6 +80,7 @@ class MapComponant extends React.Component<IProps> {
 const mapStateToProps = (state: IState) => ({
   laoding: getLoadingStatus(state.Map),
   content: getContent(state.Map),
+  unfilteredContent: getUnfilteredContent(state.Map),
   detailService: getDetailService(state.Map)
 });
 

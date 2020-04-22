@@ -13,6 +13,10 @@ export const getContent = (state: IState): Array<DemoData> => {
     : state.content;
 };
 
+export const getUnfilteredContent = (state: IState): Array<DemoData> => {
+  return state.content;
+}
+
 export const getFilter = (state: IState): DataFilter => {
   return state.filter;
 };

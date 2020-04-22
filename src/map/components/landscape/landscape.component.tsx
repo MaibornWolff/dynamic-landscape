@@ -11,9 +11,11 @@ import {uniq} from 'lodash';
 import {DemoData, Providers} from '../../../assets/data/dataType';
 import LazyLoad from 'react-lazyload';
 import {FilterComponent} from '../../../shared/components/filter/filter.container.component';
+import classNames from "classnames";
 
 interface IProps {
   content: Array<DemoData>;
+  unfilteredContent: Array<DemoData>;
   setDetailService: (service: DemoData) => void;
 }
 
@@ -27,9 +29,15 @@ const useStyles = makeStyles((theme: Theme) =>
     table: {
       minWidth: 100
     },
+    serviceButton: {
+      padding: 3
+    },
     serviceIcon: {
       height: 25,
       width: 25
+    },
+    filteredService: {
+      opacity: 0.15
     },
     filterIcon: {
       float: 'right'
@@ -47,10 +55,11 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Landscape(props: IProps) {
   const classes = useStyles();
 
-  const providers = uniq(props.content.map(service => service.provider));
-  const categories = uniq(props.content.flatMap(service => service.category));
+  const providers = uniq(props.unfilteredContent.map(service => service.provider)).sort();
+  const categories = uniq(props.unfilteredContent.flatMap(service => service.category)).sort();
   const getServices = (provider: Providers, category: string) =>
-    props.content.filter(service => service.provider === provider && service.category.includes(category));
+    props.unfilteredContent.filter(service => service.provider === provider && service.category.includes(category));
+  const isFiltered = (service: DemoData) => !props.content.includes(service)
 
   const setDetailService = (event: any, service: DemoData) => {
     props.setDetailService(service);
@@ -62,6 +71,7 @@ export default function Landscape(props: IProps) {
       <Paper className={classes.paper}>
         <Table
           className={classes.table}
+          size="small"
         >
           <TableHead className={classes.header}>
             <TableRow>
@@ -90,12 +100,13 @@ export default function Landscape(props: IProps) {
                     {getServices(provider, category).map((service, k) =>
                       <Tooltip title={service.service}>
                         <IconButton key={k} aria-label={service.service}
-                                    onClick={event => setDetailService(event, service)}>
+                                    onClick={event => setDetailService(event, service)}
+                                    className={classes.serviceButton}>
                           <LazyLoad height={25}>
                             <img
                               src={service.img}
                               alt={service.service}
-                              className={classes.serviceIcon}
+                              className={classNames(classes.serviceIcon, {[classes.filteredService]: isFiltered(service)})}
                             />
                           </LazyLoad>
                         </IconButton>
