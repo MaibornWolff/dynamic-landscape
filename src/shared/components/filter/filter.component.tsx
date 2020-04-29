@@ -1,30 +1,26 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import Logo from '../../../assets/logos/DL_Logo.svg';
+import Logo from '../../../assets/logos/CL_Logo.svg';
 import SearchIcon from '@material-ui/icons/Search';
 import {
-  IconButton,
-  Grid,
-  Typography,
-  FormGroup,
-  Checkbox,
-  FormControlLabel,
-  Chip,
   Button,
-  Select,
-  MenuItem,
-  Input,
+  Checkbox,
+  Chip,
   FormControl,
+  FormControlLabel,
+  FormGroup,
+  Grid,
+  IconButton,
+  Input,
   InputLabel,
   ListItemText,
-  TextField
+  MenuItem,
+  Select,
+  TextField,
+  Typography
 } from '@material-ui/core';
-import {
-  DataFilter,
-  Providers,
-  DataFilter_only_arrays
-} from '../../../assets/data/dataType';
+import {DataFilter, DataFilter_only_arrays, Providers} from '../../../assets/data/dataType';
 
 interface IProps {
   filter: DataFilter;
