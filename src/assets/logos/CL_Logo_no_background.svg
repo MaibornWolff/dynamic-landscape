@@ -9,13 +9,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="512mm"
-   height="512mm"
-   viewBox="0 0 512 512"
+   width="417.09329mm"
+   height="368.49451mm"
+   viewBox="0 0 417.09329 368.49451"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
-   sodipodi:docname="CL_Logo.svg">
+   sodipodi:docname="CL_Logo_NoBackground.svg">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
-     inkscape:cx="308.53372"
-     inkscape:cy="1331.6111"
+     inkscape:cx="331.31146"
+     inkscape:cy="863.37327"
      inkscape:document-units="mm"
      inkscape:current-layer="layer2"
      showgrid="false"
@@ -36,7 +36,11 @@
      inkscape:window-height="2019"
      inkscape:window-x="-14"
      inkscape:window-y="-14"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -45,29 +49,16 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
-     inkscape:label="Background"
-     inkscape:groupmode="layer"
-     id="layer1"
-     transform="translate(0,215)"
-     style="display:inline">
-    <circle
-       transform="translate(0,1.2708333e-6)"
-       id="path21"
-       cx="256"
-       cy="41"
-       style="fill:#008688;fill-opacity:1;stroke-width:0.26458332"
-       r="256" />
-  </g>
-  <g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Cloud"
-     style="display:inline">
+     style="display:inline"
+     transform="translate(-47.453349,-37.464401)">
     <path
        style="fill:none;stroke-width:8.73692513"
        inkscape:connector-curvature="0"
@@ -83,7 +74,8 @@
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="Marker"
-     style="display:inline">
+     style="display:inline"
+     transform="translate(-47.453349,-37.464401)">
     <ellipse
        style="fill:#ffffff;fill-opacity:1;stroke-width:0.26458332"
        id="path4574"

@@ -3,7 +3,7 @@ import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import Logo from '../../../assets/logos/CL_Logo.svg';
+import Logo from '../../../assets/logos/CL_Logo_no_background.svg';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import {Link} from '@material-ui/core';
 import {urls} from '../../externalURL';
