@@ -15,6 +15,7 @@ import { Card, Link } from '@material-ui/core';
 import { urls } from '../../externalURL';
 import { FilterComponent } from '../filter/filter.container.component';
 import { Location } from 'history';
+import { Link as RouterLink } from 'react-router-dom'
 
 interface IProps {
   location: Location
@@ -88,7 +89,9 @@ export default function NavigationComponent(props: IProps) {
             views.filter(({path}) => path !== props.location.pathname)
               .map(({path, icon: IconComponent}, index) => {
                 return <IconButton key={index} className={classes.button}>
-                  <Link href={path}><IconComponent className={classes.button}/></Link>
+                  <Link to={path} component={RouterLink}>
+                    <IconComponent className={classes.button}/>
+                  </Link>
                 </IconButton>
               })
           }
