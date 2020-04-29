@@ -1,12 +1,8 @@
-import { IAction } from '../../shared/action';
+import {IAction} from '../../shared/action';
 import update from 'immutability-helper';
-import {
-  SETCONTENT,
-  SETDETAILSERVICE,
-  SETFILTER
-} from '../actions/map.actions';
-import { DemoData, DataFilter } from '../../assets/data/dataType';
-import { getToFilterValues, serviceFilter } from './filterLogic';
+import {SETCONTENT, SETDETAILSERVICE, SETFILTER} from '../actions/map.actions';
+import {DataFilter, DemoData} from '../../assets/data/dataType';
+import {getToFilterValues, serviceFilter} from './filterLogic';
 
 export interface IState {
   laoding: boolean;
@@ -24,7 +20,7 @@ const initialState: IState = {
   filter: {
     provider: [],
     category: [],
-    fulltext: ['Lambda']
+    fulltext: []
   },
   toFilterValues: {
     provider: [],
