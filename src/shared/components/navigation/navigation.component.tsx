@@ -3,14 +3,22 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import Logo from '../../../assets/logos/DL_Logo.svg';
-import GitHubIcon from '@material-ui/icons/GitHub';
+import {
+  Menu as MenuIcon,
+  GitHub as GitHubIcon,
+  Map as MapIcon,
+  ViewList as ViewListIcon,
+  SvgIconComponent
+} from '@material-ui/icons';
 import { Card, Link } from '@material-ui/core';
 import { urls } from '../../externalURL';
 import { FilterComponent } from '../filter/filter.container.component';
+import { Location } from 'history';
 
-interface IProps {}
+interface IProps {
+  location: Location
+}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,7 +51,17 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function NavigationComponent() {
+const views: Array<{path: string, icon: SvgIconComponent}> = [
+  {
+    path: '/landscape',
+    icon: MapIcon
+  }, {
+    path: '/',
+    icon: ViewListIcon
+  }
+]
+
+export default function NavigationComponent(props: IProps) {
   const classes = useStyles();
 
   return (
@@ -61,11 +79,19 @@ export default function NavigationComponent() {
           <Card className={classes.logoCard}>
             <img src={Logo} alt="Logo" className={classes.logo} />
           </Card>
-          <div className={classes.spacing}></div>
+          <div className={classes.spacing}/>
           <FilterComponent
             iconClassName={classes.filterIcon}
             displayChips={false}
           />
+          {
+            views.filter(({path}) => path !== props.location.pathname)
+              .map(({path, icon: IconComponent}, index) => {
+                return <IconButton key={index} className={classes.button}>
+                  <Link href={path}><IconComponent className={classes.button}/></Link>
+                </IconButton>
+              })
+          }
           <IconButton className={classes.button}>
             <Link href={urls.github} target="_blank" rel="noopener noreferrer">
               <GitHubIcon className={classes.button} />
