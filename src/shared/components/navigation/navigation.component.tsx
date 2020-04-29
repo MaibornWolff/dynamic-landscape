@@ -1,21 +1,20 @@
 import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Logo from '../../../assets/logos/DL_Logo.svg';
 import {
-  Menu as MenuIcon,
   GitHub as GitHubIcon,
   Map as MapIcon,
-  ViewList as ViewListIcon,
-  SvgIconComponent
+  Menu as MenuIcon,
+  SvgIconComponent,
+  ViewList as ViewListIcon
 } from '@material-ui/icons';
-import { Card, Link } from '@material-ui/core';
-import { urls } from '../../externalURL';
-import { FilterComponent } from '../filter/filter.container.component';
-import { Location } from 'history';
-import { Link as RouterLink } from 'react-router-dom'
+import {Card, Link} from '@material-ui/core';
+import {urls} from '../../externalURL';
+import {Location} from 'history';
+import {Link as RouterLink} from 'react-router-dom'
 
 interface IProps {
   location: Location
@@ -81,10 +80,6 @@ export default function NavigationComponent(props: IProps) {
             <img src={Logo} alt="Logo" className={classes.logo} />
           </Card>
           <div className={classes.spacing}/>
-          <FilterComponent
-            iconClassName={classes.filterIcon}
-            displayChips={false}
-          />
           {
             views.filter(({path}) => path !== props.location.pathname)
               .map(({path, icon: IconComponent}, index) => {

@@ -5,12 +5,10 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import {Grid, IconButton, Tooltip, Typography} from '@material-ui/core';
+import {IconButton, Tooltip, Typography} from '@material-ui/core';
 import {uniq} from 'lodash';
 import {DemoData, Providers} from '../../../assets/data/dataType';
 import LazyLoad from 'react-lazyload';
-import {FilterComponent} from '../../../shared/components/filter/filter.container.component';
 import classNames from "classnames";
 
 interface IProps {
@@ -21,11 +19,6 @@ interface IProps {
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    card: {},
-    paper: {
-      width: '100%',
-      overflowX: 'auto'
-    },
     table: {
       minWidth: 100
     },
@@ -38,9 +31,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     filteredService: {
       opacity: 0.15
-    },
-    filterIcon: {
-      float: 'right'
     },
     header: {
       backgroundColor: theme.palette.primary.main
@@ -66,9 +56,7 @@ export default function Landscape(props: IProps) {
   };
 
   return (
-    <Grid item xs={11} className={classes.card}>
-      <FilterComponent iconClassName={classes.filterIcon} displayChips={true}/>
-      <Paper className={classes.paper}>
+
         <Table
           className={classes.table}
           size="small"
@@ -123,7 +111,5 @@ export default function Landscape(props: IProps) {
             )}
           </TableBody>
         </Table>
-      </Paper>
-    </Grid>
   );
 }
