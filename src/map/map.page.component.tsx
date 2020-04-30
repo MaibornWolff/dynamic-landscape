@@ -14,8 +14,7 @@ import Paper from "@material-ui/core/Paper";
 interface IProps {
   loading: boolean;
   detailService: DemoData;
-  content: Array<DemoData>;
-  unfilteredContent: Array<DemoData>;
+  filteredContent: Array<DemoData>;
   setContent: (object: Array<DemoData>) => void;
   setDetailService: (object: DemoData) => void;
   deleteDetailService: () => void;
@@ -59,7 +58,7 @@ export default class MapComponent extends React.Component<IProps> {
                 </Route>
                 <Route path="/">
                   <MapTable
-                    content={this.props.content}
+                    content={this.props.filteredContent}
                     setDetailService={this.props.setDetailService}
                   />
                 </Route>

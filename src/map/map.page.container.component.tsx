@@ -1,17 +1,16 @@
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 import {IState} from '../reducers';
-import {getContent, getDetailService, getLoadingStatus, getUnfilteredContent} from './selectors/map.selector';
+import {getDetailService, getFilteredContent, getLoadingStatus} from './selectors/map.selector';
 import {deleteDetailService, setContent, setDetailService} from './actions/map.actions';
-import MapComponant from './map.page.component';
+import MapComponent from './map.page.component';
 
 import {DemoData} from '../assets/data/dataType';
 
 
 const mapStateToProps = (state: IState) => ({
   loading: getLoadingStatus(state.Map),
-  content: getContent(state.Map),
-  unfilteredContent: getUnfilteredContent(state.Map),
+  filteredContent: getFilteredContent(state.Map),
   detailService: getDetailService(state.Map)
 });
 
@@ -24,4 +23,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 export const Map = connect(
   mapStateToProps,
   mapDispatchToProps
-)(MapComponant);
+)(MapComponent);

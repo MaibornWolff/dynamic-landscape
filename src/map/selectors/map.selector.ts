@@ -6,7 +6,7 @@ export const getLoadingStatus = (state: IState): boolean => {
   return state.loading;
 };
 
-export const getContent = (state: IState): Array<DemoData> => {
+export const getFilteredContent = (state: IState): Array<DemoData> => {
   return Object.keys(state.filter).some(
     key => state.filter[key as keyof typeof state.filter].length > 0
   )
@@ -14,7 +14,7 @@ export const getContent = (state: IState): Array<DemoData> => {
     : state.content;
 };
 
-export const getUnfilteredContent = (state: IState): Array<DemoData> => {
+export const getContent = (state: IState): Array<DemoData> => {
   return state.content;
 }
 
@@ -37,8 +37,8 @@ export const getContentByProvider = (
   return state.content.filter(service => service.provider === provider);
 };
 
-export const getProviders = (state: IState) => uniq(getUnfilteredContent(state).map(service => service.provider));
-export const getCategories = (state: IState) => uniq(getUnfilteredContent(state).flatMap(service => service.category));
+export const getProviders = (state: IState) => uniq(getContent(state).map(service => service.provider));
+export const getCategories = (state: IState) => uniq(getContent(state).flatMap(service => service.category));
 export const getServicesFunction = (state: IState) => (provider: Providers, category: string) =>
-  getUnfilteredContent(state).filter(service => service.provider === provider && service.category.includes(category))
-export const getIsFilteredFunction = (state: IState) => (service: DemoData) => !getContent(state).includes(service)
+  getContent(state).filter(service => service.provider === provider && service.category.includes(category))
+export const getIsFilteredFunction = (state: IState) => (service: DemoData) => !getFilteredContent(state).includes(service)
