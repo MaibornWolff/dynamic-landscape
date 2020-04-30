@@ -17,7 +17,7 @@ import { DemoData } from '../assets/data/dataType';
 
 
 const mapStateToProps = (state: IState) => ({
-    laoding: getLoadingStatus(state.Map),
+    loading: getLoadingStatus(state.Map),
     content: getContent(state.Map),
     detailService: getDetailService(state.Map)
   });

@@ -9,16 +9,16 @@ import { DemoData, DataFilter } from '../../assets/data/dataType';
 import { getToFilterValues, serviceFilter } from './filterLogic';
 
 export interface IState {
-  laoding: boolean;
+  loading: boolean;
   content: Array<DemoData>;
   detailedService: DemoData;
-  filtertContent: Array<DemoData>;
+  filteredContent: Array<DemoData>;
   filter: DataFilter; //TODO - define
   toFilterValues: DataFilter;
 }
 
 const initialState: IState = {
-  laoding: true,
+  loading: true,
   content: [],
   detailedService: {} as DemoData,
   filter: {
@@ -31,7 +31,7 @@ const initialState: IState = {
     category: [],
     fulltext: []
   },
-  filtertContent: []
+  filteredContent: []
 };
 
 export const Map = (state: IState = initialState, action: IAction<any>) => {
@@ -39,13 +39,13 @@ export const Map = (state: IState = initialState, action: IAction<any>) => {
     case SETCONTENT:
       return update(state, {
         content: { $set: action.payload },
-        filtertContent: {
+        filteredContent: {
           $set: serviceFilter(action.payload, state.filter)
         },
         toFilterValues: {
           $set: getToFilterValues(action.payload)
         },
-        laoding: { $set: false }
+        loading: { $set: false }
       });
 
     case SETDETAILSERVICE:
@@ -55,7 +55,7 @@ export const Map = (state: IState = initialState, action: IAction<any>) => {
 
     case SETFILTER:
       return update(state, {
-        filtertContent: {
+        filteredContent: {
           $set: serviceFilter(state.content, action.payload)
         },
         filter: { $set: action.payload }

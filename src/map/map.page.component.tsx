@@ -9,7 +9,7 @@ import MapTable from './components/maptable/maptable.component';
 import fetchAllServices from '../shared/mongodbConnection';
 
 interface IProps {
-  laoding: boolean;
+  loading: boolean;
   detailService: DemoData;
   content: Array<DemoData>;
   setContent: (object: Array<DemoData>) => void;
@@ -17,25 +17,7 @@ interface IProps {
   deleteDetailService: () => void;
 }
 
-export default class MapComponant extends React.Component<IProps> {
-  // constructor(props: IProps) {
-  //   super(props);
-  //   // Don't call this.setState() here!
-  // }
-
-  private fetchData() {
-    // if (this.props.laoding) {
-    //   fetchAllServices().then((data: DemoData[]) => {
-    //     sessionStorage.serviceContent = JSON.stringify(data);
-    //     this.props.setContent(data);
-    //   });
-    // }
-    try {
-      this.props.setContent(JSON.parse(sessionStorage.serviceContent));
-    } catch (error) {
-      console.log(error);
-    }
-  }
+export default class MapComponent extends React.Component<IProps> {
 
   componentDidMount() {
     fetchAllServices().then((data: DemoData[]) => this.props.setContent(data));
@@ -56,7 +38,7 @@ export default class MapComponant extends React.Component<IProps> {
             deleteDetailService={this.props.deleteDetailService}
           />
         )}
-        {this.props.laoding ? (
+        {this.props.loading ? (
           <Loading />
         ) : (
           <Switch>
