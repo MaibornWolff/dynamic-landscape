@@ -3,14 +3,14 @@ import {DataFilter, DemoData, Providers} from '../../assets/data/dataType';
 import {uniq} from "lodash";
 
 export const getLoadingStatus = (state: IState): boolean => {
-  return state.laoding;
+  return state.loading;
 };
 
 export const getContent = (state: IState): Array<DemoData> => {
   return Object.keys(state.filter).some(
     key => state.filter[key as keyof typeof state.filter].length > 0
   )
-    ? state.filtertContent
+    ? state.filteredContent
     : state.content;
 };
 

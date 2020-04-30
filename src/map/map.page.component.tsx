@@ -12,7 +12,7 @@ import {FilterComponent} from '../shared/components/filter/filter.container.comp
 import Paper from "@material-ui/core/Paper";
 
 interface IProps {
-  laoding: boolean;
+  loading: boolean;
   detailService: DemoData;
   content: Array<DemoData>;
   unfilteredContent: Array<DemoData>;
@@ -26,7 +26,7 @@ const StyledPaper = styled(Paper)({
   overflowX: 'auto'
 })
 
-export default class MapComponant extends React.Component<IProps> {
+export default class MapComponent extends React.Component<IProps> {
 
   componentDidMount() {
     fetchAllServices().then((data: DemoData[]) => this.props.setContent(data));
@@ -47,7 +47,7 @@ export default class MapComponant extends React.Component<IProps> {
             deleteDetailService={this.props.deleteDetailService}
           />
         )}
-        {this.props.laoding ? (
+        {this.props.loading ? (
           <Loading/>
         ) : (
           <Grid item xs={11}>
