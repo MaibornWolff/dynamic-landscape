@@ -6,15 +6,16 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import {IconButton, Tooltip, Typography} from '@material-ui/core';
-import {uniq} from 'lodash';
 import {DemoData, Providers} from '../../../assets/data/dataType';
 import LazyLoad from 'react-lazyload';
 import classNames from "classnames";
 
 interface IProps {
-  content: Array<DemoData>;
-  unfilteredContent: Array<DemoData>;
   setDetailService: (service: DemoData) => void;
+  providers: Array<Providers>;
+  categories: Array<string>;
+  getServices: (provider: Providers, category: string) => Array<DemoData>;
+  isFiltered: (service: DemoData) => boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -45,71 +46,64 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Landscape(props: IProps) {
   const classes = useStyles();
 
-  const providers = uniq(props.unfilteredContent.map(service => service.provider)).sort();
-  const categories = uniq(props.unfilteredContent.flatMap(service => service.category)).sort();
-  const getServices = (provider: Providers, category: string) =>
-    props.unfilteredContent.filter(service => service.provider === provider && service.category.includes(category));
-  const isFiltered = (service: DemoData) => !props.content.includes(service)
-
+  const providers = props.providers.sort();
+  const categories = props.categories.sort();
   const setDetailService = (event: any, service: DemoData) => {
     props.setDetailService(service);
   };
 
-  return (
-
-        <Table
-          className={classes.table}
-          size="small"
-        >
-          <TableHead className={classes.header}>
-            <TableRow>
-              <TableCell/>
-              {providers.map((provider, j) =>
-                <TableCell key={j}>
-                  <Typography
-                    variant="h6"
-                    gutterBottom
-                    className={classes.headerTitle}
-                  >
-                    {provider}
-                  </Typography>
-                </TableCell>
+  return <Table
+    className={classes.table}
+    size="small"
+  >
+    <TableHead className={classes.header}>
+      <TableRow>
+        <TableCell/>
+        {providers.map((provider, j) =>
+          <TableCell key={j}>
+            <Typography
+              variant="h6"
+              gutterBottom
+              className={classes.headerTitle}
+            >
+              {provider}
+            </Typography>
+          </TableCell>
+        )}
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      {categories.map((category, i) => (
+        <TableRow key={i}>
+          <TableCell component="th" scope="row">
+            {category}
+          </TableCell>
+          {providers.map((provider, j) =>
+            <TableCell key={j}>
+              {props.getServices(provider, category).map((service, k) =>
+                <Tooltip title={service.service}>
+                  <IconButton key={k} aria-label={service.service}
+                              onClick={event => setDetailService(event, service)}
+                              className={classes.serviceButton}>
+                    <LazyLoad height={25}>
+                      <img
+                        src={service.img}
+                        alt={service.service}
+                        className={classNames(classes.serviceIcon, {[classes.filteredService]: props.isFiltered(service)})}
+                      />
+                    </LazyLoad>
+                  </IconButton>
+                </Tooltip>
               )}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {categories.map((category, i) => (
-              <TableRow key={i}>
-                <TableCell component="th" scope="row">
-                  {category}
-                </TableCell>
-                {providers.map((provider, j) =>
-                  <TableCell key={j}>
-                    {getServices(provider, category).map((service, k) =>
-                      <Tooltip title={service.service}>
-                        <IconButton key={k} aria-label={service.service}
-                                    onClick={event => setDetailService(event, service)}
-                                    className={classes.serviceButton}>
-                          <LazyLoad height={25}>
-                            <img
-                              src={service.img}
-                              alt={service.service}
-                              className={classNames(classes.serviceIcon, {[classes.filteredService]: isFiltered(service)})}
-                            />
-                          </LazyLoad>
-                        </IconButton>
-                      </Tooltip>
-                    )}
-                  </TableCell>
-                )}
-              </TableRow>
-            ))}
-            {!categories.length && (
-              <TableRow>
-                <TableCell>Empty</TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-  );
+            </TableCell>
+          )}
+        </TableRow>
+      ))}
+      {!categories.length && (
+        <TableRow>
+          <TableCell>Empty</TableCell>
+        </TableRow>
+      )}
+    </TableBody>
+  </Table>;
 }

@@ -1,5 +1,6 @@
-import { IState } from '../reducers/map.reducer';
-import { DemoData, DataFilter } from '../../assets/data/dataType';
+import {IState} from '../reducers/map.reducer';
+import {DataFilter, DemoData, Providers} from '../../assets/data/dataType';
+import {uniq} from "lodash";
 
 export const getLoadingStatus = (state: IState): boolean => {
   return state.laoding;
@@ -35,3 +36,9 @@ export const getContentByProvider = (
 ): Array<DemoData> => {
   return state.content.filter(service => service.provider === provider);
 };
+
+export const getProviders = (state: IState) => uniq(getUnfilteredContent(state).map(service => service.provider));
+export const getCategories = (state: IState) => uniq(getUnfilteredContent(state).flatMap(service => service.category));
+export const getServicesFunction = (state: IState) => (provider: Providers, category: string) =>
+  getUnfilteredContent(state).filter(service => service.provider === provider && service.category.includes(category))
+export const getIsFilteredFunction = (state: IState) => (service: DemoData) => !getContent(state).includes(service)

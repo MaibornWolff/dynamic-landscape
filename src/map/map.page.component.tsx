@@ -7,7 +7,7 @@ import DetailModal from './components/detailModal/detailModal.component';
 import Loading from './components/laoding/loading.component';
 import MapTable from './components/maptable/maptable.component';
 import fetchAllServices from '../shared/mongodbConnection';
-import Landscape from "./components/landscape/landscape.component";
+import Landscape from "./components/landscape/landscape.container.component";
 import {FilterComponent} from '../shared/components/filter/filter.container.component';
 import Paper from "@material-ui/core/Paper";
 
@@ -55,11 +55,7 @@ export default class MapComponant extends React.Component<IProps> {
             <StyledPaper>
               <Switch>
                 <Route path="/landscape">
-                  <Landscape
-                    content={this.props.content}
-                    unfilteredContent={this.props.unfilteredContent}
-                    setDetailService={this.props.setDetailService}
-                  />
+                  <Landscape/>
                 </Route>
                 <Route path="/">
                   <MapTable
