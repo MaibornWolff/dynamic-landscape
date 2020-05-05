@@ -1,14 +1,13 @@
 import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import Logo from '../../../assets/logos/DL_Logo.svg';
+import Logo from '../../../assets/logos/CL_Logo_no_background.svg';
 import GitHubIcon from '@material-ui/icons/GitHub';
-import { Card, Link } from '@material-ui/core';
-import { urls } from '../../externalURL';
-import { FilterComponent } from '../filter/filter.container.component';
+import {Link} from '@material-ui/core';
+import {urls} from '../../externalURL';
+import {FilterComponent} from '../filter/filter.container.component';
 
 interface IProps {}
 
@@ -39,6 +38,11 @@ const useStyles = makeStyles((theme: Theme) =>
     filterIcon: {
       float: 'right',
       color: 'white'
+    },
+    appName: {
+      marginLeft: 10,
+      fontSize: 'x-large',
+      fontWeight: 500
     }
   })
 );
@@ -50,18 +54,13 @@ export default function NavigationComponent() {
     <div className={classes.root}>
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Card className={classes.logoCard}>
+          <div className={classes.logoCard}>
             <img src={Logo} alt="Logo" className={classes.logo} />
-          </Card>
-          <div className={classes.spacing}></div>
+          </div>
+          <span className={classes.appName}>
+            Cloud Landscape
+          </span>
+          <div className={classes.spacing}/>
           <FilterComponent
             iconClassName={classes.filterIcon}
             displayChips={false}
