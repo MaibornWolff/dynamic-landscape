@@ -9,8 +9,11 @@ jobs:
     - stage: checks
       install: npm install
       script:
-        - npm run check
-        - npm build
+        - npm run test -- --watchAll=false
+    - stage: build
+      if: type = pull_request
+      install: npm install
+      script: npm run build
     - stage: deploy
       if: (branch = V2) AND (type != pull_request)
       install: npm install
