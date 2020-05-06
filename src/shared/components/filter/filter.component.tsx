@@ -1,7 +1,6 @@
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import Logo from '../../../assets/logos/CL_Logo.svg';
 import SearchIcon from '@material-ui/icons/Search';
 import {
   Button,
@@ -18,20 +17,27 @@ import {
   MenuItem,
   Select,
   TextField,
-  Typography
+  Typography,
 } from '@material-ui/core';
-import {DataFilter, DataFilter_only_arrays, Providers} from '../../../assets/data/dataType';
+import {
+  DataFilter,
+  DataFilter_only_arrays,
+  Providers,
+  ServiceFeatures,
+} from '../../../assets/data/dataType';
 
-interface IProps {
+const Logo = require('./../../../assets/logos/CL_Logo.svg') as string;
+
+export interface Props {
   filter: DataFilter;
-  possibleFilterValues: DataFilter;
+  possibleFilterValues: ServiceFeatures;
   setFilter: (filter: DataFilter) => void;
-  displayChips?: Boolean;
+  displayChips?: boolean;
 }
 
 const useStyles = makeStyles({
   list: {
-    width: 250
+    width: 250,
   },
   fullList: {
     width: 'auto',
@@ -39,54 +45,52 @@ const useStyles = makeStyles({
     backgroundImage: `url(${Logo})`,
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'bottom right',
-    backgroundSize: 100
+    backgroundSize: 100,
   },
   logo: {
-    height: 50
+    height: 50,
   },
   chip: {
     float: 'right',
-    margin: '8px 5px'
+    margin: '8px 5px',
   },
   item: {
-    marginTop: 20
+    marginTop: 20,
   },
   chipSelection: {
-    margin: 2
+    margin: 2,
   },
   category: {
-    width: '100%'
+    width: '100%',
   },
   iconButton: {
-    float: 'right'
-  }
+    float: 'right',
+  },
 });
 
-export default function FilterComponentContainer(props: IProps) {
+export default function FilterComponentContainer(props: Props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const [filter, setFilter] = React.useState({ ...props.filter });
+  const [filter, setFilter] = React.useState({...props.filter});
 
-  const toggleDrawer = (open: boolean) => (
-    event: React.KeyboardEvent | React.MouseEvent
-  ) => {
+  const toggleDrawer = (open: boolean) => () => {
     if (!open) {
       props.setFilter(filter);
       setOpen(open);
     } else {
       setOpen(open);
-      setFilter({ ...props.filter });
+      setFilter({...props.filter});
     }
   };
 
-  const handleChangeSelect = (event: React.ChangeEvent<{ value: unknown }>) => {
+  const handleChangeSelect = (event: React.ChangeEvent<{value: unknown}>) => {
     console.log(event.target.value);
-    setFilter({ ...filter, category: event.target.value as string[] });
+    setFilter({...filter, category: event.target.value as string[]});
   };
 
-  const handleChangeText = (event: React.ChangeEvent<{ value: unknown }>) => {
+  const handleChangeText = (event: React.ChangeEvent<{value: unknown}>) => {
     console.log(event.target.value);
-    setFilter({ ...filter, fulltext: [event.target.value as string] });
+    setFilter({...filter, fulltext: [event.target.value as string]});
   };
 
   const handleChangeCheckbox = (
@@ -96,19 +100,21 @@ export default function FilterComponentContainer(props: IProps) {
     if (event.target.checked) {
       setFilter({
         ...filter,
-        [filterKey]: [...filter[filterKey], value]
+        [filterKey]: [...filter[filterKey], value],
       });
     } else {
       setFilter({
         ...filter,
-        [filterKey]: (filter[filterKey] as string[]).filter(p => p !== value)
+        [filterKey]: (filter[filterKey] as string[]).filter(p => p !== value),
       });
     }
   };
 
   const getFilterChips = (filterSet: DataFilter) => {
-    let chipSet: any[] = [];
-    for (let [filter, value] of Object.entries(filterSet)) {
+    const chipSet: React.ReactNode[] = [];
+    for (const [filter, value] of Object.entries<Array<string | Providers>>(
+      filterSet
+    )) {
       value.forEach((value: Providers | string) => {
         chipSet.push(
           <Chip
@@ -134,7 +140,7 @@ export default function FilterComponentContainer(props: IProps) {
       ...props.filter,
       [filterKey]: (props.filter[filterKey] as string[]).filter(
         p => p !== value
-      )
+      ),
     };
     setFilter(newFilter);
     props.setFilter(newFilter);
@@ -144,11 +150,8 @@ export default function FilterComponentContainer(props: IProps) {
     <div>
       <div>
         {/* Icon to open filter window */}
-        <IconButton
-          className={classes.iconButton}
-          onClick={toggleDrawer(true)}
-        >
-          <SearchIcon/>
+        <IconButton className={classes.iconButton} onClick={toggleDrawer(true)}>
+          <SearchIcon />
         </IconButton>
         {/* Chipset of current filter*/}
         {props.displayChips && getFilterChips(props.filter)}

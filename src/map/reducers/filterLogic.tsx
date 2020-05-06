@@ -2,12 +2,13 @@ import {
   DemoData,
   DataFilter,
   DataFilter_only_arrays,
+  ServiceFeatures,
 } from '../../assets/data/dataType';
 
 //Create a list of Unique Values to filter on
-export function getToFilterValues(services: DemoData[]): any {
-  const provider = new Set(services.map((service) => service.provider));
-  const category = new Set(services.flatMap((service) => service.category));
+export function getToFilterValues(services: DemoData[]): ServiceFeatures {
+  const provider = new Set(services.map(service => service.provider));
+  const category = new Set(services.flatMap(service => service.category));
 
   return {
     provider: Array.from(provider),
@@ -35,7 +36,7 @@ export function serviceFilter(
       Array.isArray(filterSet[filter as keyof typeof filterSet]) &&
       filterSet[filter as keyof typeof filterSet].length &&
       filter !== 'fulltext' &&
-      Array.isArray(services[0][filter as DataFilter_only_arrays] as any)
+      Array.isArray(services[0][filter as DataFilter_only_arrays])
     ) {
       filtered = true;
       services = services.filter((s: DemoData) => {
@@ -46,7 +47,7 @@ export function serviceFilter(
           filter as keyof typeof filterSet
         ] as Array<string>;
 
-        return filterValues.some((elem) => serviceValues.indexOf(elem) > -1);
+        return filterValues.some(elem => serviceValues.indexOf(elem) > -1);
       });
     }
   }
@@ -57,7 +58,7 @@ export function serviceFilter(
     services = services.filter((service: DemoData) => {
       for (let i = 0; i < filterSet.fulltext.length; i++) {
         for (const property in service) {
-          let content = service[property as keyof DemoData];
+          const content = service[property as keyof DemoData];
           if (
             typeof content === 'string' &&
             content.includes(filterSet.fulltext[i])

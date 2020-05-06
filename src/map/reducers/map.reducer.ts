@@ -1,23 +1,27 @@
-import { IAction } from '../../shared/action';
 import update from 'immutability-helper';
 import {
+  MapActionTypes,
   SETCONTENT,
   SETDETAILSERVICE,
   SETFILTER,
 } from '../actions/map.actions';
-import { DataFilter, DemoData } from '../../assets/data/dataType';
-import { getToFilterValues, serviceFilter } from './filterLogic';
+import {
+  DataFilter,
+  DemoData,
+  ServiceFeatures,
+} from '../../assets/data/dataType';
+import {getToFilterValues, serviceFilter} from './filterLogic';
 
-export interface IState {
+export interface State {
   loading: boolean;
   content: Array<DemoData>;
   detailedService: DemoData;
   filteredContent: Array<DemoData>;
   filter: DataFilter; //TODO - define
-  toFilterValues: DataFilter;
+  toFilterValues: ServiceFeatures;
 }
 
-const initialState: IState = {
+const initialState: State = {
   loading: true,
   content: [],
   filteredContent: [],
@@ -30,27 +34,26 @@ const initialState: IState = {
   toFilterValues: {
     provider: [],
     category: [],
-    fulltext: [],
   },
 };
 
-export const Map = (state: IState = initialState, action: IAction<any>) => {
+export const Map = (state: State = initialState, action: MapActionTypes) => {
   switch (action.type) {
     case SETCONTENT:
       return update(state, {
-        content: { $set: action.payload },
+        content: {$set: action.payload},
         filteredContent: {
           $set: serviceFilter(action.payload, state.filter),
         },
         toFilterValues: {
           $set: getToFilterValues(action.payload),
         },
-        loading: { $set: false },
+        loading: {$set: false},
       });
 
     case SETDETAILSERVICE:
       return update(state, {
-        detailedService: { $set: action.payload },
+        detailedService: {$set: action.payload},
       });
 
     case SETFILTER:
@@ -58,7 +61,7 @@ export const Map = (state: IState = initialState, action: IAction<any>) => {
         filteredContent: {
           $set: serviceFilter(state.content, action.payload),
         },
-        filter: { $set: action.payload },
+        filter: {$set: action.payload},
       });
 
     default:

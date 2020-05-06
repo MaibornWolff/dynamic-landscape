@@ -1,15 +1,15 @@
 import React from 'react';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import {makeStyles, createStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Paper, { PaperProps } from '@material-ui/core/Paper';
+import Paper, {PaperProps} from '@material-ui/core/Paper';
 import Draggable from 'react-draggable';
-import { DemoData } from '../../../assets/data/dataType';
-import { TransitionProps } from '@material-ui/core/transitions';
+import {DemoData} from '../../../assets/data/dataType';
+import {TransitionProps} from '@material-ui/core/transitions';
 import {
   Slide,
   Grid,
@@ -17,36 +17,35 @@ import {
   List,
   ListItem,
   ListItemIcon,
-  ListItemText
+  ListItemText,
 } from '@material-ui/core';
 import WebIcon from '@material-ui/icons/Web';
 
-interface IProps {
+interface Props {
   service: DemoData;
   deleteDetailService: () => void;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     dialog: {},
     icon: {
       width: 90,
-      paddingRight: 40
+      paddingRight: 40,
     },
     ListItemIcon: {
-      minWidth: 35
+      minWidth: 35,
     },
     InfoButton: {
-      textTransform: 'inherit'
-    }
+      textTransform: 'inherit',
+    },
   })
 );
 
-const Transition = React.forwardRef<unknown, TransitionProps>(
-  function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
-  }
-);
+// eslint-disable-next-line react/display-name
+const Transition = React.forwardRef<unknown, TransitionProps>((props, ref) => {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 function PaperComponent(props: PaperProps) {
   return (
@@ -56,7 +55,7 @@ function PaperComponent(props: PaperProps) {
   );
 }
 
-export default function DetailModal(props: IProps) {
+export default function DetailModal(props: Props) {
   const classes = useStyles();
   const handleClose = props.deleteDetailService;
   return (
@@ -72,7 +71,7 @@ export default function DetailModal(props: IProps) {
         fullWidth={true}
         maxWidth="md"
       >
-        <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+        <DialogTitle style={{cursor: 'move'}} id="draggable-dialog-title">
           <Grid
             container
             direction="row"

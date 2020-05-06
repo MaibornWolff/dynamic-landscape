@@ -3,7 +3,7 @@ import {
   makeStyles,
   useTheme,
   Theme,
-  createStyles
+  createStyles,
 } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import FirstPageIcon from '@material-ui/icons/FirstPage';
@@ -15,8 +15,8 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexShrink: 0,
-      marginLeft: theme.spacing(2.5)
-    }
+      marginLeft: theme.spacing(2.5),
+    },
   })
 );
 
@@ -35,7 +35,7 @@ export default function TablePaginationActions(
 ) {
   const classes = useStyles({});
   const theme = useTheme();
-  const { count, page, rowsPerPage, onChangePage } = props;
+  const {count, page, rowsPerPage, onChangePage} = props;
 
   const handleFirstPageButtonClick = (
     event: React.MouseEvent<HTMLButtonElement>

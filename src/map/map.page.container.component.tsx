@@ -1,6 +1,6 @@
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-import { IState } from '../reducers';
+import {connect} from 'react-redux';
+import {Dispatch} from 'redux';
+import {State} from '../reducers';
 import {
   getDetailService,
   getFilteredContent,
@@ -16,9 +16,9 @@ import {
 } from './actions/map.actions';
 import MapComponent from './map.page.component';
 
-import { DemoData } from '../assets/data/dataType';
+import {DemoData} from '../assets/data/dataType';
 
-const mapStateToProps = (state: IState) => ({
+const mapStateToProps = (state: State) => ({
   loading: getLoadingStatus(state.Map),
   filteredContent: getFilteredContent(state.Map),
   content: getContent(state.Map),

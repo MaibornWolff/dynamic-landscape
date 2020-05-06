@@ -4,20 +4,29 @@ node_js:
 cache:
   directories:
     - node_modules
-branches:
-  only:
-    - V2
-install: npm install
-script: npm run build
-deploy:
-  provider: s3
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
-  bucket: dynamiclandscape
-  acl: public_read
-  region: eu-central-1
-  skip_cleanup: true
-  local_dir: build
-  on:
-    repo: MaibornWolff/dynamic-landscape
-    branch: V2
+jobs:
+  include:
+    - stage: checks
+      install: npm install
+      script:
+        - npm run test -- --watchAll=false
+    - stage: build
+      if: type = pull_request
+      install: npm install
+      script: npm run build
+    - stage: deploy
+      if: (branch = V2) AND (type != pull_request)
+      install: npm install
+      script: npm run build
+      deploy:
+        provider: s3
+        access_key_id: $AWS_ACCESS_KEY
+        secret_access_key: $AWS_SECRET_KEY
+        bucket: dynamiclandscape
+        acl: public_read
+        region: eu-central-1
+        skip_cleanup: true
+        local_dir: build
+        on:
+          repo: MaibornWolff/dynamic-landscape
+          branch: V2

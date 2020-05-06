@@ -5,12 +5,17 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import {Button, TableFooter, TablePagination, Typography} from '@material-ui/core';
+import {
+  Button,
+  TableFooter,
+  TablePagination,
+  Typography,
+} from '@material-ui/core';
 import {DemoData} from '../../../assets/data/dataType';
 import LazyLoad from 'react-lazyload';
 import TablePaginationActions from './paginationActions.component';
 
-interface IProps {
+interface Props {
   content: Array<DemoData>;
   setDetailService: (service: DemoData) => void;
 }
@@ -18,30 +23,30 @@ interface IProps {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     table: {
-      minWidth: 100
+      minWidth: 100,
     },
     tableIcon: {
       height: 30,
       float: 'left',
-      width: 30
+      width: 30,
     },
     header: {
       // backgroundColor: theme.palette.grey[600]
-      backgroundColor: theme.palette.primary.main
+      backgroundColor: theme.palette.primary.main,
     },
     headerTitle: {
       color: 'white',
-      margin: 0
-    }
+      margin: 0,
+    },
   })
 );
 
-export default function MapTable(props: IProps) {
+export default function MapTable(props: Props) {
   const classes = useStyles();
 
   const rows = props.content;
 
-  const setDetailService = (event: any, service: DemoData) => {
+  const setDetailService = (service: DemoData) => {
     props.setDetailService(service);
   };
 
@@ -66,14 +71,10 @@ export default function MapTable(props: IProps) {
   };
 
   return (
-    <Table
-      className={classes.table}
-      size="small"
-      aria-label="a dense table"
-    >
+    <Table className={classes.table} size="small" aria-label="a dense table">
       <TableHead className={classes.header}>
         <TableRow>
-          <TableCell/>
+          <TableCell />
           <TableCell>
             <Typography
               variant="h6"
@@ -101,13 +102,13 @@ export default function MapTable(props: IProps) {
               Category
             </Typography>
           </TableCell>
-          <TableCell/>
+          <TableCell />
         </TableRow>
       </TableHead>
       <TableBody>
         {(rowsPerPage > 0
-            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : rows
+          ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+          : rows
         ).map((row, i) => (
           <TableRow key={i}>
             <TableCell>
@@ -125,7 +126,7 @@ export default function MapTable(props: IProps) {
             </TableCell>
             <TableCell>{row.category.join(' | ')}</TableCell>
             <TableCell>
-              <Button onClick={event => setDetailService(event, row)}>
+              <Button onClick={() => setDetailService(row)}>
                 More Information
               </Button>
             </TableCell>
@@ -139,10 +140,10 @@ export default function MapTable(props: IProps) {
         {emptyRows > 0 && (
           <TableRow
             style={{
-              height: 49 * (!rows.length ? emptyRows : emptyRows - 1)
+              height: 49 * (!rows.length ? emptyRows : emptyRows - 1),
             }}
           >
-            <TableCell colSpan={6}/>
+            <TableCell colSpan={6} />
           </TableRow>
         )}
       </TableBody>
@@ -155,7 +156,7 @@ export default function MapTable(props: IProps) {
             page={page}
             SelectProps={{
               inputProps: {'aria-label': 'rows per page'},
-              native: true
+              native: true,
             }}
             onChangePage={handleChangePage}
             onChangeRowsPerPage={handleChangeRowsPerPage}
