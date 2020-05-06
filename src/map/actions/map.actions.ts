@@ -1,4 +1,4 @@
-import { DemoData, DataFilter } from '../../assets/data/dataType';
+import {DemoData, DataFilter} from '../../assets/data/dataType';
 
 export const SETCONTENT = 'SETCONTENT';
 export const SETDETAILSERVICE = 'SETDETAILSERVICE';
@@ -12,7 +12,7 @@ interface SetContentAction {
 export function setContent(value: Array<DemoData>): MapActionTypes {
   return {
     type: SETCONTENT,
-    payload: value
+    payload: value,
   };
 }
 
@@ -24,7 +24,7 @@ interface SetFilterAction {
 export function setFilter(filter: DataFilter): MapActionTypes {
   return {
     type: SETFILTER,
-    payload: filter
+    payload: filter,
   };
 }
 
@@ -36,14 +36,14 @@ interface SetDetailService {
 export function setDetailService(value: DemoData): MapActionTypes {
   return {
     type: SETDETAILSERVICE,
-    payload: value
+    payload: value,
   };
 }
 
 export function deleteDetailService(): MapActionTypes {
   return {
     type: SETDETAILSERVICE,
-    payload: {} as DemoData
+    payload: {} as DemoData,
   };
 }
 

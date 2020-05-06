@@ -1,10 +1,9 @@
-import { DemoData } from '../assets/data/dataType';
-
-const {
+import {DemoData} from '../assets/data/dataType';
+import {
   Stitch,
   RemoteMongoClient,
-  UserApiKeyCredential
-} = require('mongodb-stitch-browser-sdk');
+  UserApiKeyCredential,
+} from 'mongodb-stitch-browser-sdk';
 
 const DATABASE = 'DynamicLandscape';
 const COLLECTION = 'Services';
@@ -18,7 +17,7 @@ const credential = new UserApiKeyCredential(
   '7jcwcGl6aSKf0oSXiW8Wb8AbLZwFkr2YHSrHcSVnDWEhXektnxJ8TipzrkDucVbj'
 );
 
-export default async function fetchAllServices(login?: any) {
+export default async function fetchAllServices() {
   try {
     return JSON.parse(sessionStorage.serviceContent);
   } catch (error) {
@@ -27,12 +26,7 @@ export default async function fetchAllServices(login?: any) {
     let returnDoc = [] as DemoData[];
     await client.auth
       .loginWithCredential(credential)
-      .then(() =>
-        db
-          .collection(COLLECTION)
-          .find({})
-          .toArray()
-      )
+      .then(() => db.collection(COLLECTION).find({}).toArray())
       .then((docs: any) => {
         console.log('[MongoDB Stitch] Connected to Stitch');
         returnDoc = docs;

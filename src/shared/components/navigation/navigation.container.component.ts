@@ -1,11 +1,10 @@
-import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
+import {connect} from 'react-redux';
+import {withRouter} from 'react-router';
 import NavigationComponent from './navigation.component';
 
-const mapStateToProps = (state: any) => ({});
+const mapStateToProps = () => ({});
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({});
+const mapDispatchToProps = () => ({});
 
 export const Navigation = connect(
   mapStateToProps,

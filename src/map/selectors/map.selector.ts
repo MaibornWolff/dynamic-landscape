@@ -1,30 +1,30 @@
-import { IState } from '../reducers/map.reducer';
-import { DataFilter, DemoData, Providers } from '../../assets/data/dataType';
+import {State} from '../reducers/map.reducer';
+import {DataFilter, DemoData, Providers} from '../../assets/data/dataType';
 
-export const getLoadingStatus = (state: IState): boolean => {
+export const getLoadingStatus = (state: State): boolean => {
   return state.loading;
 };
 
-export const getFilteredContent = (state: IState): Array<DemoData> => {
+export const getFilteredContent = (state: State): Array<DemoData> => {
   return Object.keys(state.filter).some(
-    (key) => state.filter[key as keyof typeof state.filter].length > 0
+    key => state.filter[key as keyof typeof state.filter].length > 0
   )
     ? state.filteredContent
     : state.content;
 };
 
-export const getContent = (state: IState): Array<DemoData> => state.content;
+export const getContent = (state: State): Array<DemoData> => state.content;
 
-export const getFilter = (state: IState): DataFilter => state.filter;
+export const getFilter = (state: State): DataFilter => state.filter;
 
-export const getPossibleFilterValues = (state: IState): DataFilter =>
+export const getPossibleFilterValues = (state: State): DataFilter =>
   state.toFilterValues;
 
-export const getProviders = (state: IState): Array<Providers> =>
+export const getProviders = (state: State): Array<Providers> =>
   state.toFilterValues.provider;
 
-export const getCategories = (state: IState): Array<string> =>
+export const getCategories = (state: State): Array<string> =>
   state.toFilterValues.category;
 
-export const getDetailService = (state: IState): DemoData =>
+export const getDetailService = (state: State): DemoData =>
   state.detailedService;

@@ -1,32 +1,33 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-import Logo from '../../../assets/logos/CL_Logo.svg';
 import {
   Typography,
   Grid,
   LinearProgress,
   Theme,
   createStyles,
-  Link
+  Link,
 } from '@material-ui/core';
-import { urls } from '../../../shared/externalURL';
+import {urls} from '../../../shared/externalURL';
+
+const Logo = require('./../../../assets/logos/CL_Logo.svg') as string;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     card: {
-      maxWidth: 500
+      maxWidth: 500,
     },
     media: {
-      height: 200
+      height: 200,
     },
     logo: {
       width: '100%',
-      marginBottom: theme.spacing(4)
-    }
+      marginBottom: theme.spacing(4),
+    },
   })
 );
 

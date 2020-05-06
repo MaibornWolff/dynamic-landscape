@@ -1,16 +1,16 @@
 import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import { IconButton, Tooltip, Typography } from '@material-ui/core';
-import { DemoData, Providers } from '../../../assets/data/dataType';
+import {IconButton, Tooltip, Typography} from '@material-ui/core';
+import {DemoData, Providers} from '../../../assets/data/dataType';
 import LazyLoad from 'react-lazyload';
 import classNames from 'classnames';
 
-interface IProps {
+interface Props {
   setDetailService: (service: DemoData) => void;
   providers: Array<Providers>;
   categories: Array<string>;
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function Landscape(props: IProps) {
+export default function Landscape(props: Props) {
   const classes = useStyles();
 
   const providers = props.providers.sort();
@@ -61,7 +61,7 @@ export default function Landscape(props: IProps) {
         service.provider === provider && service.category.includes(category)
     );
 
-  const isServiceFiltered = (service: DemoData): Boolean =>
+  const isServiceFiltered = (service: DemoData): boolean =>
     !props.filteredContent.includes(service);
 
   return (
@@ -92,11 +92,10 @@ export default function Landscape(props: IProps) {
               <TableCell key={j}>
                 {getServicesByProviderAndCategory(provider, category).map(
                   (service, k) => (
-                    <Tooltip title={service.service}>
+                    <Tooltip key={k} title={service.service}>
                       <IconButton
-                        key={k}
                         aria-label={service.service}
-                        onClick={(event) => setDetailService(event, service)}
+                        onClick={event => setDetailService(event, service)}
                         className={classes.serviceButton}
                       >
                         <LazyLoad height={25}>

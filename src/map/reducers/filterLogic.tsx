@@ -6,8 +6,8 @@ import {
 
 //Create a list of Unique Values to filter on
 export function getToFilterValues(services: DemoData[]): any {
-  const provider = new Set(services.map((service) => service.provider));
-  const category = new Set(services.flatMap((service) => service.category));
+  const provider = new Set(services.map(service => service.provider));
+  const category = new Set(services.flatMap(service => service.category));
 
   return {
     provider: Array.from(provider),
@@ -46,7 +46,7 @@ export function serviceFilter(
           filter as keyof typeof filterSet
         ] as Array<string>;
 
-        return filterValues.some((elem) => serviceValues.indexOf(elem) > -1);
+        return filterValues.some(elem => serviceValues.indexOf(elem) > -1);
       });
     }
   }
@@ -57,7 +57,7 @@ export function serviceFilter(
     services = services.filter((service: DemoData) => {
       for (let i = 0; i < filterSet.fulltext.length; i++) {
         for (const property in service) {
-          let content = service[property as keyof DemoData];
+          const content = service[property as keyof DemoData];
           if (
             typeof content === 'string' &&
             content.includes(filterSet.fulltext[i])

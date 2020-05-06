@@ -1,13 +1,13 @@
-import { createMuiTheme } from '@material-ui/core/styles';
-import { red } from '@material-ui/core/colors';
+import {createMuiTheme} from '@material-ui/core/styles';
+import {red} from '@material-ui/core/colors';
 
 const Theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#018588' //DL-Colore
+      main: '#018588', //DL-Colore
     },
     secondary: {
-      main: '#7e57c2'
+      main: '#7e57c2',
     },
 
     error: red,
@@ -21,9 +21,9 @@ const Theme = createMuiTheme({
     background: {
       paper: '#fff',
 
-      default: '#fafafa'
-    }
-  }
+      default: '#fafafa',
+    },
+  },
 });
 
 export default Theme;
