@@ -1,6 +1,5 @@
-import {IState} from '../reducers/map.reducer';
-import {DataFilter, DemoData, Providers} from '../../assets/data/dataType';
-import {uniq} from "lodash";
+import { IState } from '../reducers/map.reducer';
+import { DataFilter, DemoData, Providers } from '../../assets/data/dataType';
 
 export const getLoadingStatus = (state: IState): boolean => {
   return state.loading;
@@ -8,37 +7,24 @@ export const getLoadingStatus = (state: IState): boolean => {
 
 export const getFilteredContent = (state: IState): Array<DemoData> => {
   return Object.keys(state.filter).some(
-    key => state.filter[key as keyof typeof state.filter].length > 0
+    (key) => state.filter[key as keyof typeof state.filter].length > 0
   )
     ? state.filteredContent
     : state.content;
 };
 
-export const getContent = (state: IState): Array<DemoData> => {
-  return state.content;
-}
+export const getContent = (state: IState): Array<DemoData> => state.content;
 
-export const getFilter = (state: IState): DataFilter => {
-  return state.filter;
-};
+export const getFilter = (state: IState): DataFilter => state.filter;
 
-export const getPossibleFilterValues = (state: IState): DataFilter => {
-  return state.toFilterValues;
-};
+export const getPossibleFilterValues = (state: IState): DataFilter =>
+  state.toFilterValues;
 
-export const getDetailService = (state: IState): DemoData => {
-  return state.detailedService;
-};
+export const getProviders = (state: IState): Array<Providers> =>
+  state.toFilterValues.provider;
 
-export const getContentByProvider = (
-  state: IState,
-  provider: string
-): Array<DemoData> => {
-  return state.content.filter(service => service.provider === provider);
-};
+export const getCategories = (state: IState): Array<string> =>
+  state.toFilterValues.category;
 
-export const getProviders = (state: IState) => uniq(getContent(state).map(service => service.provider));
-export const getCategories = (state: IState) => uniq(getContent(state).flatMap(service => service.category));
-export const getServicesFunction = (state: IState) => (provider: Providers, category: string) =>
-  getContent(state).filter(service => service.provider === provider && service.category.includes(category))
-export const getIsFilteredFunction = (state: IState) => (service: DemoData) => !getFilteredContent(state).includes(service)
+export const getDetailService = (state: IState): DemoData =>
+  state.detailedService;
