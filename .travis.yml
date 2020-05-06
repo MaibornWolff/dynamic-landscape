@@ -8,11 +8,13 @@ jobs:
   include:
     - stage: checks
       install: npm install
-      script: npm run check
+      script:
+        - npm run check
+        - npm build
     - stage: deploy
       branches:
         only:
-        - V2
+          - V2
       install: npm install
       script: npm run build
       deploy:
