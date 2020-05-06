@@ -1,5 +1,10 @@
 import {State} from '../reducers/map.reducer';
-import {DataFilter, DemoData, Providers} from '../../assets/data/dataType';
+import {
+  DataFilter,
+  DemoData,
+  Providers,
+  ServiceFeatures,
+} from '../../assets/data/dataType';
 
 export const getLoadingStatus = (state: State): boolean => {
   return state.loading;
@@ -17,7 +22,7 @@ export const getContent = (state: State): Array<DemoData> => state.content;
 
 export const getFilter = (state: State): DataFilter => state.filter;
 
-export const getPossibleFilterValues = (state: State): DataFilter =>
+export const getPossibleFilterValues = (state: State): ServiceFeatures =>
   state.toFilterValues;
 
 export const getProviders = (state: State): Array<Providers> =>

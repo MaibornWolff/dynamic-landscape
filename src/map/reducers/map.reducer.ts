@@ -34,7 +34,6 @@ const initialState: State = {
   toFilterValues: {
     provider: [],
     category: [],
-    fulltext: [],
   },
 };
 
