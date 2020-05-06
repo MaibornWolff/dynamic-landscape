@@ -1,4 +1,5 @@
 [![Code Style: Google](https://img.shields.io/badge/code%20style-google-blueviolet.svg)](https://github.com/google/gts)
+[![Build Status](https://travis-ci.com/MaibornWolff/dynamic-landscape.svg?branch=V2)](https://travis-ci.com/MaibornWolff/dynamic-landscape)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
