@@ -23,13 +23,14 @@ import {
   DataFilter,
   DataFilter_only_arrays,
   Providers,
+  ServiceFeatures,
 } from '../../../assets/data/dataType';
 
 const Logo = require('./../../../assets/logos/CL_Logo.svg') as string;
 
 export interface Props {
   filter: DataFilter;
-  possibleFilterValues: DataFilter;
+  possibleFilterValues: ServiceFeatures;
   setFilter: (filter: DataFilter) => void;
   displayChips?: boolean;
 }
@@ -111,7 +112,9 @@ export default function FilterComponentContainer(props: Props) {
 
   const getFilterChips = (filterSet: DataFilter) => {
     const chipSet: React.ReactNode[] = [];
-    for (const [filter, value] of Object.entries(filterSet)) {
+    for (const [filter, value] of Object.entries<Array<string | Providers>>(
+      filterSet
+    )) {
       value.forEach((value: Providers | string) => {
         chipSet.push(
           <Chip
