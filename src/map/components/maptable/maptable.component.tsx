@@ -5,7 +5,12 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import {Button, TableFooter, TablePagination, Typography,} from '@material-ui/core';
+import {
+  Button,
+  TableFooter,
+  TablePagination,
+  Typography,
+} from '@material-ui/core';
 import {DemoData} from '../../../assets/data/dataType';
 import LazyLoad from 'react-lazyload';
 import TablePaginationActions from './paginationActions.component';
