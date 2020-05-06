@@ -48,7 +48,7 @@ export default function Landscape(props: Props) {
 
   const providers = props.providers.sort();
   const categories = props.categories.sort();
-  const setDetailService = (event: any, service: DemoData) => {
+  const setDetailService = (service: DemoData) => {
     props.setDetailService(service);
   };
 
@@ -95,7 +95,7 @@ export default function Landscape(props: Props) {
                     <Tooltip key={k} title={service.service}>
                       <IconButton
                         aria-label={service.service}
-                        onClick={event => setDetailService(event, service)}
+                        onClick={() => setDetailService(service)}
                         className={classes.serviceButton}
                       >
                         <LazyLoad height={25}>
