@@ -8,11 +8,11 @@ jobs:
   include:
     - stage: checks
       install: npm install
-      script: npm run check
+      script:
+        - npm run check
+        - npm build
     - stage: deploy
-      branches:
-        only:
-        - V2
+      if: (branch = V2) AND (type != pull_request)
       install: npm install
       script: npm run build
       deploy:
