@@ -25,7 +25,6 @@ import {DataFilter, DataFilter_only_arrays, Providers} from '../../../assets/dat
 interface IProps {
   filter: DataFilter;
   possibleFilterValues: DataFilter;
-  iconClassName: any;
   setFilter: (filter: DataFilter) => void;
   displayChips?: Boolean;
 }
@@ -57,6 +56,9 @@ const useStyles = makeStyles({
   },
   category: {
     width: '100%'
+  },
+  iconButton: {
+    float: 'right'
   }
 });
 
@@ -68,7 +70,7 @@ export default function FilterComponentContainer(props: IProps) {
   const toggleDrawer = (open: boolean) => (
     event: React.KeyboardEvent | React.MouseEvent
   ) => {
-    if (!!!open) {
+    if (!open) {
       props.setFilter(filter);
       setOpen(open);
     } else {
@@ -143,10 +145,10 @@ export default function FilterComponentContainer(props: IProps) {
       <div>
         {/* Icon to open filter window */}
         <IconButton
-          className={props.iconClassName}
+          className={classes.iconButton}
           onClick={toggleDrawer(true)}
         >
-          <SearchIcon></SearchIcon>
+          <SearchIcon/>
         </IconButton>
         {/* Chipset of current filter*/}
         {props.displayChips && getFilterChips(props.filter)}

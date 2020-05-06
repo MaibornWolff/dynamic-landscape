@@ -4,12 +4,15 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Logo from '../../../assets/logos/CL_Logo_no_background.svg';
-import GitHubIcon from '@material-ui/icons/GitHub';
+import {GitHub as GitHubIcon, Map as MapIcon, SvgIconComponent, ViewList as ViewListIcon} from '@material-ui/icons';
 import {Link} from '@material-ui/core';
 import {urls} from '../../externalURL';
-import {FilterComponent} from '../filter/filter.container.component';
+import {Location} from 'history';
+import {Link as RouterLink} from 'react-router-dom'
 
-interface IProps {}
+interface IProps {
+  location: Location
+}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -47,7 +50,17 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function NavigationComponent() {
+const views: Array<{path: string, icon: SvgIconComponent}> = [
+  {
+    path: '/landscape',
+    icon: MapIcon
+  }, {
+    path: '/',
+    icon: ViewListIcon
+  }
+]
+
+export default function NavigationComponent(props: IProps) {
   const classes = useStyles();
 
   return (
@@ -61,10 +74,17 @@ export default function NavigationComponent() {
             Cloud Landscape
           </span>
           <div className={classes.spacing}/>
-          <FilterComponent
-            iconClassName={classes.filterIcon}
-            displayChips={false}
-          />
+          <div className={classes.spacing}/>
+          {
+            views.filter(({path}) => path !== props.location.pathname)
+              .map(({path, icon: IconComponent}, index) => {
+                return <IconButton key={index} className={classes.button}>
+                  <Link to={path} component={RouterLink}>
+                    <IconComponent className={classes.button}/>
+                  </Link>
+                </IconButton>
+              })
+          }
           <IconButton className={classes.button}>
             <Link href={urls.github} target="_blank" rel="noopener noreferrer">
               <GitHubIcon className={classes.button} />

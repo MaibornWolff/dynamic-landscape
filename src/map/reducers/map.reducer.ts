@@ -3,9 +3,9 @@ import update from 'immutability-helper';
 import {
   SETCONTENT,
   SETDETAILSERVICE,
-  SETFILTER
+  SETFILTER,
 } from '../actions/map.actions';
-import { DemoData, DataFilter } from '../../assets/data/dataType';
+import { DataFilter, DemoData } from '../../assets/data/dataType';
 import { getToFilterValues, serviceFilter } from './filterLogic';
 
 export interface IState {
@@ -20,18 +20,18 @@ export interface IState {
 const initialState: IState = {
   loading: true,
   content: [],
+  filteredContent: [],
   detailedService: {} as DemoData,
   filter: {
     provider: [],
     category: [],
-    fulltext: ['Lambda']
+    fulltext: [],
   },
   toFilterValues: {
     provider: [],
     category: [],
-    fulltext: []
+    fulltext: [],
   },
-  filteredContent: []
 };
 
 export const Map = (state: IState = initialState, action: IAction<any>) => {
@@ -40,25 +40,25 @@ export const Map = (state: IState = initialState, action: IAction<any>) => {
       return update(state, {
         content: { $set: action.payload },
         filteredContent: {
-          $set: serviceFilter(action.payload, state.filter)
+          $set: serviceFilter(action.payload, state.filter),
         },
         toFilterValues: {
-          $set: getToFilterValues(action.payload)
+          $set: getToFilterValues(action.payload),
         },
-        loading: { $set: false }
+        loading: { $set: false },
       });
 
     case SETDETAILSERVICE:
       return update(state, {
-        detailedService: { $set: action.payload }
+        detailedService: { $set: action.payload },
       });
 
     case SETFILTER:
       return update(state, {
         filteredContent: {
-          $set: serviceFilter(state.content, action.payload)
+          $set: serviceFilter(state.content, action.payload),
         },
-        filter: { $set: action.payload }
+        filter: { $set: action.payload },
       });
 
     default:

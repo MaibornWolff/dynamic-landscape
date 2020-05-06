@@ -1,13 +1,10 @@
-import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
+import {Dispatch} from 'redux';
+import {connect} from 'react-redux';
 import FilterComponentContainer from './filter.component';
-import { setFilter } from '../../../map/actions/map.actions';
-import {
-  getFilter,
-  getPossibleFilterValues
-} from '../../../map/selectors/map.selector';
-import { IState } from '../../../reducers/index';
-import { DataFilter } from '../../../assets/data/dataType';
+import {setFilter} from '../../../map/actions/map.actions';
+import {getFilter, getPossibleFilterValues} from '../../../map/selectors/map.selector';
+import {IState} from '../../../reducers';
+import {DataFilter} from '../../../assets/data/dataType';
 
 interface IProps {
   filter: DataFilter;
