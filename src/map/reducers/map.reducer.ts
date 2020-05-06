@@ -1,7 +1,15 @@
-import {Action} from '../../shared/action';
 import update from 'immutability-helper';
-import {SETCONTENT, SETDETAILSERVICE, SETFILTER} from '../actions/map.actions';
-import {DataFilter, DemoData} from '../../assets/data/dataType';
+import {
+  MapActionTypes,
+  SETCONTENT,
+  SETDETAILSERVICE,
+  SETFILTER,
+} from '../actions/map.actions';
+import {
+  DataFilter,
+  DemoData,
+  ServiceFeatures,
+} from '../../assets/data/dataType';
 import {getToFilterValues, serviceFilter} from './filterLogic';
 
 export interface State {
@@ -10,7 +18,7 @@ export interface State {
   detailedService: DemoData;
   filteredContent: Array<DemoData>;
   filter: DataFilter; //TODO - define
-  toFilterValues: DataFilter;
+  toFilterValues: ServiceFeatures;
 }
 
 const initialState: State = {
@@ -30,7 +38,7 @@ const initialState: State = {
   },
 };
 
-export const Map = (state: State = initialState, action: Action<any>) => {
+export const Map = (state: State = initialState, action: MapActionTypes) => {
   switch (action.type) {
     case SETCONTENT:
       return update(state, {

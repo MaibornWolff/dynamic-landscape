@@ -2,10 +2,11 @@ import {
   DemoData,
   DataFilter,
   DataFilter_only_arrays,
+  ServiceFeatures,
 } from '../../assets/data/dataType';
 
 //Create a list of Unique Values to filter on
-export function getToFilterValues(services: DemoData[]): any {
+export function getToFilterValues(services: DemoData[]): ServiceFeatures {
   const provider = new Set(services.map(service => service.provider));
   const category = new Set(services.flatMap(service => service.category));
 
@@ -35,7 +36,7 @@ export function serviceFilter(
       Array.isArray(filterSet[filter as keyof typeof filterSet]) &&
       filterSet[filter as keyof typeof filterSet].length &&
       filter !== 'fulltext' &&
-      Array.isArray(services[0][filter as DataFilter_only_arrays] as any)
+      Array.isArray(services[0][filter as DataFilter_only_arrays])
     ) {
       filtered = true;
       services = services.filter((s: DemoData) => {

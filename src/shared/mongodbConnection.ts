@@ -1,7 +1,7 @@
 import {DemoData} from '../assets/data/dataType';
 import {
-  Stitch,
   RemoteMongoClient,
+  Stitch,
   UserApiKeyCredential,
 } from 'mongodb-stitch-browser-sdk';
 
@@ -26,13 +26,13 @@ export default async function fetchAllServices() {
     let returnDoc = [] as DemoData[];
     await client.auth
       .loginWithCredential(credential)
-      .then(() => db.collection(COLLECTION).find({}).toArray())
-      .then((docs: any) => {
+      .then(() => db.collection<DemoData>(COLLECTION).find({}).toArray())
+      .then((docs: DemoData[]) => {
         console.log('[MongoDB Stitch] Connected to Stitch');
         returnDoc = docs;
         sessionStorage.serviceContent = JSON.stringify(docs);
       })
-      .catch((err: any) => {
+      .catch((err: Error) => {
         console.error(err);
       });
     return returnDoc;

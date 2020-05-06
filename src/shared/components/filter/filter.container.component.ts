@@ -9,13 +9,6 @@ import {
 import {State} from '../../../reducers';
 import {DataFilter} from '../../../assets/data/dataType';
 
-interface Props {
-  filter: DataFilter;
-  possibleFilterValues: DataFilter;
-  iconClassName: any;
-  setFilter: (filter: DataFilter) => void;
-  displayChips?: boolean;
-}
 const mapStateToProps = (state: State) => ({
   filter: getFilter(state.Map),
   possibleFilterValues: getPossibleFilterValues(state.Map),

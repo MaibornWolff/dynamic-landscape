@@ -12,9 +12,12 @@ export type DemoData = {
 
 export type Providers = 'Google' | 'AWS' | 'Azure' | null;
 
-export type DataFilter = {
+export type ServiceFeatures = {
   provider: Providers[];
   category: string[];
+};
+
+export type DataFilter = ServiceFeatures & {
   fulltext: string[];
 };
 
