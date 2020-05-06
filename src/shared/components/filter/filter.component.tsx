@@ -19,7 +19,11 @@ import {
   TextField,
   Typography,
 } from '@material-ui/core';
-import {DataFilter, DataFilter_only_arrays, Providers,} from '../../../assets/data/dataType';
+import {
+  DataFilter,
+  DataFilter_only_arrays,
+  Providers,
+} from '../../../assets/data/dataType';
 
 const Logo = require('./../../../assets/logos/CL_Logo.svg') as string;
 
