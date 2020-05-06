@@ -4,14 +4,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Logo from '../../../assets/logos/CL_Logo_no_background.svg';
-import {
-  GitHub as GitHubIcon,
-  Map as MapIcon,
-  Menu as MenuIcon,
-  SvgIconComponent,
-  ViewList as ViewListIcon
-} from '@material-ui/icons';
-import { Link} from '@material-ui/core';
+import {GitHub as GitHubIcon, Map as MapIcon, SvgIconComponent, ViewList as ViewListIcon} from '@material-ui/icons';
+import {Link} from '@material-ui/core';
 import {urls} from '../../externalURL';
 import {Location} from 'history';
 import {Link as RouterLink} from 'react-router-dom'
