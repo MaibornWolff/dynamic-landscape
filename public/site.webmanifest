@@ -1,6 +1,6 @@
 {
-    "name": "Dynamic Landscape",
-    "short_name": "Dynamic Landscape",
+    "name": "Cloud Landscape",
+    "short_name": "Cloud Landscape",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
@@ -13,7 +13,7 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#018588",
-    "background_color": "#018588",
+    "theme_color": "#008688",
+    "background_color": "#008688",
     "display": "standalone"
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import Logo from '../../../assets/logos/DL_Logo.svg';
+import Logo from '../../../assets/logos/CL_Logo.svg';
 import SearchIcon from '@material-ui/icons/Search';
 import {
   Button,

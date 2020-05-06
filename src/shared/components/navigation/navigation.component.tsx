@@ -3,7 +3,7 @@ import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import Logo from '../../../assets/logos/DL_Logo.svg';
+import Logo from '../../../assets/logos/CL_Logo_no_background.svg';
 import {
   GitHub as GitHubIcon,
   Map as MapIcon,
@@ -11,7 +11,7 @@ import {
   SvgIconComponent,
   ViewList as ViewListIcon
 } from '@material-ui/icons';
-import {Card, Link} from '@material-ui/core';
+import { Link} from '@material-ui/core';
 import {urls} from '../../externalURL';
 import {Location} from 'history';
 import {Link as RouterLink} from 'react-router-dom'
@@ -47,6 +47,11 @@ const useStyles = makeStyles((theme: Theme) =>
     filterIcon: {
       float: 'right',
       color: 'white'
+    },
+    appName: {
+      marginLeft: 10,
+      fontSize: 'x-large',
+      fontWeight: 500
     }
   })
 );
@@ -68,17 +73,13 @@ export default function NavigationComponent(props: IProps) {
     <div className={classes.root}>
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Card className={classes.logoCard}>
+          <div className={classes.logoCard}>
             <img src={Logo} alt="Logo" className={classes.logo} />
-          </Card>
+          </div>
+          <span className={classes.appName}>
+            Cloud Landscape
+          </span>
+          <div className={classes.spacing}/>
           <div className={classes.spacing}/>
           {
             views.filter(({path}) => path !== props.location.pathname)
