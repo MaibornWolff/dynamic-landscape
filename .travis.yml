@@ -28,5 +28,5 @@ jobs:
         skip_cleanup: true
         local_dir: build
         on:
-          repo: MaibornWolff/dynamic-landscape
+          repo: MaibornWolff/cloud-landscape
           branch: V2
