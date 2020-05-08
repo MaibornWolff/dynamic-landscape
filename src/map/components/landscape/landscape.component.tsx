@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -45,6 +45,14 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Landscape(props: Props) {
   const classes = useStyles();
+  const firstUnfilteredService = React.createRef<HTMLButtonElement>();
+
+  useEffect(() => {
+    firstUnfilteredService.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+    });
+  });
 
   const providers = props.providers.sort();
   const categories = props.categories.sort();
@@ -63,6 +71,61 @@ export default function Landscape(props: Props) {
 
   const isServiceFiltered = (service: DemoData): boolean =>
     !props.filteredContent.includes(service);
+
+  const renderService = (
+    service: DemoData,
+    index: number,
+    isFiltered: boolean,
+    isFirstUnfiltered: boolean
+  ) => (
+    <Tooltip key={index} title={service.service}>
+      <IconButton
+        aria-label={service.service}
+        onClick={() => setDetailService(service)}
+        className={classes.serviceButton}
+        ref={isFirstUnfiltered ? firstUnfilteredService : undefined}
+      >
+        <LazyLoad height={25}>
+          <img
+            src={service.img}
+            alt={service.service}
+            className={classNames(
+              classes.serviceIcon,
+              isFiltered && classes.filteredService
+            )}
+          />
+        </LazyLoad>
+      </IconButton>
+    </Tooltip>
+  );
+
+  const renderCategories = () => {
+    let noUnfilteredServiceYet = true;
+    return categories.map((category, i) => (
+      <TableRow key={i}>
+        <TableCell component="th" scope="row">
+          {category}
+        </TableCell>
+        {providers.map((provider, j) => (
+          <TableCell key={j}>
+            {getServicesByProviderAndCategory(provider, category).map(
+              (service, index) => {
+                const isFiltered = isServiceFiltered(service);
+                const isFirstUnfiltered = noUnfilteredServiceYet && !isFiltered;
+                if (isFirstUnfiltered) noUnfilteredServiceYet = false;
+                return renderService(
+                  service,
+                  index,
+                  isFiltered,
+                  isFirstUnfiltered
+                );
+              }
+            )}
+          </TableCell>
+        ))}
+      </TableRow>
+    ));
+  };
 
   return (
     <Table className={classes.table} size="small">
@@ -83,40 +146,7 @@ export default function Landscape(props: Props) {
         </TableRow>
       </TableHead>
       <TableBody>
-        {categories.map((category, i) => (
-          <TableRow key={i}>
-            <TableCell component="th" scope="row">
-              {category}
-            </TableCell>
-            {providers.map((provider, j) => (
-              <TableCell key={j}>
-                {getServicesByProviderAndCategory(provider, category).map(
-                  (service, k) => (
-                    <Tooltip key={k} title={service.service}>
-                      <IconButton
-                        aria-label={service.service}
-                        onClick={() => setDetailService(service)}
-                        className={classes.serviceButton}
-                      >
-                        <LazyLoad height={25}>
-                          <img
-                            src={service.img}
-                            alt={service.service}
-                            className={classNames(
-                              classes.serviceIcon,
-                              isServiceFiltered(service) &&
-                                classes.filteredService
-                            )}
-                          />
-                        </LazyLoad>
-                      </IconButton>
-                    </Tooltip>
-                  )
-                )}
-              </TableCell>
-            ))}
-          </TableRow>
-        ))}
+        {renderCategories()}
         {!categories.length && (
           <TableRow>
             <TableCell>Empty</TableCell>
