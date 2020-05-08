@@ -61,7 +61,7 @@ const views: Array<{path: string; icon: SvgIconComponent}> = [
     icon: MapIcon,
   },
   {
-    path: '/',
+    path: '/table',
     icon: ViewListIcon,
   },
 ];
