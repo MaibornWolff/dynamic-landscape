@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Route, Switch} from 'react-router-dom';
+import {Redirect, Route, Switch} from 'react-router-dom';
 
 import {Grid, styled} from '@material-ui/core';
 import {DemoData, Providers} from '../assets/data/dataType';
@@ -64,12 +64,13 @@ export default class MapComponent extends React.Component<Props> {
                     setDetailService={this.props.setDetailService}
                   />
                 </Route>
-                <Route path="/">
+                <Route path="/table">
                   <MapTable
                     content={this.props.filteredContent}
                     setDetailService={this.props.setDetailService}
                   />
                 </Route>
+                <Redirect to="/landscape" />
               </Switch>
             </StyledPaper>
           </Grid>
