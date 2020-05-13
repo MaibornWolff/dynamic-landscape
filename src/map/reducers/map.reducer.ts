@@ -4,6 +4,7 @@ import {
   SETCONTENT,
   SETDETAILSERVICE,
   SETFILTER,
+  SETZOOMFACTOR,
 } from '../actions/map.actions';
 import {
   DataFilter,
@@ -19,6 +20,7 @@ export interface State {
   filteredContent: Array<DemoData>;
   filter: DataFilter; //TODO - define
   toFilterValues: ServiceFeatures;
+  zoomFactor: number;
 }
 
 const initialState: State = {
@@ -35,6 +37,7 @@ const initialState: State = {
     provider: [],
     category: [],
   },
+  zoomFactor: 1,
 };
 
 export const Map = (state: State = initialState, action: MapActionTypes) => {
@@ -62,6 +65,11 @@ export const Map = (state: State = initialState, action: MapActionTypes) => {
           $set: serviceFilter(state.content, action.payload),
         },
         filter: {$set: action.payload},
+      });
+
+    case SETZOOMFACTOR:
+      return update(state, {
+        zoomFactor: {$set: action.payload},
       });
 
     default:

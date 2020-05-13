@@ -13,6 +13,7 @@ import {Link} from '@material-ui/core';
 import {urls} from '../../externalURL';
 import {Location} from 'history';
 import {Link as RouterLink} from 'react-router-dom';
+import Zoom from '../zoom/zoom.container.component';
 
 const Logo = require('./../../../assets/logos/CL_Logo.svg') as string;
 interface Props {
@@ -78,6 +79,7 @@ export default function NavigationComponent(props: Props) {
           </div>
           <span className={classes.appName}>Cloud Landscape</span>
           <div className={classes.spacing} />
+          <Zoom />
           <div className={classes.spacing} />
           {views
             .filter(({path}) => path !== props.location.pathname)

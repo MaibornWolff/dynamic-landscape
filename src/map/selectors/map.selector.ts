@@ -33,3 +33,5 @@ export const getCategories = (state: State): Array<string> =>
 
 export const getDetailService = (state: State): DemoData =>
   state.detailedService;
+
+export const getZoomFactor = (state: State): number => state.zoomFactor;
