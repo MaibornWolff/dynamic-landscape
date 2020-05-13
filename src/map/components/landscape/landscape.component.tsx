@@ -5,16 +5,15 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import {IconButton, Tooltip, Typography} from '@material-ui/core';
+import {Typography} from '@material-ui/core';
 import {DemoData, Providers} from '../../../assets/data/dataType';
-import LazyLoad from 'react-lazyload';
-import classNames from 'classnames';
+import ServiceButton from './servicebutton.component';
 
 interface Props {
   setDetailService: (service: DemoData) => void;
   providers: Array<Providers>;
   categories: Array<string>;
-  content: Array<DemoData>;
+  groupedContent: Map<Providers, Map<string, DemoData[]>>;
   filteredContent: Array<DemoData>;
 }
 
@@ -22,16 +21,6 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     table: {
       minWidth: 100,
-    },
-    serviceButton: {
-      padding: 3,
-    },
-    serviceIcon: {
-      height: 25,
-      width: 25,
-    },
-    filteredService: {
-      opacity: 0.15,
     },
     header: {
       backgroundColor: theme.palette.primary.main,
@@ -63,41 +52,10 @@ export default function Landscape(props: Props) {
   const getServicesByProviderAndCategory = (
     provider: Providers,
     category: string
-  ): Array<DemoData> =>
-    props.content.filter(
-      (service: DemoData) =>
-        service.provider === provider && service.category.includes(category)
-    );
+  ): Array<DemoData> => props.groupedContent.get(provider)?.get(category) || [];
 
   const isServiceFiltered = (service: DemoData): boolean =>
     !props.filteredContent.includes(service);
-
-  const renderService = (
-    service: DemoData,
-    index: number,
-    isFiltered: boolean,
-    isFirstUnfiltered: boolean
-  ) => (
-    <Tooltip key={index} title={service.service}>
-      <IconButton
-        aria-label={service.service}
-        onClick={() => setDetailService(service)}
-        className={classes.serviceButton}
-        ref={isFirstUnfiltered ? firstUnfilteredService : undefined}
-      >
-        <LazyLoad height={25}>
-          <img
-            src={service.img}
-            alt={service.service}
-            className={classNames(
-              classes.serviceIcon,
-              isFiltered && classes.filteredService
-            )}
-          />
-        </LazyLoad>
-      </IconButton>
-    </Tooltip>
-  );
 
   const renderCategories = () => {
     let noUnfilteredServiceYet = true;
@@ -113,11 +71,16 @@ export default function Landscape(props: Props) {
                 const isFiltered = isServiceFiltered(service);
                 const isFirstUnfiltered = noUnfilteredServiceYet && !isFiltered;
                 if (isFirstUnfiltered) noUnfilteredServiceYet = false;
-                return renderService(
-                  service,
-                  index,
-                  isFiltered,
-                  isFirstUnfiltered
+                return (
+                  <ServiceButton
+                    key={index}
+                    service={service}
+                    setDetailService={setDetailService}
+                    isFiltered={isFiltered}
+                    buttonRef={
+                      isFirstUnfiltered ? firstUnfilteredService : undefined
+                    }
+                  />
                 );
               }
             )}
