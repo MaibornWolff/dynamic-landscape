@@ -51,6 +51,11 @@ If you click on any of the icons the page will show the detailed view of the sel
 
 ![Cloud Landscape Detail View](./docs/screenshots/detailView.png)
 
+### Architectur overview
+The following Component Diagram pictures the component composition within the react architecture.
+![React Component Architecture](./docs/ArchitecturDiagram/CloudLandscape.png)
+
+
 ## Using your own data
 
 In order to you use your own data source (preferable a non SQL Database), each document in your database must be structured as follows. In the provided example these are the cloud service providers (e.g. Amazon) and the actual cloud service category (e.g. “Storage”). Every entry must match the following JSON format:
