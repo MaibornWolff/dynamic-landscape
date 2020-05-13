@@ -5,6 +5,9 @@ import {
   Providers,
   ServiceFeatures,
 } from '../../assets/data/dataType';
+import {createSelector} from 'reselect';
+
+export const getContent = (state: State): Array<DemoData> => state.content;
 
 export const getLoadingStatus = (state: State): boolean => {
   return state.loading;
@@ -17,8 +20,6 @@ export const getFilteredContent = (state: State): Array<DemoData> => {
     ? state.filteredContent
     : state.content;
 };
-
-export const getContent = (state: State): Array<DemoData> => state.content;
 
 export const getFilter = (state: State): DataFilter => state.filter;
 
@@ -38,10 +39,9 @@ export const getDetailService = (state: State): DemoData =>
  * @param state current state that contains all services
  * @returns "nested" map that provides all services for a given provider and category
  */
-export const getGroupedContent = (
-  state: State
-): Map<Providers, Map<string, DemoData[]>> =>
-  getContent(state).reduce(
+export const getGroupedContent = createSelector(getContent, services => {
+  console.log('getGroupedContent called');
+  return services.reduce(
     (
       providersMap: Map<Providers, Map<string, DemoData[]>>,
       service: DemoData
@@ -58,3 +58,4 @@ export const getGroupedContent = (
     },
     new Map()
   );
+});
