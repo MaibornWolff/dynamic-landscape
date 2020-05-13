@@ -54,6 +54,7 @@ If you click on any of the icons the page will show the detailed view of the sel
 ### Architectur overview
 The following Component Diagram pictures the component composition within the react architecture.
 ![React Component Architecture](./docs/ArchitecturDiagram/CloudLandscape.png)
+ made with [Lucidchart](https://www.lucidchart.com).
 
 
 ## Using your own data
