@@ -33,9 +33,10 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.1",
     "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
-    "typescript": "3.7.2",
-    "redux-devtools-extension": "^2.13.8"
+    "reselect": "^4.0.0",
+    "typescript": "3.7.2"
   },
   "scripts": {
     "start": "react-scripts start",

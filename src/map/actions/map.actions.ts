@@ -30,7 +30,7 @@ export function setFilter(filter: DataFilter): MapActionTypes {
 
 interface SetDetailService {
   type: typeof SETDETAILSERVICE;
-  payload: DemoData;
+  payload: DemoData | undefined;
 }
 
 export function setDetailService(value: DemoData): MapActionTypes {
@@ -43,7 +43,7 @@ export function setDetailService(value: DemoData): MapActionTypes {
 export function deleteDetailService(): MapActionTypes {
   return {
     type: SETDETAILSERVICE,
-    payload: {} as DemoData,
+    payload: undefined,
   };
 }
 
