@@ -8,8 +8,8 @@ import Loading from './components/laoding/loading.component';
 import MapTable from './components/maptable/maptable.component';
 import fetchAllServices from '../shared/mongodbConnection';
 import Landscape from './components/landscape/landscape.component';
-import {FilterComponent} from '../shared/components/filter/filter.container.component';
 import Paper from '@material-ui/core/Paper';
+import Header from './components/header/header.component';
 import CacheRoute, {CacheSwitch} from 'react-router-cache-route';
 
 export interface Props {
@@ -53,7 +53,7 @@ export default class MapComponent extends React.Component<Props> {
           <Loading />
         ) : (
           <Grid item xs={11}>
-            <FilterComponent displayChips={true} />
+            <Header />
             <StyledPaper>
               <CacheSwitch>
                 <CacheRoute path="/landscape">
