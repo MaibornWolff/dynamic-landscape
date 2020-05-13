@@ -13,7 +13,7 @@ interface Props {
   setDetailService: (service: DemoData) => void;
   providers: Array<Providers>;
   categories: Array<string>;
-  content: Map<Providers, Map<string, DemoData[]>>;
+  groupedContent: Map<Providers, Map<string, DemoData[]>>;
   filteredContent: Array<DemoData>;
 }
 
@@ -52,7 +52,7 @@ export default function Landscape(props: Props) {
   const getServicesByProviderAndCategory = (
     provider: Providers,
     category: string
-  ): Array<DemoData> => props.content.get(provider)?.get(category) || [];
+  ): Array<DemoData> => props.groupedContent.get(provider)?.get(category) || [];
 
   const isServiceFiltered = (service: DemoData): boolean =>
     !props.filteredContent.includes(service);

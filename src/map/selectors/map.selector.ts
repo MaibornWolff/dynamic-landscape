@@ -33,3 +33,28 @@ export const getCategories = (state: State): Array<string> =>
 
 export const getDetailService = (state: State): DemoData =>
   state.detailedService;
+
+/**
+ * @param state current state that contains all services
+ * @returns "nested" map that provides all services for a given provider and category
+ */
+export const getGroupedContent = (
+  state: State
+): Map<Providers, Map<string, DemoData[]>> =>
+  getContent(state).reduce(
+    (
+      providersMap: Map<Providers, Map<string, DemoData[]>>,
+      service: DemoData
+    ) => {
+      // get the map with all categories for the provider of service
+      const categoriesMap =
+        providersMap.get(service.provider) || new Map<string, DemoData[]>();
+      // add the service to every category group it belongs to
+      service.category.forEach(category => {
+        const group = categoriesMap.get(category) || [];
+        categoriesMap.set(category, [...group, service]);
+      });
+      return providersMap.set(service.provider, categoriesMap);
+    },
+    new Map()
+  );
