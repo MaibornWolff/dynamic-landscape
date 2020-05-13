@@ -18,7 +18,7 @@
 
 ## What is Cloud Landscape
 
-Cloud Landscape is a web-based visualization tool. It was initially designed to visualize the set of cloud services provided by Microsoft (Azure), Amazon (AWS) and Google (GCP). This project includes the respective database for demonstration purposes. Our Cloud Landscape tool also provides a basic search functionality for the items in your database as well as the possibility to show connections between items. In the context of cloud services these connections represent service dependencies for different scenarios.
+Cloud Landscape is a web-based visualization tool. It was initially designed to visualize the set of cloud services provided by Microsoft (Azure), Amazon (AWS) and Google (GCP). This project includes the respective database for demonstration purposes. Our Cloud Landscape tool also provides a basic search functionality for the items in your database.
 Try out the [online demo](http://cloudlandscape.info/landscape/) for cloud services.
 
 ## Getting started
