@@ -4,6 +4,8 @@ import {ZoomIn, ZoomOut} from '@material-ui/icons';
 import {makeStyles} from '@material-ui/styles';
 
 const FACTOR_STEP = 1.1;
+const FACTOR_MIN = 0.3;
+const FACTOR_MAX = 4;
 
 export interface Props {
   zoomFactor: number;
@@ -28,22 +30,28 @@ export default function Zoom(props: Props) {
   };
 
   const handleZoomIn = () =>
-    props.setZoomFactor(props.zoomFactor * FACTOR_STEP);
+    props.setZoomFactor(Math.min(FACTOR_MAX, props.zoomFactor * FACTOR_STEP));
   const handleZoomOut = () =>
-    props.setZoomFactor(props.zoomFactor / FACTOR_STEP);
+    props.setZoomFactor(Math.max(FACTOR_MIN, props.zoomFactor / FACTOR_STEP));
+  const canZoomIn = props.zoomFactor < FACTOR_MAX;
+  const canZoomOut = props.zoomFactor > FACTOR_MIN;
 
   return (
     <Grid container alignItems="center">
       <Grid item>
-        <IconButton onClick={handleZoomOut} className={classes.button}>
+        <IconButton
+          onClick={handleZoomOut}
+          className={classes.button}
+          disabled={!canZoomOut}
+        >
           <ZoomOut />
         </IconButton>
       </Grid>
       <Grid item xs>
         <Slider
           value={props.zoomFactor}
-          min={0}
-          max={10}
+          min={FACTOR_MIN}
+          max={FACTOR_MAX}
           scale={x => x ** 2}
           step={0.1}
           onChange={handleChange}
@@ -51,7 +59,11 @@ export default function Zoom(props: Props) {
         />
       </Grid>
       <Grid item>
-        <IconButton onClick={handleZoomIn} className={classes.button}>
+        <IconButton
+          onClick={handleZoomIn}
+          className={classes.button}
+          disabled={!canZoomIn}
+        >
           <ZoomIn />
         </IconButton>
       </Grid>

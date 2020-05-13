@@ -22,6 +22,7 @@ export interface Props {
   setContent: (object: Array<DemoData>) => void;
   setDetailService: (object: DemoData) => void;
   deleteDetailService: () => void;
+  zoomFactor: number;
 }
 
 const StyledPaper = styled(Paper)({
@@ -63,6 +64,7 @@ export default class MapComponent extends React.Component<Props> {
                     providers={this.props.providers}
                     categories={this.props.categories}
                     setDetailService={this.props.setDetailService}
+                    zoomFactor={this.props.zoomFactor}
                   />
                 </CacheRoute>
                 <CacheRoute path="/table">

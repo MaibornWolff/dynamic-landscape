@@ -9,14 +9,17 @@ interface Props {
   setDetailService: (service: DemoData) => void;
   buttonRef?: React.RefObject<HTMLButtonElement>;
   isFiltered: boolean;
+  zoomFactor: number;
 }
 
 const ServiceIconButton = styled(IconButton)({padding: 3});
-const ServiceIcon = styled.img<{filtered: boolean}>(props => ({
-  height: 25,
-  width: 25,
-  opacity: props.filtered ? 0.15 : 1,
-}));
+const ServiceIcon = styled.img<{filtered: boolean; zoomFactor: number}>(
+  props => ({
+    height: 25 * props.zoomFactor,
+    width: 25 * props.zoomFactor,
+    opacity: props.filtered ? 0.15 : 1,
+  })
+);
 
 export default function ServiceButton(props: Props) {
   const setDetailService = () => props.setDetailService(props.service);
@@ -33,6 +36,7 @@ export default function ServiceButton(props: Props) {
             src={props.service.img}
             alt={props.service.service}
             filtered={props.isFiltered}
+            zoomFactor={props.zoomFactor}
           />
         </LazyLoad>
       </ServiceIconButton>

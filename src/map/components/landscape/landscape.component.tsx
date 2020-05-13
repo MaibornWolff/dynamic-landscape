@@ -15,6 +15,7 @@ interface Props {
   categories: Array<string>;
   groupedContent: Map<Providers, Map<string, DemoData[]>>;
   filteredContent: Array<DemoData>;
+  zoomFactor: number;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -22,6 +23,9 @@ const useStyles = makeStyles((theme: Theme) =>
     table: {
       minWidth: 100,
     },
+    tableCell: (props: {zoomFactor: number}) => ({
+      fontSize: `${props.zoomFactor * 100}%`,
+    }),
     header: {
       backgroundColor: theme.palette.primary.main,
     },
@@ -33,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function Landscape(props: Props) {
-  const classes = useStyles();
+  const classes = useStyles({zoomFactor: props.zoomFactor});
   const firstUnfilteredService = React.createRef<HTMLButtonElement>();
 
   useEffect(() => {
@@ -61,7 +65,7 @@ export default function Landscape(props: Props) {
     let noUnfilteredServiceYet = true;
     return categories.map((category, i) => (
       <TableRow key={i}>
-        <TableCell component="th" scope="row">
+        <TableCell component="th" scope="row" className={classes.tableCell}>
           {category}
         </TableCell>
         {providers.map((provider, j) => (
@@ -77,6 +81,7 @@ export default function Landscape(props: Props) {
                     service={service}
                     setDetailService={setDetailService}
                     isFiltered={isFiltered}
+                    zoomFactor={props.zoomFactor}
                     buttonRef={
                       isFirstUnfiltered ? firstUnfilteredService : undefined
                     }
