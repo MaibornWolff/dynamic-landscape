@@ -6,7 +6,6 @@ import IconButton from '@material-ui/core/IconButton';
 import {GitHub as GitHubIcon} from '@material-ui/icons';
 import {Link} from '@material-ui/core';
 import {urls} from '../../externalURL';
-import Zoom from '../zoom/zoom.container.component';
 
 const Logo = require('./../../../assets/logos/CL_Logo.svg') as string;
 
@@ -57,8 +56,6 @@ export default function NavigationComponent() {
             <img src={Logo} alt="Logo" className={classes.logo} />
           </div>
           <span className={classes.appName}>Cloud Landscape</span>
-          <div className={classes.spacing} />
-          <Zoom />
           <div className={classes.spacing} />
           <IconButton className={classes.button}>
             <Link href={urls.github} target="_blank" rel="noopener noreferrer">
