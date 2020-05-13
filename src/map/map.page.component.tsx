@@ -13,7 +13,7 @@ import Paper from '@material-ui/core/Paper';
 
 interface Props {
   loading: boolean;
-  detailService: DemoData;
+  detailService: DemoData | undefined;
   filteredContent: Array<DemoData>;
   content: Array<DemoData>;
   providers: Array<Providers>;
@@ -42,7 +42,7 @@ export default class MapComponent extends React.Component<Props> {
         alignItems="center"
         style={{minHeight: 600, marginTop: 40}}
       >
-        {Object.keys(this.props.detailService).length !== 0 && (
+        {this.props.detailService && (
           <DetailModal
             service={this.props.detailService}
             deleteDetailService={this.props.deleteDetailService}

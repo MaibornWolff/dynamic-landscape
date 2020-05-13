@@ -22,6 +22,14 @@ export function serviceFilter(
 ): DemoData[] {
   let filtered = false;
 
+  if (
+    !Object.keys(filterSet).some(
+      key => filterSet[key as keyof typeof filterSet].length > 0
+    )
+  ) {
+    return services;
+  }
+
   //filter provider
   if (Array.isArray(filterSet.provider) && filterSet.provider.length) {
     filtered = true;
