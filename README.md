@@ -47,7 +47,7 @@ At the top of the page you will find the search input. The search runs using the
 ![Cloud Landscape](./docs/screenshots/landscapeView.png)
 ![Cloud Landscape Filter](./docs/screenshots/filter.png)
 
-If you click on any of the icons the page will show the detailed view of the selectedservice.
+If you click on any of the icons the page will show the detailed view of the selected service.
 
 ![Cloud Landscape Detail View](./docs/screenshots/detailView.png)
 
