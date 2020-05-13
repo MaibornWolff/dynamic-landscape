@@ -52,9 +52,9 @@ If you click on any of the icons the page will show the detailed view of the sel
 ![Cloud Landscape Detail View](./docs/screenshots/detailView.png)
 
 ### Architectur overview
-The following Component Diagram pictures the component composition within the react architecture.
+The following Component Diagram pictures the component composition within the react architecture. Made with [Lucidchart](https://www.lucidchart.com).
 ![React Component Architecture](./docs/ArchitecturDiagram/CloudLandscape.png)
- made with [Lucidchart](https://www.lucidchart.com).
+
 
 
 ## Using your own data
