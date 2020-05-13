@@ -1,38 +1,37 @@
 import {State} from '../reducers/map.reducer';
-import {
-  DataFilter,
-  DemoData,
-  Providers,
-  ServiceFeatures,
-} from '../../assets/data/dataType';
+import {DataFilter, DemoData, Providers} from '../../assets/data/dataType';
+import {getToFilterValues, serviceFilter} from '../reducers/filterLogic';
 import {createSelector} from 'reselect';
-
-export const getContent = (state: State): Array<DemoData> => state.content;
 
 export const getLoadingStatus = (state: State): boolean => {
   return state.loading;
 };
 
-export const getFilteredContent = (state: State): Array<DemoData> => {
-  return Object.keys(state.filter).some(
-    key => state.filter[key as keyof typeof state.filter].length > 0
-  )
-    ? state.filteredContent
-    : state.content;
-};
+export const getContent = (state: State): Array<DemoData> => state.content;
 
 export const getFilter = (state: State): DataFilter => state.filter;
 
-export const getPossibleFilterValues = (state: State): ServiceFeatures =>
-  state.toFilterValues;
+export const getFilteredContent = createSelector(
+  getFilter,
+  getContent,
+  (filter, content) => serviceFilter(content, filter)
+);
 
-export const getProviders = (state: State): Array<Providers> =>
-  state.toFilterValues.provider;
+export const getPossibleFilterValues = createSelector(getContent, content =>
+  getToFilterValues(content)
+);
 
-export const getCategories = (state: State): Array<string> =>
-  state.toFilterValues.category;
+export const getProviders = createSelector(
+  getPossibleFilterValues,
+  toFilterValues => toFilterValues.provider
+);
 
-export const getDetailService = (state: State): DemoData =>
+export const getCategories = createSelector(
+  getPossibleFilterValues,
+  toFilterValues => toFilterValues.category
+);
+
+export const getDetailService = (state: State): DemoData | undefined =>
   state.detailedService;
 
 /**
