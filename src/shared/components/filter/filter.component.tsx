@@ -149,12 +149,23 @@ export default function FilterComponentContainer(props: Props) {
   return (
     <div>
       <div>
-        {/* Icon to open filter window */}
-        <IconButton className={classes.iconButton} onClick={toggleDrawer(true)}>
-          <SearchIcon />
-        </IconButton>
-        {/* Chipset of current filter*/}
-        {props.displayChips && getFilterChips(props.filter)}
+        <Grid
+          container
+          direction="row"
+          justify="flex-start"
+          alignItems="flex-end"
+          role="presentation"
+        >
+          {/* Icon to open filter window */}
+          <IconButton
+            className={classes.iconButton}
+            onClick={toggleDrawer(true)}
+          >
+            <SearchIcon />
+          </IconButton>
+          {/* Chipset of current filter*/}
+          {props.displayChips && getFilterChips(props.filter)}
+        </Grid>
       </div>
       <SwipeableDrawer
         anchor="top"

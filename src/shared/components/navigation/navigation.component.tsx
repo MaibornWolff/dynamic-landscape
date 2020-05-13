@@ -3,22 +3,12 @@ import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import {
-  GitHub as GitHubIcon,
-  Map as MapIcon,
-  SvgIconComponent,
-  ViewList as ViewListIcon,
-} from '@material-ui/icons';
+import {GitHub as GitHubIcon} from '@material-ui/icons';
 import {Link} from '@material-ui/core';
 import {urls} from '../../externalURL';
-import {Location} from 'history';
-import {Link as RouterLink} from 'react-router-dom';
 import Zoom from '../zoom/zoom.container.component';
 
 const Logo = require('./../../../assets/logos/CL_Logo.svg') as string;
-interface Props {
-  location: Location;
-}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -56,18 +46,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const views: Array<{path: string; icon: SvgIconComponent}> = [
-  {
-    path: '/landscape',
-    icon: MapIcon,
-  },
-  {
-    path: '/table',
-    icon: ViewListIcon,
-  },
-];
-
-export default function NavigationComponent(props: Props) {
+export default function NavigationComponent() {
   const classes = useStyles();
 
   return (
@@ -81,17 +60,6 @@ export default function NavigationComponent(props: Props) {
           <div className={classes.spacing} />
           <Zoom />
           <div className={classes.spacing} />
-          {views
-            .filter(({path}) => path !== props.location.pathname)
-            .map(({path, icon: IconComponent}, index) => {
-              return (
-                <IconButton key={index} className={classes.button}>
-                  <Link to={path} component={RouterLink}>
-                    <IconComponent className={classes.button} />
-                  </Link>
-                </IconButton>
-              );
-            })}
           <IconButton className={classes.button}>
             <Link href={urls.github} target="_blank" rel="noopener noreferrer">
               <GitHubIcon className={classes.button} />

@@ -5,7 +5,7 @@ import {
   getDetailService,
   getFilteredContent,
   getLoadingStatus,
-  getContent,
+  getGroupedContent,
   getCategories,
   getProviders,
 } from './selectors/map.selector';
@@ -21,7 +21,7 @@ import {DemoData} from '../assets/data/dataType';
 const mapStateToProps = (state: State) => ({
   loading: getLoadingStatus(state.Map),
   filteredContent: getFilteredContent(state.Map),
-  content: getContent(state.Map),
+  groupedContent: getGroupedContent(state.Map),
   detailService: getDetailService(state.Map),
   providers: getProviders(state.Map),
   categories: getCategories(state.Map),

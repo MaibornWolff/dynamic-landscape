@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Redirect, Route, Switch} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 
 import {Grid, styled} from '@material-ui/core';
 import {DemoData, Providers} from '../assets/data/dataType';
@@ -8,14 +8,15 @@ import Loading from './components/laoding/loading.component';
 import MapTable from './components/maptable/maptable.component';
 import fetchAllServices from '../shared/mongodbConnection';
 import Landscape from './components/landscape/landscape.component';
-import {FilterComponent} from '../shared/components/filter/filter.container.component';
 import Paper from '@material-ui/core/Paper';
+import Header from './components/header/header.component';
+import CacheRoute, {CacheSwitch} from 'react-router-cache-route';
 
-interface Props {
+export interface Props {
   loading: boolean;
-  detailService: DemoData;
+  detailService: DemoData | undefined;
   filteredContent: Array<DemoData>;
-  content: Array<DemoData>;
+  groupedContent: Map<Providers, Map<string, DemoData[]>>;
   providers: Array<Providers>;
   categories: Array<string>;
   setContent: (object: Array<DemoData>) => void;
@@ -42,7 +43,7 @@ export default class MapComponent extends React.Component<Props> {
         alignItems="center"
         style={{minHeight: 600, marginTop: 40}}
       >
-        {Object.keys(this.props.detailService).length !== 0 && (
+        {this.props.detailService && (
           <DetailModal
             service={this.props.detailService}
             deleteDetailService={this.props.deleteDetailService}
@@ -52,26 +53,26 @@ export default class MapComponent extends React.Component<Props> {
           <Loading />
         ) : (
           <Grid item xs={11}>
-            <FilterComponent displayChips={true} />
+            <Header />
             <StyledPaper>
-              <Switch>
-                <Route path="/landscape">
+              <CacheSwitch>
+                <CacheRoute path="/landscape">
                   <Landscape
                     filteredContent={this.props.filteredContent}
-                    content={this.props.content}
+                    groupedContent={this.props.groupedContent}
                     providers={this.props.providers}
                     categories={this.props.categories}
                     setDetailService={this.props.setDetailService}
                   />
-                </Route>
-                <Route path="/table">
+                </CacheRoute>
+                <CacheRoute path="/table">
                   <MapTable
                     content={this.props.filteredContent}
                     setDetailService={this.props.setDetailService}
                   />
-                </Route>
+                </CacheRoute>
                 <Redirect to="/landscape" />
-              </Switch>
+              </CacheSwitch>
             </StyledPaper>
           </Grid>
         )}
