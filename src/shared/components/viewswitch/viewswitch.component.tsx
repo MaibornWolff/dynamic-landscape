@@ -42,11 +42,11 @@ export default function ViewSwitch(props: Props) {
         .filter(({path}) => path !== props.location.pathname)
         .map(({path, icon: IconComponent}, index) => {
           return (
-            <IconButton key={index} className={classes.button}>
-              <Link to={path} component={RouterLink}>
+            <Link key={index} to={path} component={RouterLink}>
+              <IconButton className={classes.button}>
                 <IconComponent className={classes.button} />
-              </Link>
-            </IconButton>
+              </IconButton>
+            </Link>
           );
         })}
     </>
