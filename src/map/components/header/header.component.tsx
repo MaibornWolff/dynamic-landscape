@@ -1,9 +1,18 @@
-import {Grid} from '@material-ui/core';
+import {Grid, createStyles, makeStyles} from '@material-ui/core';
 import React from 'react';
 import {FilterComponent} from '../../../shared/components/filter/filter.container.component';
 import ViewSwitch from '../../../shared/components/viewswitch/viewswitch.container.component';
 
+const useStyles = makeStyles(() =>
+  createStyles({
+    header: {
+      paddingBottom: '10px',
+    },
+  })
+);
+
 export default function Header() {
+  const classes = useStyles();
   return (
     <Grid
       container
@@ -11,6 +20,7 @@ export default function Header() {
       justify="space-between"
       alignItems="flex-end"
       role="presentation"
+      className={classes.header}
     >
       <Grid item xs={8} md={8}>
         <FilterComponent displayChips={true} />

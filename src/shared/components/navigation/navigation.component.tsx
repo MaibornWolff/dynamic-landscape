@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import {GitHub as GitHubIcon} from '@material-ui/icons';
 import {Link} from '@material-ui/core';
 import {urls} from '../../externalURL';
+import {FilterComponent} from '../filter/filter-searchbar/filter.container.component';
 
 const Logo = require('./../../../assets/logos/CL_Logo.svg') as string;
 
@@ -56,11 +57,12 @@ export default function NavigationComponent() {
         <span className={classes.appName}>Cloud Landscape</span>
         <div className={classes.spacing} />
         <div className={classes.spacing} />
-        <IconButton className={classes.button}>
-          <Link href={urls.github} target="_blank" rel="noopener noreferrer">
+        <FilterComponent displayChips={true} />
+        <Link href={urls.github} target="_blank" rel="noopener noreferrer">
+          <IconButton className={classes.button}>
             <GitHubIcon className={classes.button} />
-          </Link>
-        </IconButton>
+          </IconButton>
+        </Link>
       </Toolbar>
     </AppBar>
   );
