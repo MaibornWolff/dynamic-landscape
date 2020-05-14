@@ -77,7 +77,9 @@ export default class MapComponent extends React.Component<Props> {
             </StyledPaper>
           </Grid>
         )}
-        <Footer />
+        <Grid item xs={12}>
+          <Footer />
+        </Grid>
       </Grid>
     );
   }
