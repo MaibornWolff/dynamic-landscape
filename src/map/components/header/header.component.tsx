@@ -1,6 +1,6 @@
 import {Grid, createStyles, makeStyles} from '@material-ui/core';
 import React from 'react';
-import {FilterComponent} from '../../../shared/components/filter/filter.container.component';
+import {FilterIconChips} from '../../../shared/components/filter/FilterIconChips/FilterIconChips.container.component';
 import ViewSwitch from '../../../shared/components/viewswitch/viewswitch.container.component';
 
 const useStyles = makeStyles(() =>
@@ -11,7 +11,11 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export default function Header() {
+interface Props {
+  toggleFilterBar: () => void;
+}
+
+export default function Header(props: Props) {
   const classes = useStyles();
   return (
     <Grid
@@ -23,7 +27,10 @@ export default function Header() {
       className={classes.header}
     >
       <Grid item xs={8} md={8}>
-        <FilterComponent displayChips={true} />
+        <FilterIconChips
+          displayChips={true}
+          toggleFilterBar={props.toggleFilterBar}
+        />
       </Grid>
       <Grid item xs={4} md={4}>
         <Grid
