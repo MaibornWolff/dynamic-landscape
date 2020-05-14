@@ -11,6 +11,7 @@ import Landscape from './components/landscape/landscape.component';
 import Paper from '@material-ui/core/Paper';
 import Header from './components/header/header.component';
 import CacheRoute, {CacheSwitch} from 'react-router-cache-route';
+import Footer from './components/footer/footer.component';
 
 export interface Props {
   loading: boolean;
@@ -76,6 +77,9 @@ export default class MapComponent extends React.Component<Props> {
             </StyledPaper>
           </Grid>
         )}
+        <Grid item xs={12}>
+          <Footer />
+        </Grid>
       </Grid>
     );
   }

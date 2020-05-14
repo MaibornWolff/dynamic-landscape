@@ -58,11 +58,11 @@ export default function NavigationComponent() {
           <span className={classes.appName}>Cloud Landscape</span>
           <div className={classes.spacing} />
           <div className={classes.spacing} />
-          <IconButton className={classes.button}>
-            <Link href={urls.github} target="_blank" rel="noopener noreferrer">
+          <Link href={urls.github} target="_blank" rel="noopener noreferrer">
+            <IconButton className={classes.button}>
               <GitHubIcon className={classes.button} />
-            </Link>
-          </IconButton>
+            </IconButton>
+          </Link>
         </Toolbar>
       </AppBar>
     </div>
