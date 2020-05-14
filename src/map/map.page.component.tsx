@@ -82,32 +82,34 @@ export default class MapComponent extends React.Component<Props, State> {
           {this.props.loading ? (
             <Loading />
           ) : (
-            <Grid item xs={11}>
-              <Header toggleFilterBar={this.toggleFilterBar} />
+            <>
+              <Grid item xs={11}>
+                <Header toggleFilterBar={this.toggleFilterBar} />
 
-              <StyledPaper>
-                <CacheSwitch>
-                  <CacheRoute path="/landscape">
-                    <Landscape
-                      filteredContent={this.props.filteredContent}
-                      groupedContent={this.props.groupedContent}
-                      providers={this.props.providers}
-                      categories={this.props.categories}
-                      setDetailService={this.props.setDetailService}
-                    />
-                  </CacheRoute>
-                  <CacheRoute path="/table">
-                    <MapTable
-                      content={this.props.filteredContent}
-                      setDetailService={this.props.setDetailService}
-                    />
-                  </CacheRoute>
-                  <Redirect to="/landscape" />
-                </CacheSwitch>
-              </StyledPaper>
-            </Grid>
+                <StyledPaper>
+                  <CacheSwitch>
+                    <CacheRoute path="/landscape">
+                      <Landscape
+                        filteredContent={this.props.filteredContent}
+                        groupedContent={this.props.groupedContent}
+                        providers={this.props.providers}
+                        categories={this.props.categories}
+                        setDetailService={this.props.setDetailService}
+                      />
+                    </CacheRoute>
+                    <CacheRoute path="/table">
+                      <MapTable
+                        content={this.props.filteredContent}
+                        setDetailService={this.props.setDetailService}
+                      />
+                    </CacheRoute>
+                    <Redirect to="/landscape" />
+                  </CacheSwitch>
+                </StyledPaper>
+              </Grid>
+              <Footer />
+            </>
           )}
-          <Footer />
         </Grid>
       </>
     );
