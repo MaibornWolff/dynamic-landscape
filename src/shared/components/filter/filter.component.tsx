@@ -18,6 +18,7 @@ import {
   Select,
   TextField,
   Typography,
+  Drawer,
 } from '@material-ui/core';
 import {
   DataFilter,
@@ -35,7 +36,16 @@ export interface Props {
   displayChips?: boolean;
 }
 
+const drawerWidth = 240;
+
 const useStyles = makeStyles({
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: drawerWidth,
+  },
   list: {
     width: 250,
   },
@@ -167,11 +177,16 @@ export default function FilterComponentContainer(props: Props) {
           {props.displayChips && getFilterChips(props.filter)}
         </Grid>
       </div>
-      <SwipeableDrawer
-        anchor="top"
+      <Drawer
+        anchor="left"
+        variant="persistent"
         open={open}
         onClose={toggleDrawer(false)}
-        onOpen={toggleDrawer(true)}
+        // onOpen={toggleDrawer(true)}
+        className={classes.drawer}
+        classes={{
+          paper: classes.drawerPaper,
+        }}
       >
         <div>
           <Grid
@@ -257,7 +272,7 @@ export default function FilterComponentContainer(props: Props) {
             </Grid>
           </Grid>
         </div>
-      </SwipeableDrawer>
+      </Drawer>
     </div>
   );
 }

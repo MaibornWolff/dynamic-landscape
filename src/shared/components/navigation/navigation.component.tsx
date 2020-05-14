@@ -11,12 +11,11 @@ const Logo = require('./../../../assets/logos/CL_Logo.svg') as string;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      flexGrow: 1,
-    },
     appBar: {
       // backgroundColor: theme.palette.grey[600]
       backgroundColor: theme.palette.primary.main,
+      zIndex: theme.zIndex.drawer + 1,
+      flexGrow: 1,
     },
     menuButton: {
       marginRight: theme.spacing(2),
@@ -49,22 +48,20 @@ export default function NavigationComponent() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static" className={classes.appBar}>
-        <Toolbar>
-          <div className={classes.logoCard}>
-            <img src={Logo} alt="Logo" className={classes.logo} />
-          </div>
-          <span className={classes.appName}>Cloud Landscape</span>
-          <div className={classes.spacing} />
-          <div className={classes.spacing} />
-          <IconButton className={classes.button}>
-            <Link href={urls.github} target="_blank" rel="noopener noreferrer">
-              <GitHubIcon className={classes.button} />
-            </Link>
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-    </div>
+    <AppBar position="fixed" className={classes.appBar}>
+      <Toolbar>
+        <div className={classes.logoCard}>
+          <img src={Logo} alt="Logo" className={classes.logo} />
+        </div>
+        <span className={classes.appName}>Cloud Landscape</span>
+        <div className={classes.spacing} />
+        <div className={classes.spacing} />
+        <IconButton className={classes.button}>
+          <Link href={urls.github} target="_blank" rel="noopener noreferrer">
+            <GitHubIcon className={classes.button} />
+          </Link>
+        </IconButton>
+      </Toolbar>
+    </AppBar>
   );
 }
