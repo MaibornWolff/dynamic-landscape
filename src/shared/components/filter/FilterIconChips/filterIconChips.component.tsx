@@ -1,7 +1,6 @@
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-import SearchIcon from '@material-ui/icons/Search';
-import {Chip, Grid, IconButton} from '@material-ui/core';
+import {Chip, Grid} from '@material-ui/core';
 import {DataFilter, Providers} from '../../../../assets/data/dataType';
 
 export interface Props {
@@ -26,10 +25,10 @@ export default function FilterIconChipsContainer(props: Props) {
 
   const getFilterChips = (filterSet: DataFilter) => {
     const chipSet: React.ReactNode[] = [];
-    for (const [filter, value] of Object.entries<Array<string | Providers>>(
+    for (const [filter, SearchValue] of Object.entries<string[] | Providers[]>(
       filterSet
     )) {
-      value.forEach((value: Providers | string) => {
+      SearchValue.forEach((value: Providers | string) => {
         chipSet.push(
           <Chip
             key={value as string}
