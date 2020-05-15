@@ -142,8 +142,9 @@ export default function FilterComponentContainer(props: Props) {
         <Typography variant="caption" className={classes.menuitem}>
           Provider
         </Typography>
-        {props.possibleFilterValues.provider.map(
-          (provider: Providers, i: number) => {
+        {props.possibleFilterValues.provider
+          .sort()
+          .map((provider: Providers, i: number) => {
             return (
               <ListItem key={i} button className={classes.menuitem}>
                 <FormControlLabel
@@ -163,8 +164,7 @@ export default function FilterComponentContainer(props: Props) {
                 />
               </ListItem>
             );
-          }
-        )}
+          })}
       </List>
       <Divider />
 
@@ -173,8 +173,9 @@ export default function FilterComponentContainer(props: Props) {
           Categories
         </Typography>
 
-        {props.possibleFilterValues.category.map(
-          (category: string, i: number) => {
+        {props.possibleFilterValues.category
+          .sort()
+          .map((category: string, i: number) => {
             return (
               <ListItem key={i} button className={classes.menuitem}>
                 <FormControlLabel
@@ -194,8 +195,7 @@ export default function FilterComponentContainer(props: Props) {
                 />
               </ListItem>
             );
-          }
-        )}
+          })}
       </List>
       <Divider />
     </Drawer>
