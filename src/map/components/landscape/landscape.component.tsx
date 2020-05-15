@@ -25,6 +25,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     tableCell: (props: {zoomFactor: number}) => ({
       fontSize: `${props.zoomFactor * 100}%`,
+      paddingTop: `${Math.min(1, props.zoomFactor) * 6}px`,
+      paddingRight: `${Math.min(1, props.zoomFactor) * 24}px`,
+      paddingBottom: `${Math.min(1, props.zoomFactor) * 6}px`,
+      paddingLeft: `${Math.min(1, props.zoomFactor) * 16}px`,
     }),
     header: {
       backgroundColor: theme.palette.primary.main,
@@ -69,7 +73,7 @@ export default function Landscape(props: Props) {
           {category}
         </TableCell>
         {providers.map((provider, j) => (
-          <TableCell key={j}>
+          <TableCell key={j} className={classes.tableCell}>
             {getServicesByProviderAndCategory(provider, category).map(
               (service, index) => {
                 const isFiltered = isServiceFiltered(service);
