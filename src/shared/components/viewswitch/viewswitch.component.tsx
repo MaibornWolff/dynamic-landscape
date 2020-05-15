@@ -55,21 +55,19 @@ export default function ViewSwitch(props: Props) {
         size="small"
         onChange={handleChange}
       >
-        {views
-          // .filter(({path}) => path !== props.location.pathnsame)
-          .map(({name, path, icon: IconComponent}, index) => {
-            return (
-              <ToggleButton
-                key={index}
-                value={path}
-                aria-label={name}
-                disabled={path === props.location.pathname}
-                classes={{disabled: classes.buttonDisabled}}
-              >
-                <IconComponent className={classes.button} fontSize="small" />
-              </ToggleButton>
-            );
-          })}
+        {views.map(({name, path, icon: IconComponent}, index) => {
+          return (
+            <ToggleButton
+              key={index}
+              value={path}
+              aria-label={name}
+              disabled={path === props.location.pathname}
+              classes={{disabled: classes.buttonDisabled}}
+            >
+              <IconComponent className={classes.button} fontSize="small" />
+            </ToggleButton>
+          );
+        })}
       </ToggleButtonGroup>
     </>
   );

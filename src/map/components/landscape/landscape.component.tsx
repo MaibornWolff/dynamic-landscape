@@ -15,6 +15,7 @@ interface Props {
   categories: Array<string>;
   groupedContent: Map<Providers, Map<string, DemoData[]>>;
   filteredContent: Array<DemoData>;
+  zoomFactor: number;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -64,6 +65,7 @@ export default function Landscape(props: Props) {
             categories={props.categories}
             groupedContent={props.groupedContent}
             filteredContent={props.filteredContent}
+            zoomFactor={props.zoomFactor}
           />
         ) : (
           <TableRow>

@@ -34,6 +34,8 @@ export const getCategories = createSelector(
 export const getDetailService = (state: State): DemoData | undefined =>
   state.detailedService;
 
+export const getZoomFactor = (state: State): number => state.zoomFactor;
+
 /**
  * @param state current state that contains all services
  * @returns "nested" map that provides all services for a given provider and category

@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react';
 import ServiceButton from './servicebutton.component';
 import {Providers, DemoData} from '../../../assets/data/dataType';
-import {TableRow, TableCell} from '@material-ui/core';
+import {TableRow, TableCell, createStyles} from '@material-ui/core';
+import {makeStyles} from '@material-ui/styles';
 
 interface Props {
   setDetailService: (service: DemoData) => void;
@@ -9,10 +10,24 @@ interface Props {
   categories: Array<string>;
   groupedContent: Map<Providers, Map<string, DemoData[]>>;
   filteredContent: Array<DemoData>;
+  zoomFactor: number;
 }
+
+const useStyles = makeStyles(
+  createStyles({
+    tableCell: (props: {zoomFactor: number}) => ({
+      fontSize: `${props.zoomFactor * 100}%`,
+      paddingTop: `${Math.min(1, props.zoomFactor) * 6}px`,
+      paddingRight: `${Math.min(1, props.zoomFactor) * 24}px`,
+      paddingBottom: `${Math.min(1, props.zoomFactor) * 6}px`,
+      paddingLeft: `${Math.min(1, props.zoomFactor) * 16}px`,
+    }),
+  })
+);
 
 function CategoryRow(props: Props) {
   const firstUnfilteredService = React.createRef<HTMLButtonElement>();
+  const classes = useStyles({zoomFactor: props.zoomFactor});
 
   useEffect(() => {
     firstUnfilteredService.current?.scrollIntoView({
@@ -35,11 +50,11 @@ function CategoryRow(props: Props) {
     <>
       {props.categories.map((category, i) => (
         <TableRow key={i}>
-          <TableCell component="th" scope="row">
+          <TableCell component="th" scope="row" className={classes.tableCell}>
             {category}
           </TableCell>
           {props.providers.map((provider, j) => (
-            <TableCell key={j}>
+            <TableCell key={j} className={classes.tableCell}>
               {getServicesByProviderAndCategory(provider, category).map(
                 (service, index) => {
                   const isFiltered = isServiceFiltered(service);
@@ -55,6 +70,7 @@ function CategoryRow(props: Props) {
                       buttonRef={
                         isFirstUnfiltered ? firstUnfilteredService : undefined
                       }
+                      zoomFactor={props.zoomFactor}
                     />
                   );
                 }
@@ -68,5 +84,8 @@ function CategoryRow(props: Props) {
 }
 
 export default React.memo(CategoryRow, (prevProps, nextProps) => {
-  return prevProps.filteredContent === nextProps.filteredContent;
+  return (
+    prevProps.filteredContent === nextProps.filteredContent &&
+    prevProps.zoomFactor === nextProps.zoomFactor
+  );
 });

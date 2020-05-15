@@ -3,6 +3,7 @@ import {DemoData, DataFilter} from '../../assets/data/dataType';
 export const SETCONTENT = 'SETCONTENT';
 export const SETDETAILSERVICE = 'SETDETAILSERVICE';
 export const SETFILTER = 'SETFILTER';
+export const SETZOOMFACTOR = 'SETZOOMFACTOR';
 
 interface SetContentAction {
   type: typeof SETCONTENT;
@@ -47,7 +48,20 @@ export function deleteDetailService(): MapActionTypes {
   };
 }
 
+interface SetZoomFactorAction {
+  type: typeof SETZOOMFACTOR;
+  payload: number;
+}
+
+export function setZoomFactor(zoomFactor: number): MapActionTypes {
+  return {
+    type: SETZOOMFACTOR,
+    payload: zoomFactor,
+  };
+}
+
 export type MapActionTypes =
   | SetContentAction
   | SetDetailService
-  | SetFilterAction; //|| ...
+  | SetFilterAction
+  | SetZoomFactorAction;
