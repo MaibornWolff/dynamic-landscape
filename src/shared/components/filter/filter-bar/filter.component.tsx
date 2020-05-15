@@ -83,7 +83,7 @@ const useStyles = makeStyles({
   },
   menulist: {
     maxHeight: '300px',
-    overflow: 'scroll',
+    overflow: 'auto',
     scrollBehavior: 'smooth',
   },
   closeIcon: {
