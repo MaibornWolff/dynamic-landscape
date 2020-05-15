@@ -21,7 +21,7 @@ const ServiceIcon = styled.img<{filtered: boolean; zoomFactor: number}>(
   })
 );
 
-export default function ServiceButton(props: Props) {
+function ServiceButton(props: Props) {
   const setDetailService = () => props.setDetailService(props.service);
 
   return (
@@ -43,3 +43,10 @@ export default function ServiceButton(props: Props) {
     </Tooltip>
   );
 }
+
+export default React.memo(ServiceButton, (prevProps, nextProps) => {
+  return (
+    prevProps.isFiltered === nextProps.isFiltered &&
+    prevProps.zoomFactor === nextProps.zoomFactor
+  );
+});
