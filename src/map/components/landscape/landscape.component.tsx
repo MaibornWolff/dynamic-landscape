@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,7 +7,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import {Typography} from '@material-ui/core';
 import {DemoData, Providers} from '../../../assets/data/dataType';
-import ServiceButton from './servicebutton.component';
+import CategoryRow from './categoryRow.component';
 
 interface Props {
   setDetailService: (service: DemoData) => void;
@@ -34,61 +34,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Landscape(props: Props) {
   const classes = useStyles();
-  const firstUnfilteredService = React.createRef<HTMLButtonElement>();
-
-  useEffect(() => {
-    firstUnfilteredService.current?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest',
-    });
-  });
 
   const providers = props.providers.sort();
   const categories = props.categories.sort();
-  const setDetailService = (service: DemoData) => {
-    props.setDetailService(service);
-  };
-
-  const getServicesByProviderAndCategory = (
-    provider: Providers,
-    category: string
-  ): Array<DemoData> => props.groupedContent.get(provider)?.get(category) || [];
-
-  const isServiceFiltered = (service: DemoData): boolean =>
-    !props.filteredContent.includes(service);
-
-  const renderCategories = () => {
-    let noUnfilteredServiceYet = true;
-    return categories.map((category, i) => (
-      <TableRow key={i}>
-        <TableCell component="th" scope="row">
-          {category}
-        </TableCell>
-        {providers.map((provider, j) => (
-          <TableCell key={j}>
-            {getServicesByProviderAndCategory(provider, category).map(
-              (service, index) => {
-                const isFiltered = isServiceFiltered(service);
-                const isFirstUnfiltered = noUnfilteredServiceYet && !isFiltered;
-                if (isFirstUnfiltered) noUnfilteredServiceYet = false;
-                return (
-                  <ServiceButton
-                    key={index}
-                    service={service}
-                    setDetailService={setDetailService}
-                    isFiltered={isFiltered}
-                    buttonRef={
-                      isFirstUnfiltered ? firstUnfilteredService : undefined
-                    }
-                  />
-                );
-              }
-            )}
-          </TableCell>
-        ))}
-      </TableRow>
-    ));
-  };
 
   return (
     <Table className={classes.table} size="small">
@@ -109,8 +57,15 @@ export default function Landscape(props: Props) {
         </TableRow>
       </TableHead>
       <TableBody>
-        {renderCategories()}
-        {!categories.length && (
+        {categories.length ? (
+          <CategoryRow
+            setDetailService={props.setDetailService}
+            providers={props.providers}
+            categories={props.categories}
+            groupedContent={props.groupedContent}
+            filteredContent={props.filteredContent}
+          />
+        ) : (
           <TableRow>
             <TableCell>Empty</TableCell>
           </TableRow>

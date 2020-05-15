@@ -5,15 +5,10 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import {
-  Button,
-  TableFooter,
-  TablePagination,
-  Typography,
-} from '@material-ui/core';
+import {TableFooter, TablePagination, Typography} from '@material-ui/core';
 import {DemoData} from '../../../assets/data/dataType';
-import LazyLoad from 'react-lazyload';
 import TablePaginationActions from './paginationActions.component';
+import ServiceRow from './servicerow.component';
 
 interface Props {
   content: Array<DemoData>;
@@ -110,27 +105,11 @@ export default function MapTable(props: Props) {
           ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
           : rows
         ).map((row, i) => (
-          <TableRow key={i}>
-            <TableCell>
-              <LazyLoad height={30}>
-                <img
-                  src={row.img}
-                  alt={row.service}
-                  className={classes.tableIcon}
-                />
-              </LazyLoad>
-            </TableCell>
-            <TableCell>{row.service}</TableCell>
-            <TableCell component="th" scope="row">
-              {row.provider}
-            </TableCell>
-            <TableCell>{row.category.join(' | ')}</TableCell>
-            <TableCell>
-              <Button onClick={() => setDetailService(row)}>
-                More Information
-              </Button>
-            </TableCell>
-          </TableRow>
+          <ServiceRow
+            key={i}
+            service={row}
+            setDetailService={setDetailService}
+          />
         ))}
         {!rows.length && (
           <TableRow>
