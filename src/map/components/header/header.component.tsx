@@ -1,8 +1,10 @@
-import {Grid, createStyles, makeStyles} from '@material-ui/core';
+import {createStyles, Grid, makeStyles} from '@material-ui/core';
 import React from 'react';
 import {FilterIconChips} from '../../../shared/components/filter/FilterIconChips/FilterIconChips.container.component';
 import ViewSwitch from '../../../shared/components/viewswitch/viewswitch.container.component';
 import Zoom from '../../../shared/components/zoom/zoom.container.component';
+import {Location, History} from 'history';
+import {match} from 'react-router';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -12,8 +14,11 @@ const useStyles = makeStyles(() =>
   })
 );
 
-interface Props {
+export interface Props {
   toggleFilterBar: () => void;
+  location: Location;
+  history: History;
+  match: match;
 }
 
 export default function Header(props: Props) {
@@ -41,9 +46,11 @@ export default function Header(props: Props) {
           alignItems="center"
           role="presentation"
         >
-          <Grid item xs={12} sm={11}>
-            <Zoom />
-          </Grid>
+          {props.location.pathname === '/landscape' && (
+            <Grid item xs={12} sm={11}>
+              <Zoom />
+            </Grid>
+          )}
           <Grid item xs={1} sm={1}>
             <ViewSwitch />
           </Grid>

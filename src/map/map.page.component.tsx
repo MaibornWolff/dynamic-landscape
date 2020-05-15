@@ -9,7 +9,7 @@ import MapTable from './components/maptable/maptable.component';
 import fetchAllServices from '../shared/mongodbConnection';
 import Landscape from './components/landscape/landscape.component';
 import Paper from '@material-ui/core/Paper';
-import Header from './components/header/header.component';
+import Header from './components/header/header.container.component';
 import CacheRoute, {CacheSwitch} from 'react-router-cache-route';
 import Footer from './components/footer/footer.component';
 import {FilterBarComponent} from '../shared/components/filter/filter-bar/filter.container.component';
