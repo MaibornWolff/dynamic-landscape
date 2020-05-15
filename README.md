@@ -1,6 +1,6 @@
 # Cloud Landscape
 
-[![Build Status](https://travis-ci.com/MaibornWolff/cloud-landscape.svg?branch=V2)](https://travis-ci.com/MaibornWolff/cloud-landscape)
+[![Build Status](https://travis-ci.com/MaibornWolff/cloud-landscape.svg?branch=master)](https://travis-ci.com/MaibornWolff/cloud-landscape)
 [![Code Style: Google](https://img.shields.io/badge/code%20style-google-blueviolet.svg)](https://github.com/google/gts)
 
 > Cloud Landscape - [Online demo](http://cloudlandscape.info/landscape)
@@ -9,7 +9,7 @@
 
 ## Jump to Section
 
-- [What is Cloud Landscape](#What-is-cloud-landscape)
+- [What is Cloud Landscape](#What-is-Cloud-Landscape)
 - [Getting started](#Getting-started)
 - [Using your own data](#Using-your-own-data)
 - [Further dependencies](#Further-dependencies)
