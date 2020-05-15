@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.com/MaibornWolff/cloud-landscape.svg?branch=master)](https://travis-ci.com/MaibornWolff/cloud-landscape)
 [![Code Style: Google](https://img.shields.io/badge/code%20style-google-blueviolet.svg)](https://github.com/google/gts)
 
-> Cloud Landscape - [Online demo](http://cloudlandscape.info/landscape/)
+> Cloud Landscape - [Online demo](http://cloudlandscape.info/landscape)
 >
 > Made with ❤️ by the [MaibornWolff ](https://www.maibornwolff.de) DevOps & Cloud Native team.
 
@@ -19,7 +19,7 @@
 ## What is Cloud Landscape
 
 Cloud Landscape is a web-based visualization tool. It was initially designed to visualize the set of cloud services provided by Microsoft (Azure), Amazon (AWS) and Google (GCP). This project includes the respective database for demonstration purposes. Our Cloud Landscape tool also provides a basic search functionality for the items in your database.
-Try out the [online demo](http://cloudlandscape.info/landscape/) for cloud services.
+Try out the [online demo](http://cloudlandscape.info/landscape) for cloud services.
 
 ## Getting started
 
@@ -52,10 +52,9 @@ If you click on any of the icons the page will show the detailed view of the sel
 ![Cloud Landscape Detail View](./docs/screenshots/detailView.png)
 
 ### Architectur overview
+
 The following Component Diagram pictures the component composition within the react architecture. Made with [Lucidchart](https://www.lucidchart.com).
 ![React Component Architecture](./docs/ArchitecturDiagram/CloudLandscape.png)
-
-
 
 ## Using your own data
 

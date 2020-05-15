@@ -8,6 +8,7 @@ import {
   getGroupedContent,
   getCategories,
   getProviders,
+  getZoomFactor,
 } from './selectors/map.selector';
 import {
   deleteDetailService,
@@ -25,6 +26,7 @@ const mapStateToProps = (state: State) => ({
   detailService: getDetailService(state.Map),
   providers: getProviders(state.Map),
   categories: getCategories(state.Map),
+  zoomFactor: getZoomFactor(state.Map),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

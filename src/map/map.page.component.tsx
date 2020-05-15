@@ -9,7 +9,7 @@ import MapTable from './components/maptable/maptable.component';
 import fetchAllServices from '../shared/mongodbConnection';
 import Landscape from './components/landscape/landscape.component';
 import Paper from '@material-ui/core/Paper';
-import Header from './components/header/header.component';
+import Header from './components/header/header.container.component';
 import CacheRoute, {CacheSwitch} from 'react-router-cache-route';
 import Footer from './components/footer/footer.component';
 import {FilterBarComponent} from '../shared/components/filter/filter-bar/filter.container.component';
@@ -25,6 +25,7 @@ export interface Props {
   setContent: (object: Array<DemoData>) => void;
   setDetailService: (object: DemoData) => void;
   deleteDetailService: () => void;
+  zoomFactor: number;
 }
 interface State {
   filterBarOpen: boolean;
@@ -85,7 +86,6 @@ export default class MapComponent extends React.Component<Props, State> {
             <>
               <Grid item xs={11}>
                 <Header toggleFilterBar={this.toggleFilterBar} />
-
                 <StyledPaper>
                   <CacheSwitch>
                     <CacheRoute path="/landscape">
@@ -95,6 +95,7 @@ export default class MapComponent extends React.Component<Props, State> {
                         providers={this.props.providers}
                         categories={this.props.categories}
                         setDetailService={this.props.setDetailService}
+                        zoomFactor={this.props.zoomFactor}
                       />
                     </CacheRoute>
                     <CacheRoute path="/table">
