@@ -68,12 +68,12 @@ export default function FilterIconChipsContainer(props: Props) {
       role="presentation"
     >
       {/* Icon to open filter window */}
-      <IconButton
+      {/* <IconButton
         className={classes.iconButton}
         onClick={props.toggleFilterBar}
       >
         <SearchIcon />
-      </IconButton>
+      </IconButton> */}
       {/* Chipset of current filter*/}
       {props.displayChips && getFilterChips(props.filter)}
     </Grid>

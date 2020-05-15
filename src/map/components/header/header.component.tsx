@@ -7,6 +7,7 @@ const useStyles = makeStyles(() =>
   createStyles({
     header: {
       paddingBottom: '10px',
+      minHeight: '60px',
     },
   })
 );

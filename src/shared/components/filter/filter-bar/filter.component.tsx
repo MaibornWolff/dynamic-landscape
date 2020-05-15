@@ -9,6 +9,7 @@ import {
   Box,
   ListItem,
   List,
+  Paper,
 } from '@material-ui/core';
 import {
   DataFilter,
@@ -17,9 +18,9 @@ import {
   ServiceFeatures,
 } from '../../../../assets/data/dataType';
 import {SearchBar} from '../SearchBar/SearchBar.container.component';
-import IconButton from '@material-ui/core/IconButton';
-
+import {IconButton, Tooltip} from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import SearchIcon from '@material-ui/icons/Search';
 
 const Logo = require('./../../../../assets/logos/CL_Logo.svg') as string;
 
@@ -88,6 +89,12 @@ const useStyles = makeStyles({
   closeIcon: {
     float: 'right',
   },
+  openButton: {
+    width: 'fit-content',
+    position: 'fixed',
+    left: '-5px',
+    marginTop: '6px',
+  },
 });
 
 export default function FilterComponentContainer(props: Props) {
@@ -113,91 +120,103 @@ export default function FilterComponentContainer(props: Props) {
   };
 
   return (
-    <Drawer
-      anchor="left"
-      variant="persistent"
-      open={props.open}
-      // onOpen={toggleDrawer(true)}
-      className={classes.drawer}
-      classes={{
-        paper: classes.drawerPaper,
-      }}
-    >
-      <Box className={classes.drawitem}>
-        <div className={classes.closeIcon}>
+    <>
+      <Drawer
+        anchor="left"
+        variant="persistent"
+        open={props.open}
+        className={classes.drawer}
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+      >
+        <Box className={classes.drawitem}>
+          <div className={classes.closeIcon}>
+            <IconButton onClick={props.toggleFilterBar}>
+              <ChevronLeftIcon />
+            </IconButton>
+          </div>
+          <Typography variant="subtitle1">Filter</Typography>
+          <Typography variant="caption">Cloud Services</Typography>
+        </Box>
+        <Divider />
+        <Box className={classes.drawitem} style={{marginLeft: '-40px'}}>
+          <SearchBar />
+        </Box>
+        <Divider />
+
+        <List className={classes.menulist}>
+          <Typography variant="caption" className={classes.menuitem}>
+            Provider
+          </Typography>
+          {props.possibleFilterValues.provider
+            .sort()
+            .map((provider: Providers, i: number) => {
+              return (
+                <ListItem key={i} button className={classes.menuitem}>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={props.filter.provider.some(
+                          v => v === provider
+                        )}
+                        onChange={handleChangeCheckbox(
+                          'provider',
+                          provider as Providers
+                        )}
+                        value={provider}
+                        color="primary"
+                        size="small"
+                      />
+                    }
+                    label={provider}
+                  />
+                </ListItem>
+              );
+            })}
+        </List>
+        <Divider />
+
+        <List className={classes.menulist}>
+          <Typography variant="caption" className={classes.menuitem}>
+            Categories
+          </Typography>
+
+          {props.possibleFilterValues.category
+            .sort()
+            .map((category: string, i: number) => {
+              return (
+                <ListItem key={i} button className={classes.menuitem}>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={props.filter.category.some(
+                          v => v === category
+                        )}
+                        onChange={handleChangeCheckbox(
+                          'category',
+                          category as string
+                        )}
+                        value={category}
+                        color="primary"
+                        size="small"
+                      />
+                    }
+                    label={category}
+                  />
+                </ListItem>
+              );
+            })}
+        </List>
+        <Divider />
+      </Drawer>
+      <Paper elevation={3} className={classes.openButton}>
+        <Tooltip title={'Open Searchbar'}>
           <IconButton onClick={props.toggleFilterBar}>
-            <ChevronLeftIcon />
+            <SearchIcon />
           </IconButton>
-        </div>
-        <Typography variant="subtitle1">Filter</Typography>
-        <Typography variant="caption">Cloud Services</Typography>
-      </Box>
-      <Divider />
-      <Box className={classes.drawitem} style={{marginLeft: '-40px'}}>
-        <SearchBar />
-      </Box>
-      <Divider />
-
-      <List className={classes.menulist}>
-        <Typography variant="caption" className={classes.menuitem}>
-          Provider
-        </Typography>
-        {props.possibleFilterValues.provider
-          .sort()
-          .map((provider: Providers, i: number) => {
-            return (
-              <ListItem key={i} button className={classes.menuitem}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={props.filter.provider.some(v => v === provider)}
-                      onChange={handleChangeCheckbox(
-                        'provider',
-                        provider as Providers
-                      )}
-                      value={provider}
-                      color="primary"
-                      size="small"
-                    />
-                  }
-                  label={provider}
-                />
-              </ListItem>
-            );
-          })}
-      </List>
-      <Divider />
-
-      <List className={classes.menulist}>
-        <Typography variant="caption" className={classes.menuitem}>
-          Categories
-        </Typography>
-
-        {props.possibleFilterValues.category
-          .sort()
-          .map((category: string, i: number) => {
-            return (
-              <ListItem key={i} button className={classes.menuitem}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={props.filter.category.some(v => v === category)}
-                      onChange={handleChangeCheckbox(
-                        'category',
-                        category as string
-                      )}
-                      value={category}
-                      color="primary"
-                      size="small"
-                    />
-                  }
-                  label={category}
-                />
-              </ListItem>
-            );
-          })}
-      </List>
-      <Divider />
-    </Drawer>
+        </Tooltip>
+      </Paper>
+    </>
   );
 }
