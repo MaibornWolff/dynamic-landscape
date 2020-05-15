@@ -29,34 +29,21 @@ export default function Header(props: Props) {
       container
       direction="row"
       justify="space-between"
-      alignItems="flex-end"
+      alignItems="center"
       role="presentation"
       className={classes.header}
     >
-      <Grid item xs={12} md={8}>
+      <Grid item xs={12} md={6}>
         <FilterIconChips
           displayChips={true}
           toggleFilterBar={props.toggleFilterBar}
         />
       </Grid>
-      <Grid item xs={12} md={4}>
-        <Grid
-          container
-          direction="row"
-          justify="flex-end"
-          alignItems="center"
-          role="presentation"
-        >
-          {props.location.pathname === '/landscape' && (
-            <Grid item xs={12} sm={11}>
-              <Zoom />
-            </Grid>
-          )}
-          <Grid item xs={1} sm={1}>
-            <ViewSwitch />
-          </Grid>
-        </Grid>
+      <Grid item xs={6} md={4}>
+        {props.location.pathname === '/landscape' && <Zoom />}
       </Grid>
+      {/* <Grid item xs={6} md={2} style={{}}></Grid> */}
+      <ViewSwitch />
     </Grid>
   );
 }
