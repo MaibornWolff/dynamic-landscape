@@ -12,6 +12,7 @@ import Paper from '@material-ui/core/Paper';
 import Header from './components/header/header.component';
 import CacheRoute, {CacheSwitch} from 'react-router-cache-route';
 import Footer from './components/footer/footer.component';
+import {FilterBarComponent} from '../shared/components/filter/filter-bar/filter.container.component';
 
 export interface Props {
   loading: boolean;
@@ -20,9 +21,13 @@ export interface Props {
   groupedContent: Map<Providers, Map<string, DemoData[]>>;
   providers: Array<Providers>;
   categories: Array<string>;
+  filterBar: boolean;
   setContent: (object: Array<DemoData>) => void;
   setDetailService: (object: DemoData) => void;
   deleteDetailService: () => void;
+}
+interface State {
+  filterBarOpen: boolean;
 }
 
 const StyledPaper = styled(Paper)({
@@ -30,57 +35,85 @@ const StyledPaper = styled(Paper)({
   overflowX: 'auto',
 });
 
-export default class MapComponent extends React.Component<Props> {
+export default class MapComponent extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {filterBarOpen: true};
+  }
+
   componentDidMount() {
     fetchAllServices().then((data: DemoData[]) => this.props.setContent(data));
   }
 
+  toggleFilterBar = () => {
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        filterBarOpen: !prevState.filterBarOpen,
+      };
+    });
+  };
+
   public render() {
     return (
-      <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        style={{minHeight: 600, marginTop: 40}}
-      >
-        {this.props.detailService && (
-          <DetailModal
-            service={this.props.detailService}
-            deleteDetailService={this.props.deleteDetailService}
-          />
-        )}
-        {this.props.loading ? (
-          <Loading />
-        ) : (
-          <Grid item xs={11}>
-            <Header />
-            <StyledPaper>
-              <CacheSwitch>
-                <CacheRoute path="/landscape">
-                  <Landscape
-                    filteredContent={this.props.filteredContent}
-                    groupedContent={this.props.groupedContent}
-                    providers={this.props.providers}
-                    categories={this.props.categories}
-                    setDetailService={this.props.setDetailService}
-                  />
-                </CacheRoute>
-                <CacheRoute path="/table">
-                  <MapTable
-                    content={this.props.filteredContent}
-                    setDetailService={this.props.setDetailService}
-                  />
-                </CacheRoute>
-                <Redirect to="/landscape" />
-              </CacheSwitch>
-            </StyledPaper>
-          </Grid>
-        )}
-        <Grid item xs={12}>
-          <Footer />
+      <>
+        {' '}
+        <FilterBarComponent
+          open={this.state.filterBarOpen}
+          toggleFilterBar={this.toggleFilterBar}
+        />
+        <Grid
+          container
+          direction="row"
+          justify="center"
+          alignItems="center"
+          style={{
+            minHeight: 600,
+            paddingLeft: this.state.filterBarOpen ? '240px' : '0px',
+            transition: 'padding 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',
+          }}
+        >
+          {this.props.detailService && (
+            <DetailModal
+              service={this.props.detailService}
+              deleteDetailService={this.props.deleteDetailService}
+            />
+          )}
+          {this.props.loading ? (
+            <Loading />
+          ) : (
+            <>
+              <Grid item xs={11}>
+                <Header toggleFilterBar={this.toggleFilterBar} />
+
+                <StyledPaper>
+                  <CacheSwitch>
+                    <CacheRoute path="/landscape">
+                      <Landscape
+                        filteredContent={this.props.filteredContent}
+                        groupedContent={this.props.groupedContent}
+                        providers={this.props.providers}
+                        categories={this.props.categories}
+                        setDetailService={this.props.setDetailService}
+                      />
+                    </CacheRoute>
+                    <CacheRoute path="/table">
+                      <MapTable
+                        content={this.props.filteredContent}
+                        setDetailService={this.props.setDetailService}
+                      />
+                    </CacheRoute>
+                    <Redirect to="/landscape" />
+                  </CacheSwitch>
+                </StyledPaper>
+              </Grid>
+              <Grid item xs={12}>
+                <Footer />
+              </Grid>
+            </>
+          )}
         </Grid>
-      </Grid>
+      </>
     );
   }
 }
