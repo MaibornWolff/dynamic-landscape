@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import ServiceButton from './servicebutton.component';
-import {Providers, DemoData} from '../../../assets/data/dataType';
-import {TableRow, TableCell, createStyles} from '@material-ui/core';
+import {DemoData, Providers} from '../../../assets/data/dataType';
+import {createStyles, TableCell, TableRow} from '@material-ui/core';
 import {makeStyles} from '@material-ui/styles';
 
 interface Props {
@@ -25,16 +25,8 @@ const useStyles = makeStyles(
   })
 );
 
-function CategoryRow(props: Props) {
-  const firstUnfilteredService = React.createRef<HTMLButtonElement>();
+function CategoryRows(props: Props) {
   const classes = useStyles({zoomFactor: props.zoomFactor});
-
-  useEffect(() => {
-    firstUnfilteredService.current?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest',
-    });
-  });
 
   const getServicesByProviderAndCategory = (
     provider: Providers,
@@ -67,10 +59,8 @@ function CategoryRow(props: Props) {
                       service={service}
                       setDetailService={props.setDetailService}
                       isFiltered={isFiltered}
-                      buttonRef={
-                        isFirstUnfiltered ? firstUnfilteredService : undefined
-                      }
                       zoomFactor={props.zoomFactor}
+                      shouldScroll={isFirstUnfiltered}
                     />
                   );
                 }
@@ -83,7 +73,7 @@ function CategoryRow(props: Props) {
   );
 }
 
-export default React.memo(CategoryRow, (prevProps, nextProps) => {
+export default React.memo(CategoryRows, (prevProps, nextProps) => {
   return (
     prevProps.filteredContent === nextProps.filteredContent &&
     prevProps.zoomFactor === nextProps.zoomFactor
