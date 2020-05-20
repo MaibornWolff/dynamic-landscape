@@ -7,7 +7,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import {Typography} from '@material-ui/core';
 import {DemoData, Providers} from '../../../assets/data/dataType';
-import CategoryRow from './categoryRow.component';
+import CategoryRow from './categoryRows.component';
 
 interface Props {
   setDetailService: (service: DemoData) => void;
