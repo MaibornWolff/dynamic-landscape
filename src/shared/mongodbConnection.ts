@@ -3,8 +3,6 @@ import {
   RemoteMongoClient,
   Stitch,
   UserApiKeyCredential,
-  StitchUser,
-  StitchUserProfile,
 } from 'mongodb-stitch-browser-sdk';
 
 const DATABASE = 'DynamicLandscape';
@@ -44,13 +42,7 @@ export default async function fetchAllServices() {
 export async function checkAdminCredentials(credentials: string) {
   return await client.auth
     .loginWithCredential(new UserApiKeyCredential(credentials))
-    .then((user: StitchUser) => {
-      console.debug(user);
-      return (
-        (user.profile as StitchUserProfile & {data: {name: string}})?.data
-          ?.name === 'Frontend-Admin'
-      );
-    })
+    .then(() => client.callFunction('checkIsFrontendAdmin', []))
     .catch((err: Error) => {
       if (err.message === 'invalid API key') return false;
       console.error(err);
