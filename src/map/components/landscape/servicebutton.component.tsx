@@ -33,7 +33,7 @@ function ServiceButton(props: Props) {
         block: 'nearest',
       });
     setDidScroll(props.shouldScroll);
-  });
+  }, [didScroll, props.shouldScroll, buttonRef]);
 
   return (
     <Tooltip title={props.service.service}>
