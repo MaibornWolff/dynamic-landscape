@@ -8,6 +8,7 @@ import {
 } from '@material-ui/core';
 import {VpnKey as KeyIcon} from '@material-ui/icons';
 import styled from 'styled-components';
+import {checkAdminCredentials} from '../../../shared/mongodbConnection';
 
 export interface Props {
   setCredentials: (credentials: string) => void;
@@ -30,18 +31,17 @@ export default function Login(props: Props) {
   const [errorHint, setErrorHint] = useState<string | undefined>(undefined);
   const [checking, setChecking] = useState<boolean>(false);
 
-  const checkCredentials = (credentials: string) => true;
   const handleCredentialsChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => setStateCredentials(event.target.value);
   const handleLogin = () => {
     setChecking(true);
-    if (checkCredentials(stateCredentials)) {
-      props.setCredentials(stateCredentials);
-    } else {
-      setErrorHint('Invalid credentials.');
-    }
-    setChecking(false);
+    checkAdminCredentials(stateCredentials).then((valid: boolean) => {
+      setChecking(false);
+      valid
+        ? props.setCredentials(stateCredentials)
+        : setErrorHint('Invalid credentials.');
+    });
   };
 
   return (
