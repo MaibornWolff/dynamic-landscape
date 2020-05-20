@@ -16,6 +16,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import {Map} from './map/map.page.container.component';
 import {Navigation} from './shared/components/navigation/navigation.container.component';
 import StyleWrapper from './shared/components/styleWrapper';
+import {Admin} from './admin/components/admin.page.container.component';
 
 const App: React.FC = () => {
   const store = configureStore();
@@ -28,7 +29,7 @@ const App: React.FC = () => {
             <Navigation />
             <Switch>
               <Route path="/admin">
-                <p>Admin Page</p>
+                <Admin />
               </Route>
               <Route path="/">
                 <Map />

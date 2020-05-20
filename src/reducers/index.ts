@@ -13,5 +13,5 @@ export const rootReducer = combineReducers({
 // this is the global state
 export interface State {
   Map: MapState;
-  Administration: AdminState;
+  Admin: AdminState;
 }
