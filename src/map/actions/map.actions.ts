@@ -5,7 +5,7 @@ export const SETDETAILSERVICE = 'SETDETAILSERVICE';
 export const SETFILTER = 'SETFILTER';
 export const SETZOOMFACTOR = 'SETZOOMFACTOR';
 
-interface SetContentAction {
+export interface SetContentAction {
   type: typeof SETCONTENT;
   payload: Array<DemoData>;
 }
@@ -17,7 +17,7 @@ export function setContent(value: Array<DemoData>): MapActionTypes {
   };
 }
 
-interface SetFilterAction {
+export interface SetFilterAction {
   type: typeof SETFILTER;
   payload: DataFilter;
 }
@@ -29,7 +29,7 @@ export function setFilter(filter: DataFilter): MapActionTypes {
   };
 }
 
-interface SetDetailService {
+export interface SetDetailService {
   type: typeof SETDETAILSERVICE;
   payload: DemoData | undefined;
 }
@@ -48,7 +48,7 @@ export function deleteDetailService(): MapActionTypes {
   };
 }
 
-interface SetZoomFactorAction {
+export interface SetZoomFactorAction {
   type: typeof SETZOOMFACTOR;
   payload: number;
 }
