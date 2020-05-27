@@ -4,7 +4,7 @@ import {Redirect} from 'react-router-dom';
 import {Grid, styled} from '@material-ui/core';
 import {DemoData, Providers} from '../assets/data/dataType';
 import DetailModal from './components/detailModal/detailModal.component';
-import Loading from './components/laoding/loading.component';
+import Loading from '../shared/components/laoding/loading.component';
 import MapTable from './components/maptable/maptable.component';
 import fetchAllServices from '../shared/mongodbConnection';
 import Landscape from './components/landscape/landscape.component';

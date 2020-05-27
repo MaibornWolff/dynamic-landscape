@@ -12,7 +12,7 @@ import {
   createStyles,
   Link,
 } from '@material-ui/core';
-import {urls} from '../../../shared/externalURL';
+import {urls} from '../../externalURL';
 
 const Logo = require('./../../../assets/logos/CL_Logo.svg') as string;
 

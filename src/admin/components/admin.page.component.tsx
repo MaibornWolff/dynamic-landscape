@@ -2,10 +2,13 @@ import React from 'react';
 import {Grid} from '@material-ui/core';
 import styled from 'styled-components';
 import Login from './login/login.component';
+import AddService from './addservice/addservice.container.component';
+import Loading from '../../shared/components/laoding/loading.component';
 
 export interface Props {
   credentials: string | undefined;
   setCredentials: (credentials: string) => void;
+  loading: boolean;
 }
 
 const ContainerGrid = styled(Grid)({
@@ -21,7 +24,11 @@ export default function Admin(props: Props) {
       alignItems="center"
     >
       {props.credentials ? (
-        <>You are logged in!</>
+        props.loading ? (
+          <Loading />
+        ) : (
+          <AddService />
+        )
       ) : (
         <Login setCredentials={props.setCredentials} />
       )}
