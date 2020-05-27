@@ -31,6 +31,11 @@ export const getCategories = createSelector(
   toFilterValues => toFilterValues.category
 );
 
+export const getKeywords = createSelector(
+  getPossibleFilterValues,
+  toFilterValues => toFilterValues.keywords
+);
+
 export const getDetailService = (state: State): DemoData | undefined =>
   state.detailedService;
 

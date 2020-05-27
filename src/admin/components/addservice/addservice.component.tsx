@@ -6,6 +6,8 @@ import {Button, Grid} from '@material-ui/core';
 
 export interface Props {
   categories: string[];
+  providers: string[];
+  keywords: string[];
 }
 
 const Container = styled.div({
@@ -19,7 +21,7 @@ export default function AddService(props: Props) {
   const [service, setService] = React.useState<DemoData>({
     service: '',
     category: [],
-    provider: 'AWS',
+    provider: '',
     description: '',
     img: '',
     keywords: [],
@@ -36,6 +38,8 @@ export default function AddService(props: Props) {
           service={service}
           serviceChanged={setService}
           categories={props.categories}
+          providers={props.providers}
+          keywords={props.keywords}
         />
         <Button
           variant="contained"

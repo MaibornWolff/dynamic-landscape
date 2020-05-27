@@ -23,6 +23,7 @@ const initialState: State = {
     provider: [],
     category: [],
     fulltext: [],
+    keywords: [],
   },
   detailedService: undefined,
   zoomFactor: 1,

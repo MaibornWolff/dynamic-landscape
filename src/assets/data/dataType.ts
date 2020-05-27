@@ -10,11 +10,12 @@ export type DemoData = {
   // [key: string]: any;
 };
 
-export type Providers = 'Google' | 'AWS' | 'Azure' | null;
+export type Providers = string;
 
 export type ServiceFeatures = {
   provider: Providers[];
   category: string[];
+  keywords: string[];
 };
 
 export type DataFilter = ServiceFeatures & {

@@ -1,12 +1,14 @@
 import React from 'react';
 import {DemoData} from '../../../assets/data/dataType';
-import {Chip, Grid, TextField} from '@material-ui/core';
+import {Grid, TextField} from '@material-ui/core';
 import {Autocomplete} from '@material-ui/lab';
 
 export interface Props {
   service: DemoData;
   serviceChanged: (service: DemoData) => void;
   categories: string[];
+  providers: string[];
+  keywords: string[];
 }
 
 export default function ServiceEditor(props: Props) {
@@ -33,6 +35,16 @@ export default function ServiceEditor(props: Props) {
     value: string[] | null
   ) => handleServiceChange({category: value || []});
 
+  const handleProviderChange = (
+    event: React.ChangeEvent<{}>,
+    value: string | null
+  ) => handleServiceChange({provider: value || ''});
+
+  const handleKeywordsChange = (
+    event: React.ChangeEvent<{}>,
+    value: string[] | null
+  ) => handleServiceChange({keywords: value || []});
+
   return (
     <Grid container direction="column" alignContent="stretch">
       <Grid item xs={12}>
@@ -58,16 +70,6 @@ export default function ServiceEditor(props: Props) {
           options={props.categories}
           value={props.service.category}
           freeSolo
-          renderTags={(value: string[], getTagProps) =>
-            value.map((option: string, index: number) => (
-              <Chip
-                key={index}
-                variant="outlined"
-                label={option}
-                {...getTagProps({index})}
-              />
-            ))
-          }
           renderInput={params => (
             <TextField
               {...params}
@@ -76,6 +78,30 @@ export default function ServiceEditor(props: Props) {
             />
           )}
           onChange={handleCategoriesChange}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <Autocomplete<string>
+          options={props.providers}
+          value={props.service.provider}
+          freeSolo
+          renderInput={params => (
+            <TextField {...params} label="Provider" placeholder="Provider" />
+          )}
+          onChange={handleProviderChange}
+          selectOnFocus
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <Autocomplete<string>
+          multiple
+          options={props.keywords}
+          value={props.service.keywords}
+          freeSolo
+          renderInput={params => (
+            <TextField {...params} label="Keywords" placeholder="Keywords" />
+          )}
+          onChange={handleKeywordsChange}
         />
       </Grid>
     </Grid>
