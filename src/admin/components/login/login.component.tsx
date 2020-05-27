@@ -71,6 +71,7 @@ export default function Login(props: Props) {
             color="primary"
             onClick={handleLogin}
             disabled={checking || !stateCredentials}
+            autoFocus
           >
             Log in
           </Button>

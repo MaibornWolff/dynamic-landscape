@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Login from './login/login.component';
 import AddService from './addservice/addservice.container.component';
 import Loading from '../../shared/components/laoding/loading.component';
+import {Redirect, Route, Switch} from 'react-router';
 
 export interface Props {
   credentials: string | undefined;
@@ -27,7 +28,12 @@ export default function Admin(props: Props) {
         props.loading ? (
           <Loading />
         ) : (
-          <AddService credentials={props.credentials} />
+          <Switch>
+            <Route path="/admin/add">
+              <AddService credentials={props.credentials} />
+            </Route>
+            <Redirect to="/" />
+          </Switch>
         )
       ) : (
         <Login setCredentials={props.setCredentials} />

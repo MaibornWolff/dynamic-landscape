@@ -2,14 +2,15 @@ import * as React from 'react';
 import ServiceEditor from './serviceeditor.component';
 import {DemoData, DemoDataWithoutId} from '../../../assets/data/dataType';
 import styled from 'styled-components';
-import {Button, Grid} from '@material-ui/core';
+import {Button, CircularProgress, Grid} from '@material-ui/core';
 import {addNewService} from '../../../shared/mongodbConnection';
+import {useHistory} from 'react-router-dom';
 
 export interface Props {
   categories: string[];
   providers: string[];
   keywords: string[];
-  addService: (serice: DemoData) => void;
+  addService: (service: DemoData) => void;
   credentials: string;
 }
 
@@ -34,6 +35,7 @@ const emptyService = {
 export default function AddService(props: Props) {
   const [service, setService] = React.useState<DemoDataWithoutId>(emptyService);
   const [waiting, setWaiting] = React.useState<boolean>(false);
+  const history = useHistory();
 
   const handleSubmit = () => {
     setWaiting(true);
@@ -46,7 +48,10 @@ export default function AddService(props: Props) {
       .then(newService => props.addService(newService))
       .then(() => setService(emptyService))
       .catch(err => console.error(err))
-      .finally(() => setWaiting(false));
+      .finally(() => {
+        setWaiting(false);
+        history.push('/');
+      });
   };
 
   return (
@@ -69,7 +74,7 @@ export default function AddService(props: Props) {
           onClick={handleSubmit}
           disabled={waiting}
         >
-          Add service
+          {waiting ? <CircularProgress /> : 'Add service'}
         </Button>
       </Container>
     </Grid>
