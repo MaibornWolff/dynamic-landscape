@@ -6,7 +6,6 @@ import {DemoData, Providers} from '../assets/data/dataType';
 import DetailModal from './components/detailModal/detailModal.component';
 import Loading from '../shared/components/laoding/loading.component';
 import MapTable from './components/maptable/maptable.component';
-import fetchAllServices from '../shared/mongodbConnection';
 import Landscape from './components/landscape/landscape.component';
 import Paper from '@material-ui/core/Paper';
 import Header from './components/header/header.container.component';
@@ -21,7 +20,6 @@ export interface Props {
   groupedContent: Map<Providers, Map<string, DemoData[]>>;
   providers: Array<Providers>;
   categories: Array<string>;
-  filterBar: boolean;
   setContent: (object: Array<DemoData>) => void;
   setDetailService: (object: DemoData) => void;
   deleteDetailService: () => void;
@@ -40,10 +38,6 @@ export default class MapComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {filterBarOpen: true};
-  }
-
-  componentDidMount() {
-    fetchAllServices().then((data: DemoData[]) => this.props.setContent(data));
   }
 
   toggleFilterBar = () => {
