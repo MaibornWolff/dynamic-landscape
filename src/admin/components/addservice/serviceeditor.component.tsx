@@ -59,14 +59,14 @@ export default function ServiceEditor<
   ) => handleServiceChange({providerIcon: event.target.value});
 
   return (
-    <Grid container direction="column" alignContent="stretch">
+    <Grid container direction="column" alignContent="stretch" spacing={1}>
       <Grid item xs={12}>
         <TextField
           label="Name"
           value={props.service.service}
           onChange={handleNameChange}
-          fullWidth
           disabled={props.disabled}
+          fullWidth
         />
       </Grid>
       <Grid item xs={12}>
@@ -84,7 +84,6 @@ export default function ServiceEditor<
           multiple
           options={props.categories}
           value={props.service.category}
-          freeSolo
           renderInput={params => (
             <TextField
               {...params}
@@ -94,19 +93,23 @@ export default function ServiceEditor<
           )}
           onChange={handleCategoriesChange}
           disabled={props.disabled}
+          fullWidth
+          autoSelect
+          freeSolo
         />
       </Grid>
       <Grid item xs={12}>
         <Autocomplete<string>
           options={props.providers}
           value={props.service.provider}
-          freeSolo
           renderInput={params => (
             <TextField {...params} label="Provider" placeholder="Provider" />
           )}
           onChange={handleProviderChange}
-          selectOnFocus
           disabled={props.disabled}
+          fullWidth
+          autoSelect
+          freeSolo
         />
       </Grid>
       <Grid item xs={12}>
@@ -114,12 +117,14 @@ export default function ServiceEditor<
           multiple
           options={props.keywords}
           value={props.service.keywords}
-          freeSolo
           renderInput={params => (
             <TextField {...params} label="Keywords" placeholder="Keywords" />
           )}
           onChange={handleKeywordsChange}
           disabled={props.disabled}
+          fullWidth
+          autoSelect
+          freeSolo
         />
       </Grid>
       <Grid item xs={12}>
@@ -127,8 +132,8 @@ export default function ServiceEditor<
           label="Weblink"
           value={props.service.webLink}
           onChange={handleWeblinkChange}
-          fullWidth
           disabled={props.disabled}
+          fullWidth
         />
       </Grid>
       <Grid item xs={12}>
@@ -136,8 +141,8 @@ export default function ServiceEditor<
           label="Icon"
           value={props.service.img}
           onChange={handleImgChange}
-          fullWidth
           disabled={props.disabled}
+          fullWidth
         />
       </Grid>
       <Grid item xs={12}>
@@ -145,8 +150,8 @@ export default function ServiceEditor<
           label="Provider icon"
           value={props.service.providerIcon}
           onChange={handleProviderIconChange}
-          fullWidth
           disabled={props.disabled}
+          fullWidth
         />
       </Grid>
     </Grid>
