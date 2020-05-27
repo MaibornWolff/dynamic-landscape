@@ -16,14 +16,17 @@ import {
   ListItemIcon,
   ListItemText,
   Slide,
+  SlideProps,
   Typography,
 } from '@material-ui/core';
 import WebIcon from '@material-ui/icons/Web';
+import DeleteDialog from './deleteDialog.component';
 
 interface Props {
   service: DemoData;
   deleteDetailService: () => void;
   adminCredentials?: string;
+  deleteService: (service: DemoData) => void;
 }
 
 const useStyles = makeStyles(() =>
@@ -61,6 +64,16 @@ function PaperComponent(props: PaperProps) {
 export default function DetailModal(props: Props) {
   const classes = useStyles();
   const handleClose = props.deleteDetailService;
+
+  const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false);
+  const handleDelete = () => setDeleteDialogOpen(true);
+  const handleCloseDeleteDialog = (didDelete: boolean) => {
+    setDeleteDialogOpen(false);
+    if (didDelete) {
+      handleClose();
+    }
+  };
+
   return (
     <div>
       <Dialog
@@ -130,8 +143,16 @@ export default function DetailModal(props: Props) {
         <DialogActions>
           {props.adminCredentials ? (
             <>
-              <Button className={classes.Red}>Delete</Button>
-              <Button className={classes.Red}>Edit</Button>
+              <Button className={classes.Red} onClick={handleDelete}>
+                Delete
+              </Button>
+              <DeleteDialog
+                service={props.service}
+                open={deleteDialogOpen}
+                onClose={handleCloseDeleteDialog}
+                adminCredentials={props.adminCredentials}
+                deleteService={props.deleteService}
+              />
             </>
           ) : undefined}
           <Button autoFocus onClick={handleClose} color="primary">

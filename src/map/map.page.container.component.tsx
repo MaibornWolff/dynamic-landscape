@@ -12,6 +12,7 @@ import {
 } from './selectors/map.selector';
 import {
   deleteDetailService,
+  deleteService,
   setContent,
   setDetailService,
 } from './actions/map.actions';
@@ -35,6 +36,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setContent: (content: Array<DemoData>) => dispatch(setContent(content)),
   setDetailService: (service: DemoData) => dispatch(setDetailService(service)),
   deleteDetailService: () => dispatch(deleteDetailService()),
+  deleteService: (service: DemoData) => dispatch(deleteService(service)),
 });
 
 export const Map = connect(mapStateToProps, mapDispatchToProps)(MapComponent);

@@ -10,8 +10,7 @@ export type DemoDataWithoutId = {
 };
 
 export type DemoData = DemoDataWithoutId & {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  _id: any;
+  _id: unknown;
 };
 
 export type Providers = string;
