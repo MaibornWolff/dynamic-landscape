@@ -18,6 +18,7 @@ import {
 import MapComponent from './map.page.component';
 
 import {DemoData} from '../assets/data/dataType';
+import {getCredentials} from '../admin/selectors/admin.selector';
 
 const mapStateToProps = (state: State) => ({
   loading: getLoadingStatus(state.Map),
@@ -27,6 +28,7 @@ const mapStateToProps = (state: State) => ({
   providers: getProviders(state.Map),
   categories: getCategories(state.Map),
   zoomFactor: getZoomFactor(state.Map),
+  adminCredentials: getCredentials(state.Admin),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

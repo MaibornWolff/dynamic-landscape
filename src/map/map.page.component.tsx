@@ -24,6 +24,7 @@ export interface Props {
   setDetailService: (object: DemoData) => void;
   deleteDetailService: () => void;
   zoomFactor: number;
+  adminCredentials?: string;
 }
 interface State {
   filterBarOpen: boolean;
@@ -72,6 +73,7 @@ export default class MapComponent extends React.Component<Props, State> {
             <DetailModal
               service={this.props.detailService}
               deleteDetailService={this.props.deleteDetailService}
+              adminCredentials={this.props.adminCredentials}
             />
           )}
           {this.props.loading ? (
