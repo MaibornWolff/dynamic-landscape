@@ -1,13 +1,16 @@
 import * as React from 'react';
 import ServiceEditor from './serviceeditor.component';
-import {DemoData} from '../../../assets/data/dataType';
+import {DemoData, DemoDataWithoutId} from '../../../assets/data/dataType';
 import styled from 'styled-components';
 import {Button, Grid} from '@material-ui/core';
+import {addNewService} from '../../../shared/mongodbConnection';
 
 export interface Props {
   categories: string[];
   providers: string[];
   keywords: string[];
+  addService: (serice: DemoData) => void;
+  credentials: string;
 }
 
 const Container = styled.div({
@@ -17,29 +20,46 @@ const Container = styled.div({
   alignItems: 'stretch',
 });
 
-export default function AddService(props: Props) {
-  const [service, setService] = React.useState<DemoData>({
-    service: '',
-    category: [],
-    provider: '',
-    description: '',
-    img: '',
-    keywords: [],
-    providerIcon: '',
-    webLink: '',
-  });
+const emptyService = {
+  service: '',
+  category: [],
+  provider: '',
+  description: '',
+  img: '',
+  keywords: [],
+  providerIcon: '',
+  webLink: '',
+};
 
-  const handleSubmit = () => alert('Submit!');
+export default function AddService(props: Props) {
+  const [service, setService] = React.useState<DemoDataWithoutId>(emptyService);
+  const [waiting, setWaiting] = React.useState<boolean>(false);
+
+  const handleSubmit = () => {
+    setWaiting(true);
+    const sentService = service;
+    addNewService(props.credentials, sentService)
+      .then(result => ({
+        ...sentService,
+        _id: result.insertedId,
+      }))
+      .then(newService => props.addService(newService))
+      .then(() => setService(emptyService))
+      .catch(err => console.error(err))
+      .finally(() => setWaiting(false));
+  };
 
   return (
     <Grid item xs={11} sm={10} md={9}>
       <Container>
+        <h2>Add a new service</h2>
         <ServiceEditor
           service={service}
           serviceChanged={setService}
           categories={props.categories}
           providers={props.providers}
           keywords={props.keywords}
+          disabled={waiting}
         />
         <Button
           variant="contained"
@@ -47,6 +67,7 @@ export default function AddService(props: Props) {
           style={{marginTop: 15}}
           type="submit"
           onClick={handleSubmit}
+          disabled={waiting}
         >
           Add service
         </Button>

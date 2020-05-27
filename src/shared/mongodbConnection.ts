@@ -1,4 +1,4 @@
-import {DemoData} from '../assets/data/dataType';
+import {DemoData, DemoDataWithoutId} from '../assets/data/dataType';
 import {
   RemoteMongoClient,
   Stitch,
@@ -48,4 +48,15 @@ export async function checkAdminCredentials(credentials: string) {
       console.error(err);
       return false;
     });
+}
+
+export async function addNewService(
+  credentials: string,
+  service: DemoDataWithoutId
+) {
+  return await client.auth
+    .loginWithCredential(new UserApiKeyCredential(credentials))
+    .then(() =>
+      db.collection<DemoDataWithoutId>(COLLECTION).insertOne(service)
+    );
 }

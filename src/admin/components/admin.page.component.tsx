@@ -27,7 +27,7 @@ export default function Admin(props: Props) {
         props.loading ? (
           <Loading />
         ) : (
-          <AddService />
+          <AddService credentials={props.credentials} />
         )
       ) : (
         <Login setCredentials={props.setCredentials} />

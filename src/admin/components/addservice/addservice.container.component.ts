@@ -6,6 +6,9 @@ import {
   getKeywords,
   getProviders,
 } from '../../../map/selectors/map.selector';
+import {Dispatch} from 'redux';
+import {DemoData} from '../../../assets/data/dataType';
+import {addService} from '../../../map/actions/map.actions';
 
 const mapStateToProps = (state: State) => ({
   categories: getCategories(state.Map),
@@ -13,4 +16,8 @@ const mapStateToProps = (state: State) => ({
   keywords: getKeywords(state.Map),
 });
 
-export default connect(mapStateToProps)(AddService);
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  addService: (service: DemoData) => dispatch(addService(service)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddService);

@@ -1,4 +1,4 @@
-export type DemoData = {
+export type DemoDataWithoutId = {
   provider: Providers;
   providerIcon: string;
   category: Array<string>;
@@ -7,7 +7,11 @@ export type DemoData = {
   img: string;
   description: string;
   keywords: Array<string>;
-  // [key: string]: any;
+};
+
+export type DemoData = DemoDataWithoutId & {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  _id: any;
 };
 
 export type Providers = string;
