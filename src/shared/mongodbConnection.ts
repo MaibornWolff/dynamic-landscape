@@ -38,3 +38,14 @@ export default async function fetchAllServices() {
     return returnDoc;
   }
 }
+
+export async function checkAdminCredentials(credentials: string) {
+  return await client.auth
+    .loginWithCredential(new UserApiKeyCredential(credentials))
+    .then(() => client.callFunction('checkIsFrontendAdmin', []))
+    .catch((err: Error) => {
+      if (err.message === 'invalid API key') return false;
+      console.error(err);
+      return false;
+    });
+}
