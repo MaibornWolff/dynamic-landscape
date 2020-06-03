@@ -1,5 +1,5 @@
 import React from 'react';
-import {makeStyles, createStyles} from '@material-ui/core/styles';
+import {createStyles, makeStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -9,21 +9,24 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Paper, {PaperProps} from '@material-ui/core/Paper';
 import Draggable from 'react-draggable';
 import {DemoData} from '../../../assets/data/dataType';
-import {TransitionProps} from '@material-ui/core/transitions';
 import {
-  Slide,
   Grid,
-  Typography,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
+  Slide,
+  SlideProps,
+  Typography,
 } from '@material-ui/core';
 import WebIcon from '@material-ui/icons/Web';
+import DeleteDialog from './deleteDialog.component';
 
 interface Props {
   service: DemoData;
   deleteDetailService: () => void;
+  adminCredentials?: string;
+  setContent: (services: DemoData[]) => void;
 }
 
 const useStyles = makeStyles(() =>
@@ -39,11 +42,14 @@ const useStyles = makeStyles(() =>
     InfoButton: {
       textTransform: 'inherit',
     },
+    Red: {
+      color: 'red',
+    },
   })
 );
 
 // eslint-disable-next-line react/display-name
-const Transition = React.forwardRef<unknown, TransitionProps>((props, ref) => {
+const Transition = React.forwardRef<unknown, SlideProps>((props, ref) => {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
@@ -58,6 +64,16 @@ function PaperComponent(props: PaperProps) {
 export default function DetailModal(props: Props) {
   const classes = useStyles();
   const handleClose = props.deleteDetailService;
+
+  const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false);
+  const handleDelete = () => setDeleteDialogOpen(true);
+  const handleCloseDeleteDialog = (didDelete: boolean) => {
+    setDeleteDialogOpen(false);
+    if (didDelete) {
+      handleClose();
+    }
+  };
+
   return (
     <div>
       <Dialog
@@ -83,7 +99,7 @@ export default function DetailModal(props: Props) {
                 src={props.service.img}
                 alt="Service Icon"
                 className={classes.icon}
-              ></img>
+              />
             </Grid>
             <Grid item>
               <Typography variant="h3" component="h2">
@@ -125,6 +141,20 @@ export default function DetailModal(props: Props) {
           </Grid>
         </DialogContent>
         <DialogActions>
+          {props.adminCredentials ? (
+            <>
+              <Button className={classes.Red} onClick={handleDelete}>
+                Delete
+              </Button>
+              <DeleteDialog
+                service={props.service}
+                open={deleteDialogOpen}
+                onClose={handleCloseDeleteDialog}
+                adminCredentials={props.adminCredentials}
+                setContent={props.setContent}
+              />
+            </>
+          ) : undefined}
           <Button autoFocus onClick={handleClose} color="primary">
             Close
           </Button>

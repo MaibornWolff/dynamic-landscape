@@ -11,10 +11,10 @@ import CategoryRow from './categoryRows.component';
 
 interface Props {
   setDetailService: (service: DemoData) => void;
-  providers: Array<Providers>;
-  categories: Array<string>;
+  providers: Providers[];
+  categories: string[];
   groupedContent: Map<Providers, Map<string, DemoData[]>>;
-  filteredContent: Array<DemoData>;
+  filteredContent: DemoData[];
   contentSize: number;
   zoomFactor: number;
 }

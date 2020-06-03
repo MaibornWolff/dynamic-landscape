@@ -9,10 +9,12 @@ import {
 export function getToFilterValues(services: DemoData[]): ServiceFeatures {
   const provider = new Set(services.map(service => service.provider));
   const category = new Set(services.flatMap(service => service.category));
+  const keywords = new Set(services.flatMap(service => service.keywords));
 
   return {
     provider: Array.from(provider),
     category: Array.from(category),
+    keywords: Array.from(keywords),
   };
 }
 
@@ -53,7 +55,7 @@ export function serviceFilter(
         >;
         const filterValues = filterSet[
           filter as keyof typeof filterSet
-        ] as Array<string>;
+        ] as string[];
 
         return filterValues.some(elem => serviceValues.indexOf(elem) > -1);
       });
