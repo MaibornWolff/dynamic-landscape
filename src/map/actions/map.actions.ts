@@ -4,7 +4,6 @@ export const SETCONTENT = 'SETCONTENT';
 export const SETDETAILSERVICE = 'SETDETAILSERVICE';
 export const SETFILTER = 'SETFILTER';
 export const SETZOOMFACTOR = 'SETZOOMFACTOR';
-export const ADDSERVICE = 'ADDSERVICE';
 export const DELETESERVICE = 'DELETESERVICE';
 
 export interface SetContentAction {
@@ -62,18 +61,6 @@ export function setZoomFactor(zoomFactor: number): MapActionTypes {
   };
 }
 
-export interface AddServiceAction {
-  type: typeof ADDSERVICE;
-  payload: DemoData;
-}
-
-export function addService(service: DemoData): AddServiceAction {
-  return {
-    type: ADDSERVICE,
-    payload: service,
-  };
-}
-
 export interface DeleteServiceAction {
   type: typeof DELETESERVICE;
   payload: DemoData;
@@ -91,5 +78,4 @@ export type MapActionTypes =
   | SetDetailService
   | SetFilterAction
   | SetZoomFactorAction
-  | AddServiceAction
   | DeleteServiceAction;

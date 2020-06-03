@@ -3,14 +3,16 @@ import ServiceEditor from './serviceeditor.component';
 import {DemoData, DemoDataWithoutId} from '../../../assets/data/dataType';
 import styled from 'styled-components';
 import {Button, CircularProgress, Grid} from '@material-ui/core';
-import {addNewService} from '../../../shared/mongodbConnection';
+import fetchAllServices, {
+  addNewService,
+} from '../../../shared/mongodbConnection';
 import {useHistory} from 'react-router-dom';
 
 export interface Props {
   categories: string[];
   providers: string[];
   keywords: string[];
-  addService: (service: DemoData) => void;
+  setContent: (services: DemoData[]) => void;
   credentials: string;
 }
 
@@ -32,6 +34,12 @@ const emptyService = {
   webLink: '',
 };
 
+const defaultIcons = new Map([
+  ['Amazon', './img/logos/AWS/General/AWS_Simple_Icons_AWS_Cloud.svg'],
+  ['Google', './img/logos/Google/Extras/Google Cloud Platform.svg'],
+  ['Microsoft', './img/logos/Microsoft/CnE_Cloud/SVG/Azure_logo_icon_50.svg'],
+]);
+
 export default function AddService(props: Props) {
   const [service, setService] = React.useState<DemoDataWithoutId>(emptyService);
   const [waiting, setWaiting] = React.useState<boolean>(false);
@@ -39,14 +47,16 @@ export default function AddService(props: Props) {
 
   const handleSubmit = () => {
     setWaiting(true);
-    const sentService = service;
-    addNewService(props.credentials, sentService)
-      .then(result => ({
-        ...sentService,
-        _id: result.insertedId,
-      }))
-      .then(newService => props.addService(newService))
-      .then(() => setService(emptyService))
+    const serviceWithDefaultImgs = {
+      ...service,
+      img: service.img || defaultIcons.get(service.provider) || '',
+      providerIcon:
+        service.providerIcon || defaultIcons.get(service.provider) || '',
+    };
+    setService(serviceWithDefaultImgs);
+    addNewService(props.credentials, serviceWithDefaultImgs)
+      .then(() => fetchAllServices())
+      .then(services => props.setContent(services))
       .catch(err => console.error(err))
       .finally(() => {
         setWaiting(false);
