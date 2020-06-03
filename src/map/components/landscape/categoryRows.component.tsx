@@ -6,10 +6,10 @@ import {makeStyles} from '@material-ui/styles';
 
 interface Props {
   setDetailService: (service: DemoData) => void;
-  providers: Array<Providers>;
-  categories: Array<string>;
+  providers: Providers[];
+  categories: string[];
   groupedContent: Map<Providers, Map<string, DemoData[]>>;
-  filteredContent: Array<DemoData>;
+  filteredContent: DemoData[];
   zoomFactor: number;
 }
 
@@ -31,7 +31,7 @@ function CategoryRows(props: Props) {
   const getServicesByProviderAndCategory = (
     provider: Providers,
     category: string
-  ): Array<DemoData> => props.groupedContent.get(provider)?.get(category) || [];
+  ): DemoData[] => props.groupedContent.get(provider)?.get(category) || [];
 
   const isServiceFiltered = (service: DemoData): boolean =>
     !props.filteredContent.includes(service);

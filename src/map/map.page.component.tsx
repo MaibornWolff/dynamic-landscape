@@ -17,12 +17,12 @@ import {FilterBarComponent} from '../shared/components/filter/filter-bar/filter.
 export interface Props {
   loading: boolean;
   detailService: DemoData | undefined;
-  filteredContent: Array<DemoData>;
+  filteredContent: DemoData[];
   groupedContent: Map<Providers, Map<string, DemoData[]>>;
-  providers: Array<Providers>;
-  categories: Array<string>;
+  providers: Providers[];
+  categories: string[];
   filterBar: boolean;
-  setContent: (object: Array<DemoData>) => void;
+  setContent: (object: DemoData[]) => void;
   setDetailService: (object: DemoData) => void;
   deleteDetailService: () => void;
   zoomFactor: number;

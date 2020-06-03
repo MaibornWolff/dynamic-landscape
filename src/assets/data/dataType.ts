@@ -1,12 +1,12 @@
 export type DemoData = {
   provider: Providers;
   providerIcon: string;
-  category: Array<string>;
+  category: string[];
   service: string;
   webLink: string;
   img: string;
   description: string;
-  keywords: Array<string>;
+  keywords: string[];
   // [key: string]: any;
 };
 
