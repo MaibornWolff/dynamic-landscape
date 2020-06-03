@@ -11,9 +11,8 @@ import TablePaginationActions from './paginationActions.component';
 import ServiceRow from './servicerow.component';
 
 interface Props {
-  filteredContent:DemoData[];
+  filteredContent: DemoData[];
   contentSize: number;
-  content: DemoData[];
   setDetailService: (service: DemoData) => void;
 }
 
