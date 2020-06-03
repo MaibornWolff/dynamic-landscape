@@ -7,7 +7,7 @@ export const getLoadingStatus = (state: State): boolean => {
   return state.loading;
 };
 
-export const getContent = (state: State): Array<DemoData> => state.content;
+export const getContent = (state: State): DemoData[] => state.content;
 
 export const getFilter = (state: State): DataFilter => state.filter;
 
@@ -29,6 +29,11 @@ export const getProviders = createSelector(
 export const getCategories = createSelector(
   getPossibleFilterValues,
   toFilterValues => toFilterValues.category
+);
+
+export const getKeywords = createSelector(
+  getPossibleFilterValues,
+  toFilterValues => toFilterValues.keywords
 );
 
 export const getDetailService = (state: State): DemoData | undefined =>

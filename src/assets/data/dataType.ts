@@ -1,20 +1,25 @@
-export type DemoData = {
+export type DemoDataWithoutId = {
   provider: Providers;
   providerIcon: string;
-  category: Array<string>;
+  category: string[];
   service: string;
   webLink: string;
   img: string;
   description: string;
-  keywords: Array<string>;
+  keywords: string[];
   // [key: string]: any;
 };
 
-export type Providers = 'Google' | 'AWS' | 'Azure' | null;
+export type DemoData = DemoDataWithoutId & {
+  _id: unknown;
+};
+
+export type Providers = string;
 
 export type ServiceFeatures = {
   provider: Providers[];
   category: string[];
+  keywords: string[];
 };
 
 export type DataFilter = ServiceFeatures & {

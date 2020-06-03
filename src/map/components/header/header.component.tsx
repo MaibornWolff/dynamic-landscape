@@ -42,7 +42,6 @@ export default function Header(props: Props) {
       <Grid item xs={6} md={4}>
         {props.location.pathname === '/landscape' && <Zoom />}
       </Grid>
-      {/* <Grid item xs={6} md={2} style={{}}></Grid> */}
       <ViewSwitch />
     </Grid>
   );

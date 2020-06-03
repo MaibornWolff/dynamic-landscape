@@ -4,9 +4,8 @@ import {Redirect} from 'react-router-dom';
 import {Grid, styled} from '@material-ui/core';
 import {DemoData, Providers} from '../assets/data/dataType';
 import DetailModal from './components/detailModal/detailModal.component';
-import Loading from './components/laoding/loading.component';
+import Loading from '../shared/components/laoding/loading.component';
 import MapTable from './components/maptable/maptable.component';
-import fetchAllServices from '../shared/mongodbConnection';
 import Landscape from './components/landscape/landscape.component';
 import Paper from '@material-ui/core/Paper';
 import Header from './components/header/header.container.component';
@@ -17,15 +16,16 @@ import {FilterBarComponent} from '../shared/components/filter/filter-bar/filter.
 export interface Props {
   loading: boolean;
   detailService: DemoData | undefined;
-  filteredContent: Array<DemoData>;
+  filteredContent: DemoData[];
   groupedContent: Map<Providers, Map<string, DemoData[]>>;
-  providers: Array<Providers>;
-  categories: Array<string>;
+  providers: Providers[];
+  categories: string[];
   filterBar: boolean;
-  setContent: (object: Array<DemoData>) => void;
+  setContent: (object: DemoData[]) => void;
   setDetailService: (object: DemoData) => void;
   deleteDetailService: () => void;
   zoomFactor: number;
+  adminCredentials?: string;
 }
 interface State {
   filterBarOpen: boolean;
@@ -40,10 +40,6 @@ export default class MapComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {filterBarOpen: false};
-  }
-
-  componentDidMount() {
-    fetchAllServices().then((data: DemoData[]) => this.props.setContent(data));
   }
 
   toggleFilterBar = () => {
@@ -78,6 +74,8 @@ export default class MapComponent extends React.Component<Props, State> {
             <DetailModal
               service={this.props.detailService}
               deleteDetailService={this.props.deleteDetailService}
+              adminCredentials={this.props.adminCredentials}
+              setContent={this.props.setContent}
             />
           )}
           {this.props.loading ? (

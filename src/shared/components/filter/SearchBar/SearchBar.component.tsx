@@ -55,8 +55,8 @@ export default function SearchBarComponentContainer(props: Props) {
   const classes = useStyles();
   const [text, setText] = useState('');
 
-  const handleChangeText = (event: React.ChangeEvent<{value: unknown}>) => {
-    setText(event.target.value as string);
+  const handleChangeText = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setText(event.target.value);
   };
 
   const keyPress = (e: any) => {
