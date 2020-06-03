@@ -22,7 +22,6 @@ export interface Props {
   categories: Array<string>;
   setContent: (object: Array<DemoData>) => void;
   setDetailService: (object: DemoData) => void;
-  deleteService: (service: DemoData) => void;
   deleteDetailService: () => void;
   zoomFactor: number;
   adminCredentials?: string;
@@ -75,7 +74,7 @@ export default class MapComponent extends React.Component<Props, State> {
               service={this.props.detailService}
               deleteDetailService={this.props.deleteDetailService}
               adminCredentials={this.props.adminCredentials}
-              deleteService={this.props.deleteService}
+              setContent={this.props.setContent}
             />
           )}
           {this.props.loading ? (

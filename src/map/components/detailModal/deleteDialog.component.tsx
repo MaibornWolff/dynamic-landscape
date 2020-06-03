@@ -8,14 +8,16 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import {DemoData} from '../../../assets/data/dataType';
 import {createStyles, makeStyles} from '@material-ui/core/styles';
 import {CircularProgress} from '@material-ui/core';
-import {deleteService as deleteServiceInDb} from '../../../shared/mongodbConnection';
+import fetchAllServices, {
+  deleteService as deleteServiceInDb,
+} from '../../../shared/mongodbConnection';
 
 interface Props {
   service: DemoData;
   open: boolean;
   onClose: (didDelete: boolean) => void;
   adminCredentials: string;
-  deleteService: (service: DemoData) => void;
+  setContent: (services: DemoData[]) => void;
 }
 
 const useStyles = makeStyles(() =>
@@ -33,8 +35,9 @@ export default function DeleteDialog(props: Props) {
   const handleDelete = () => {
     setDeleting(true);
     deleteServiceInDb(props.adminCredentials, props.service)
-      .then(() => {
-        props.deleteService(props.service);
+      .then(() => fetchAllServices())
+      .then(services => {
+        props.setContent(services);
         setDeleting(false);
         props.onClose(true);
       })

@@ -26,7 +26,7 @@ interface Props {
   service: DemoData;
   deleteDetailService: () => void;
   adminCredentials?: string;
-  deleteService: (service: DemoData) => void;
+  setContent: (services: DemoData[]) => void;
 }
 
 const useStyles = makeStyles(() =>
@@ -151,7 +151,7 @@ export default function DetailModal(props: Props) {
                 open={deleteDialogOpen}
                 onClose={handleCloseDeleteDialog}
                 adminCredentials={props.adminCredentials}
-                deleteService={props.deleteService}
+                setContent={props.setContent}
               />
             </>
           ) : undefined}

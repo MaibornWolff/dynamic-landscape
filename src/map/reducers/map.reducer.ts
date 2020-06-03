@@ -1,6 +1,5 @@
 import update from 'immutability-helper';
 import {
-  DELETESERVICE,
   MapActionTypes,
   SETCONTENT,
   SETDETAILSERVICE,
@@ -51,13 +50,6 @@ export const Map = (state: State = initialState, action: MapActionTypes) => {
     case SETZOOMFACTOR:
       return update(state, {
         zoomFactor: {$set: action.payload},
-      });
-
-    case DELETESERVICE:
-      return update(state, {
-        content: {
-          $set: state.content.filter(s => s._id !== action.payload._id),
-        },
       });
 
     default:
