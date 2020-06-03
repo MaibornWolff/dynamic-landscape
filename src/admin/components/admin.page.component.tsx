@@ -13,7 +13,7 @@ export interface Props {
   credentials: string | undefined;
   setCredentials: (credentials: string) => void;
   loading: boolean;
-  content: DemoData[];
+  findServiceById: (id: unknown) => DemoData | undefined;
 }
 
 const ContainerGrid = styled(Grid)({
@@ -21,11 +21,8 @@ const ContainerGrid = styled(Grid)({
 });
 
 export default function Admin(props: Props) {
-  const findService = (serviceId: string) =>
-    props.content.find(service => service._id === serviceId);
-
   const renderWrappedEditor = (credentials: string, serviceId: string) => {
-    const service = findService(serviceId);
+    const service = props.findServiceById(serviceId);
     if (service) {
       return <EditService credentials={credentials} service={service} />;
     } else {
