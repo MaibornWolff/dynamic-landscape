@@ -12,7 +12,7 @@ export default function Footer() {
         <LinkExternal href={urls.maibornWolff} target="/blank">
           Maibornwolff
         </LinkExternal>
-        {' - '}
+        {' − '}
         <Link to="/admin" target="">
           Login
         </Link>
