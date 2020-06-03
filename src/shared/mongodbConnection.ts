@@ -19,7 +19,8 @@ const credential = new UserApiKeyCredential(
 
 export default async function fetchAllServices(force = false) {
   const cache = sessionStorage.getItem('serviceContent');
-  if (cache && !force) {
+  const createdBy = Number(sessionStorage.getItem('createdBy'));
+  if (cache && !force && createdBy && createdBy + 86400000 > Date.now()) {
     return JSON.parse(cache);
   } else {
     let returnDoc = [] as DemoData[];
@@ -30,6 +31,7 @@ export default async function fetchAllServices(force = false) {
         console.log('[MongoDB Stitch] Connected to Stitch');
         returnDoc = docs;
         sessionStorage.setItem('serviceContent', JSON.stringify(returnDoc));
+        sessionStorage.setItem('createdBy', Date.now().toString());
       })
       .catch((err: Error) => {
         console.error(err);
