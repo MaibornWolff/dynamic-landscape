@@ -16,6 +16,10 @@ export const getFilteredContent = createSelector(
   getContent,
   (filter, content) => serviceFilter(content, filter)
 );
+export const getContentSize = createSelector(
+  getContent,
+  (content: DemoData[]): number => content.length
+);
 
 export const getPossibleFilterValues = createSelector(getContent, content =>
   getToFilterValues(content)
