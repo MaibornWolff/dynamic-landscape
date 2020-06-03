@@ -32,7 +32,7 @@ export default function EditService(props: Props) {
   const handleSubmit = () => {
     setWaiting(true);
     updateService(props.credentials, service)
-      .then(() => fetchAllServices())
+      .then(() => fetchAllServices(true))
       .then(services => props.setContent(services))
       .catch(err => console.error(err))
       .finally(() => {
