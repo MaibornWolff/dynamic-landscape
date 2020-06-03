@@ -34,6 +34,12 @@ const emptyService = {
   webLink: '',
 };
 
+const defaultIcons = new Map([
+  ['Amazon', './img/logos/AWS/General/AWS_Simple_Icons_AWS_Cloud.svg'],
+  ['Google', './img/logos/Google/Extras/Google Cloud Platform.svg'],
+  ['Microsoft', './img/logos/Microsoft/CnE_Cloud/SVG/Azure_logo_icon_50.svg'],
+]);
+
 export default function AddService(props: Props) {
   const [service, setService] = React.useState<DemoDataWithoutId>(emptyService);
   const [waiting, setWaiting] = React.useState<boolean>(false);
@@ -41,7 +47,14 @@ export default function AddService(props: Props) {
 
   const handleSubmit = () => {
     setWaiting(true);
-    addNewService(props.credentials, service)
+    const serviceWithDefaultImgs = {
+      ...service,
+      img: service.img || defaultIcons.get(service.provider) || '',
+      providerIcon:
+        service.providerIcon || defaultIcons.get(service.provider) || '',
+    };
+    setService(serviceWithDefaultImgs);
+    addNewService(props.credentials, serviceWithDefaultImgs)
       .then(() => fetchAllServices())
       .then(services => props.setContent(services))
       .catch(err => console.error(err))
