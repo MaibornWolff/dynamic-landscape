@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.com/MaibornWolff/cloud-landscape.svg?branch=master)](https://travis-ci.com/MaibornWolff/cloud-landscape)
 [![Code Style: Google](https://img.shields.io/badge/code%20style-google-blueviolet.svg)](https://github.com/google/gts)
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/MaibornWolff/cloud-landscape)
 
 > Cloud Landscape - [Online demo](http://cloudlandscape.info/landscape)
 >
