@@ -71,3 +71,16 @@ export async function deleteService(credentials: string, service: DemoData) {
         .deleteOne({_id: {$oid: (service._id as string | object).toString()}})
     );
 }
+
+export async function updateService(credentials: string, service: DemoData) {
+  return await client.auth
+    .loginWithCredential(new UserApiKeyCredential(credentials))
+    .then(() =>
+      db
+        .collection<DemoData>(COLLECTION)
+        .findOneAndReplace(
+          {_id: {$oid: (service._id as string | object).toString()}},
+          service
+        )
+    );
+}
