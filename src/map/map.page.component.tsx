@@ -39,7 +39,7 @@ const StyledPaper = styled(Paper)({
 export default class MapComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = {filterBarOpen: true};
+    this.state = {filterBarOpen: false};
   }
 
   componentDidMount() {
