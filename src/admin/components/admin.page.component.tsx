@@ -17,6 +17,7 @@ const ContainerGrid = styled(Grid)({
 });
 
 export default function Admin(props: Props) {
+  console.log();
   return (
     <ContainerGrid
       container

@@ -2,11 +2,15 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import NavigationComponent from './navigation.component';
 
-const mapStateToProps = () => ({});
+import {getCredentials} from '../../../admin/selectors/admin.selector';
+import {State} from '../../../reducers';
+
+const mapStateToProps = (state: State) => ({
+  adminCredentials: getCredentials(state.Admin),
+});
 
 const mapDispatchToProps = () => ({});
 
-export const Navigation = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(NavigationComponent));
+export const Navigation = withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(NavigationComponent)
+);
