@@ -15,6 +15,7 @@ interface Props {
   categories: string[];
   groupedContent: Map<Providers, Map<string, DemoData[]>>;
   filteredContent: DemoData[];
+  contentSize: number;
   zoomFactor: number;
 }
 
@@ -27,6 +28,10 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.primary.main,
     },
     headerTitle: {
+      color: 'white',
+      margin: 0,
+    },
+    headerContentSize: {
       color: 'white',
       margin: 0,
     },
@@ -43,7 +48,17 @@ export default function Landscape(props: Props) {
     <Table className={classes.table} size="small">
       <TableHead className={classes.header}>
         <TableRow>
-          <TableCell />
+          <TableCell>
+            {props.filteredContent.length !== props.contentSize && (
+              <Typography
+                variant="subtitle1"
+                gutterBottom
+                className={classes.headerContentSize}
+              >
+                {props.filteredContent.length}/{props.contentSize}
+              </Typography>
+            )}
+          </TableCell>
           {providers.map((provider, j) => (
             <TableCell key={j}>
               <Typography
