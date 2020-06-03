@@ -10,7 +10,7 @@ import {DataFilter, DemoData} from '../../assets/data/dataType';
 
 export interface State {
   loading: boolean;
-  content: Array<DemoData>;
+  content: DemoData[];
   filter: DataFilter;
   detailedService?: DemoData;
   zoomFactor: number;

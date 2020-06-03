@@ -16,11 +16,12 @@ import {FilterBarComponent} from '../shared/components/filter/filter-bar/filter.
 export interface Props {
   loading: boolean;
   detailService: DemoData | undefined;
-  filteredContent: Array<DemoData>;
+  filteredContent: DemoData[];
   groupedContent: Map<Providers, Map<string, DemoData[]>>;
-  providers: Array<Providers>;
-  categories: Array<string>;
-  setContent: (object: Array<DemoData>) => void;
+  providers: Providers[];
+  categories: string[];
+  filterBar: boolean;
+  setContent: (object: DemoData[]) => void;
   setDetailService: (object: DemoData) => void;
   deleteDetailService: () => void;
   zoomFactor: number;
@@ -38,7 +39,7 @@ const StyledPaper = styled(Paper)({
 export default class MapComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = {filterBarOpen: true};
+    this.state = {filterBarOpen: false};
   }
 
   toggleFilterBar = () => {

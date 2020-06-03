@@ -7,10 +7,10 @@ export const SETZOOMFACTOR = 'SETZOOMFACTOR';
 
 export interface SetContentAction {
   type: typeof SETCONTENT;
-  payload: Array<DemoData>;
+  payload: DemoData[];
 }
 
-export function setContent(value: Array<DemoData>): MapActionTypes {
+export function setContent(value: DemoData[]): MapActionTypes {
   return {
     type: SETCONTENT,
     payload: value,

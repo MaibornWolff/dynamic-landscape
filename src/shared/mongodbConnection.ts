@@ -17,20 +17,27 @@ const credential = new UserApiKeyCredential(
   '7jcwcGl6aSKf0oSXiW8Wb8AbLZwFkr2YHSrHcSVnDWEhXektnxJ8TipzrkDucVbj'
 );
 
-export default async function fetchAllServices() {
-  console.log('Fetching Data');
-  let returnDoc = [] as DemoData[];
-  await client.auth
-    .loginWithCredential(credential)
-    .then(() => db.collection<DemoData>(COLLECTION).find({}).toArray())
-    .then((docs: DemoData[]) => {
-      console.log('[MongoDB Stitch] Connected to Stitch');
-      returnDoc = docs;
-    })
-    .catch((err: Error) => {
-      console.error(err);
-    });
-  return returnDoc;
+export default async function fetchAllServices(force = false) {
+  const cache = sessionStorage.getItem('serviceContent');
+  const createdBy = Number(sessionStorage.getItem('createdBy'));
+  if (cache && !force && createdBy && createdBy + 86400000 > Date.now()) {
+    return JSON.parse(cache);
+  } else {
+    let returnDoc = [] as DemoData[];
+    await client.auth
+      .loginWithCredential(credential)
+      .then(() => db.collection<DemoData>(COLLECTION).find({}).toArray())
+      .then((docs: DemoData[]) => {
+        console.log('[MongoDB Stitch] Connected to Stitch');
+        returnDoc = docs;
+        sessionStorage.setItem('serviceContent', JSON.stringify(returnDoc));
+        sessionStorage.setItem('createdBy', Date.now().toString());
+      })
+      .catch((err: Error) => {
+        console.error(err);
+      });
+    return returnDoc;
+  }
 }
 
 export async function checkAdminCredentials(credentials: string) {
