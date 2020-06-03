@@ -50,7 +50,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function NavigationComponent(props: Props) {
   const classes = useStyles();
-  console.log(props.adminCredentials);
   return (
     <>
       <AppBar position="fixed" className={classes.appBar}>
