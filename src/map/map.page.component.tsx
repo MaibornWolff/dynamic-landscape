@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Redirect} from 'react-router-dom';
+import {match, Redirect} from 'react-router-dom';
 
 import {Grid, styled} from '@material-ui/core';
 import {DemoData, Providers} from '../assets/data/dataType';
@@ -12,6 +12,8 @@ import Header from './components/header/header.container.component';
 import CacheRoute, {CacheSwitch} from 'react-router-cache-route';
 import Footer from './components/footer/footer.component';
 import {FilterBarComponent} from '../shared/components/filter/filter-bar/filter.container.component';
+import {History, Location} from 'history';
+import {parse as parseQueryString} from 'query-string';
 
 export interface Props {
   loading: boolean;
@@ -26,6 +28,9 @@ export interface Props {
   deleteDetailService: () => void;
   zoomFactor: number;
   adminCredentials?: string;
+  location: Location;
+  history: History;
+  match: match;
 }
 interface State {
   filterBarOpen: boolean;
@@ -40,6 +45,19 @@ export default class MapComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {filterBarOpen: false};
+  }
+
+  maybeShowDetailService = () => {
+    const serviceId = parseQueryString(this.props.location.search).serviceId;
+    console.debug(serviceId); // TODO remove console output and implement display of detail dialog
+  };
+
+  componentDidMount(): void {
+    if (!this.props.loading) this.maybeShowDetailService();
+  }
+
+  componentDidUpdate(prevProps: Readonly<Props>): void {
+    if (prevProps.loading && !this.props.loading) this.maybeShowDetailService();
   }
 
   toggleFilterBar = () => {
