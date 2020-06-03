@@ -18,6 +18,7 @@ export interface Props {
   loading: boolean;
   detailService: DemoData | undefined;
   filteredContent: Array<DemoData>;
+  contentSize: number;
   groupedContent: Map<Providers, Map<string, DemoData[]>>;
   providers: Array<Providers>;
   categories: Array<string>;
@@ -91,6 +92,7 @@ export default class MapComponent extends React.Component<Props, State> {
                     <CacheRoute path="/landscape">
                       <Landscape
                         filteredContent={this.props.filteredContent}
+                        contentSize={this.props.contentSize}
                         groupedContent={this.props.groupedContent}
                         providers={this.props.providers}
                         categories={this.props.categories}
@@ -100,7 +102,8 @@ export default class MapComponent extends React.Component<Props, State> {
                     </CacheRoute>
                     <CacheRoute path="/table">
                       <MapTable
-                        content={this.props.filteredContent}
+                        filteredContent={this.props.filteredContent}
+                        contentSize={this.props.contentSize}
                         setDetailService={this.props.setDetailService}
                       />
                     </CacheRoute>

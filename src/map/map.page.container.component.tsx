@@ -9,6 +9,7 @@ import {
   getCategories,
   getProviders,
   getZoomFactor,
+  getContentSize,
 } from './selectors/map.selector';
 import {
   deleteDetailService,
@@ -22,6 +23,7 @@ import {DemoData} from '../assets/data/dataType';
 const mapStateToProps = (state: State) => ({
   loading: getLoadingStatus(state.Map),
   filteredContent: getFilteredContent(state.Map),
+  contentSize: getContentSize(state.Map),
   groupedContent: getGroupedContent(state.Map),
   detailService: getDetailService(state.Map),
   providers: getProviders(state.Map),

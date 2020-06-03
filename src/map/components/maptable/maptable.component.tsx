@@ -11,7 +11,8 @@ import TablePaginationActions from './paginationActions.component';
 import ServiceRow from './servicerow.component';
 
 interface Props {
-  content: Array<DemoData>;
+  filteredContent: Array<DemoData>;
+  contentSize: number;
   setDetailService: (service: DemoData) => void;
 }
 
@@ -33,13 +34,18 @@ const useStyles = makeStyles((theme: Theme) =>
       color: 'white',
       margin: 0,
     },
+    headerContentSize: {
+      color: 'white',
+      margin: 0,
+    },
   })
 );
 
 export default function MapTable(props: Props) {
   const classes = useStyles();
 
-  const rows = props.content;
+  const rows = props.filteredContent;
+  const contentSize = props.contentSize;
 
   const setDetailService = (service: DemoData) => {
     props.setDetailService(service);
@@ -69,7 +75,17 @@ export default function MapTable(props: Props) {
     <Table className={classes.table} size="small" aria-label="a dense table">
       <TableHead className={classes.header}>
         <TableRow>
-          <TableCell />
+          <TableCell>
+            {rows.length !== contentSize && (
+              <Typography
+                variant="subtitle1"
+                gutterBottom
+                className={classes.headerContentSize}
+              >
+                {rows.length}/{contentSize}
+              </Typography>
+            )}
+          </TableCell>
           <TableCell>
             <Typography
               variant="h6"

@@ -5,7 +5,7 @@ import {
   ServiceFeatures,
 } from '../../assets/data/dataType';
 
-//Create a list of Unique Values to filter on
+// Create a list of Unique Values to filter on
 export function getToFilterValues(services: DemoData[]): ServiceFeatures {
   const provider = new Set(services.map(service => service.provider));
   const category = new Set(services.flatMap(service => service.category));
