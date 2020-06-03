@@ -97,7 +97,15 @@ export default function MapTable(props: Props) {
               Category
             </Typography>
           </TableCell>
-          <TableCell />
+          <TableCell>
+            <Typography
+              variant="h6"
+              gutterBottom
+              className={classes.headerTitle}
+            >
+              Website
+            </Typography>
+          </TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
