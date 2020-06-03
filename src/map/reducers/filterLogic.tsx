@@ -55,7 +55,7 @@ export function serviceFilter(
         >;
         const filterValues = filterSet[
           filter as keyof typeof filterSet
-        ] as Array<string>;
+        ] as string[];
 
         return filterValues.some(elem => serviceValues.indexOf(elem) > -1);
       });
