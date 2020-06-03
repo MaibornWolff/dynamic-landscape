@@ -3,14 +3,16 @@ import ServiceEditor from './serviceeditor.component';
 import {DemoData, DemoDataWithoutId} from '../../../assets/data/dataType';
 import styled from 'styled-components';
 import {Button, CircularProgress, Grid} from '@material-ui/core';
-import {addNewService} from '../../../shared/mongodbConnection';
+import fetchAllServices, {
+  addNewService,
+} from '../../../shared/mongodbConnection';
 import {useHistory} from 'react-router-dom';
 
 export interface Props {
   categories: string[];
   providers: string[];
   keywords: string[];
-  addService: (service: DemoData) => void;
+  setContent: (services: DemoData[]) => void;
   credentials: string;
 }
 
@@ -39,14 +41,9 @@ export default function AddService(props: Props) {
 
   const handleSubmit = () => {
     setWaiting(true);
-    const sentService = service;
-    addNewService(props.credentials, sentService)
-      .then(result => ({
-        ...sentService,
-        _id: result.insertedId,
-      }))
-      .then(newService => props.addService(newService))
-      .then(() => setService(emptyService))
+    addNewService(props.credentials, service)
+      .then(() => fetchAllServices())
+      .then(services => props.setContent(services))
       .catch(err => console.error(err))
       .finally(() => {
         setWaiting(false);

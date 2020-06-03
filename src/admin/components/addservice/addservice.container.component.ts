@@ -8,7 +8,7 @@ import {
 } from '../../../map/selectors/map.selector';
 import {Dispatch} from 'redux';
 import {DemoData} from '../../../assets/data/dataType';
-import {addService} from '../../../map/actions/map.actions';
+import {setContent} from '../../../map/actions/map.actions';
 
 const mapStateToProps = (state: State) => ({
   categories: getCategories(state.Map),
@@ -17,7 +17,7 @@ const mapStateToProps = (state: State) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  addService: (service: DemoData) => dispatch(addService(service)),
+  setContent: (services: DemoData[]) => dispatch(setContent(services)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddService);
