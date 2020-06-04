@@ -2,7 +2,7 @@ import React from 'react';
 import {createStyles, makeStyles} from '@material-ui/core/styles';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-import {Button} from '@material-ui/core';
+import {Link} from '@material-ui/core';
 import {DemoData} from '../../../assets/data/dataType';
 import LazyLoad from 'react-lazyload';
 
@@ -18,6 +18,9 @@ const useStyles = makeStyles(() =>
       float: 'left',
       width: 30,
     },
+    tableRow: {
+      cursor: 'pointer',
+    },
   })
 );
 
@@ -29,7 +32,7 @@ function ServiceRow(props: Props) {
   };
 
   return (
-    <TableRow>
+    <TableRow hover onClick={setDetailService} className={classes.tableRow}>
       <TableCell>
         <LazyLoad height={30}>
           <img
@@ -45,7 +48,9 @@ function ServiceRow(props: Props) {
       </TableCell>
       <TableCell>{props.service.category.join(' | ')}</TableCell>
       <TableCell>
-        <Button onClick={setDetailService}>More Information</Button>
+        <Link href={props.service.webLink} target="_blank" rel="noreferrer">
+          {props.service.webLink.split('/')[2]}
+        </Link>
       </TableCell>
     </TableRow>
   );
