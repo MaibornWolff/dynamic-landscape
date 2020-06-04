@@ -40,6 +40,11 @@ export const getKeywords = createSelector(
   toFilterValues => toFilterValues.keywords
 );
 
+export const findServiceById = createSelector(
+  getContent,
+  content => (id: unknown) => content.find(service => service._id === id)
+);
+
 export const getDetailService = (state: State): DemoData | undefined =>
   state.detailedService;
 
