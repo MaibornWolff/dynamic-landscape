@@ -1,10 +1,10 @@
 import * as React from 'react';
 import ServiceEditor from '../../../shared/components/serviceeditor/serviceeditor.component';
-import {DemoData, DemoDataWithoutId} from '../../../assets/data/dataType';
+import {DemoData} from '../../../assets/data/dataType';
 import styled from 'styled-components';
 import {Button, CircularProgress, Grid} from '@material-ui/core';
 import fetchAllServices, {
-  addNewService,
+  updateService,
 } from '../../../shared/mongodbConnection';
 import {useHistory} from 'react-router-dom';
 
@@ -14,6 +14,7 @@ export interface Props {
   keywords: string[];
   setContent: (services: DemoData[]) => void;
   credentials: string;
+  service: DemoData;
 }
 
 const Container = styled.div({
@@ -23,39 +24,15 @@ const Container = styled.div({
   alignItems: 'stretch',
 });
 
-const emptyService = {
-  service: '',
-  category: [],
-  provider: '',
-  description: '',
-  img: '',
-  keywords: [],
-  providerIcon: '',
-  webLink: '',
-};
-
-const defaultIcons = new Map([
-  ['Amazon', './img/logos/AWS/General/AWS_Simple_Icons_AWS_Cloud.svg'],
-  ['Google', './img/logos/Google/Extras/Google Cloud Platform.svg'],
-  ['Microsoft', './img/logos/Microsoft/CnE_Cloud/SVG/Azure_logo_icon_50.svg'],
-]);
-
-export default function AddService(props: Props) {
-  const [service, setService] = React.useState<DemoDataWithoutId>(emptyService);
+export default function EditService(props: Props) {
+  const [service, setService] = React.useState<DemoData>(props.service);
   const [waiting, setWaiting] = React.useState<boolean>(false);
   const history = useHistory();
 
   const handleSubmit = () => {
     setWaiting(true);
-    const serviceWithDefaultImgs = {
-      ...service,
-      img: service.img || defaultIcons.get(service.provider) || '',
-      providerIcon:
-        service.providerIcon || defaultIcons.get(service.provider) || '',
-    };
-    setService(serviceWithDefaultImgs);
-    addNewService(props.credentials, serviceWithDefaultImgs)
-      .then(() => fetchAllServices(true)) // force fetch
+    updateService(props.credentials, service)
+      .then(() => fetchAllServices(true))
       .then(services => props.setContent(services))
       .catch(err => console.error(err))
       .finally(() => {
@@ -67,7 +44,7 @@ export default function AddService(props: Props) {
   return (
     <Grid item xs={11} sm={10} md={9}>
       <Container>
-        <h2>Add a new service</h2>
+        <h2>Edit service</h2>
         <ServiceEditor
           service={service}
           serviceChanged={setService}
@@ -84,7 +61,7 @@ export default function AddService(props: Props) {
           onClick={handleSubmit}
           disabled={waiting}
         >
-          {waiting ? <CircularProgress /> : 'Add service'}
+          {waiting ? <CircularProgress /> : 'Save changes'}
         </Button>
       </Container>
     </Grid>
