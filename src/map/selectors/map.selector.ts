@@ -45,9 +45,6 @@ export const findServiceById = createSelector(
   content => (id: unknown) => content.find(service => service._id === id)
 );
 
-export const getDetailService = (state: State): DemoData | undefined =>
-  state.detailedService;
-
 export const getZoomFactor = (state: State): number => state.zoomFactor;
 
 /**
