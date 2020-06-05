@@ -16,6 +16,10 @@ export const getFilteredContent = createSelector(
   getContent,
   (filter, content) => serviceFilter(content, filter)
 );
+export const getContentSize = createSelector(
+  getContent,
+  (content: DemoData[]): number => content.length
+);
 
 export const getPossibleFilterValues = createSelector(getContent, content =>
   getToFilterValues(content)
@@ -34,6 +38,11 @@ export const getCategories = createSelector(
 export const getKeywords = createSelector(
   getPossibleFilterValues,
   toFilterValues => toFilterValues.keywords
+);
+
+export const findServiceById = createSelector(
+  getContent,
+  content => (id: unknown) => content.find(service => service._id === id)
 );
 
 export const getDetailService = (state: State): DemoData | undefined =>

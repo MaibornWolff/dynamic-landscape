@@ -5,11 +5,15 @@ import Login from './login/login.component';
 import AddService from './addservice/addservice.container.component';
 import Loading from '../../shared/components/laoding/loading.component';
 import {Redirect, Route, Switch} from 'react-router';
+import EditService from './editservice/editservice.container.component';
+import {DemoData} from '../../assets/data/dataType';
+import {Alert} from '@material-ui/lab';
 
 export interface Props {
   credentials: string | undefined;
   setCredentials: (credentials: string) => void;
   loading: boolean;
+  findServiceById: (id: unknown) => DemoData | undefined;
 }
 
 const ContainerGrid = styled(Grid)({
@@ -17,6 +21,16 @@ const ContainerGrid = styled(Grid)({
 });
 
 export default function Admin(props: Props) {
+  const renderWrappedEditor = (credentials: string, serviceId: string) => {
+    const service = props.findServiceById(serviceId);
+    if (service) {
+      return <EditService credentials={credentials} service={service} />;
+    } else {
+      return <Alert severity="error">No service with that ID</Alert>;
+    }
+  };
+
+  const closureCredentials = props.credentials;
   return (
     <ContainerGrid
       container
@@ -24,14 +38,23 @@ export default function Admin(props: Props) {
       justify="center"
       alignItems="center"
     >
-      {props.credentials ? (
+      {closureCredentials ? (
         props.loading ? (
           <Loading />
         ) : (
           <Switch>
             <Route path="/admin/add">
-              <AddService credentials={props.credentials} />
+              <AddService credentials={closureCredentials} />
             </Route>
+            <Route
+              path="/admin/edit/:serviceId"
+              render={routeProps =>
+                renderWrappedEditor(
+                  closureCredentials,
+                  routeProps.match.params.serviceId
+                )
+              }
+            />
             <Redirect to="/" />
           </Switch>
         )

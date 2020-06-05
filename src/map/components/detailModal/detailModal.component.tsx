@@ -21,6 +21,7 @@ import {
 } from '@material-ui/core';
 import WebIcon from '@material-ui/icons/Web';
 import DeleteDialog from './deleteDialog.component';
+import {useHistory} from 'react-router';
 
 interface Props {
   service: DemoData;
@@ -64,6 +65,7 @@ function PaperComponent(props: PaperProps) {
 export default function DetailModal(props: Props) {
   const classes = useStyles();
   const handleClose = props.deleteDetailService;
+  const history = useHistory();
 
   const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false);
   const handleDelete = () => setDeleteDialogOpen(true);
@@ -72,6 +74,10 @@ export default function DetailModal(props: Props) {
     if (didDelete) {
       handleClose();
     }
+  };
+  const handleEdit = () => {
+    history.push(`/admin/edit/${props.service._id}`);
+    handleClose();
   };
 
   return (
@@ -153,6 +159,9 @@ export default function DetailModal(props: Props) {
                 adminCredentials={props.adminCredentials}
                 setContent={props.setContent}
               />
+              <Button className={classes.Red} onClick={handleEdit}>
+                Edit
+              </Button>
             </>
           ) : undefined}
           <Button autoFocus onClick={handleClose} color="primary">
