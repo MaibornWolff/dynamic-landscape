@@ -1,11 +1,11 @@
 import {Box, Typography} from '@material-ui/core';
 import React from 'react';
-import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
+import {createStyles, makeStyles} from '@material-ui/core/styles';
 import {urls} from '../../../shared/externalURL';
 import LinkExternal from '@material-ui/core/Link';
 import {Link} from 'react-router-dom';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     link: {
       textDecoration: 'none',
