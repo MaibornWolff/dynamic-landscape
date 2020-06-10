@@ -100,7 +100,7 @@ const useStyles = makeStyles({
     marginTop: '6px',
   },
   switch: {
-    margin: '0 2px',
+    margin: '0 5px',
   },
 });
 
