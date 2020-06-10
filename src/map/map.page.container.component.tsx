@@ -5,11 +5,11 @@ import {
   getDetailService,
   getFilteredContent,
   getLoadingStatus,
-  getGroupedContent,
-  getCategories,
-  getProviders,
   getZoomFactor,
   getContentSize,
+  getGroupedShowableContent,
+  getShowableProviders,
+  getShowableCategories,
 } from './selectors/map.selector';
 import {
   deleteDetailService,
@@ -25,10 +25,10 @@ const mapStateToProps = (state: State) => ({
   loading: getLoadingStatus(state.Map),
   filteredContent: getFilteredContent(state.Map),
   contentSize: getContentSize(state.Map),
-  groupedContent: getGroupedContent(state.Map),
+  groupedContent: getGroupedShowableContent(state.Map),
   detailService: getDetailService(state.Map),
-  providers: getProviders(state.Map),
-  categories: getCategories(state.Map),
+  providers: getShowableProviders(state.Map),
+  categories: getShowableCategories(state.Map),
   zoomFactor: getZoomFactor(state.Map),
   adminCredentials: getCredentials(state.Admin),
 });
