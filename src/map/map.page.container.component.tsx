@@ -5,30 +5,31 @@ import {
   getDetailService,
   getFilteredContent,
   getLoadingStatus,
-  getGroupedContent,
-  getCategories,
-  getProviders,
   getZoomFactor,
   getContentSize,
+  getGroupedShowableContent,
+  getShowableProviders,
+  getShowableCategories,
 } from './selectors/map.selector';
 import {
   deleteDetailService,
   setContent,
   setDetailService,
 } from './actions/map.actions';
-import MapComponent from './map.page.component';
+import MapComponent, {Props} from './map.page.component';
 
 import {DemoData} from '../assets/data/dataType';
 import {getCredentials} from '../admin/selectors/admin.selector';
+import {withRouter} from 'react-router';
 
 const mapStateToProps = (state: State) => ({
   loading: getLoadingStatus(state.Map),
   filteredContent: getFilteredContent(state.Map),
   contentSize: getContentSize(state.Map),
-  groupedContent: getGroupedContent(state.Map),
+  groupedContent: getGroupedShowableContent(state.Map),
   detailService: getDetailService(state.Map),
-  providers: getProviders(state.Map),
-  categories: getCategories(state.Map),
+  providers: getShowableProviders(state.Map),
+  categories: getShowableCategories(state.Map),
   zoomFactor: getZoomFactor(state.Map),
   adminCredentials: getCredentials(state.Admin),
 });
@@ -39,4 +40,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   deleteDetailService: () => dispatch(deleteDetailService()),
 });
 
-export const Map = connect(mapStateToProps, mapDispatchToProps)(MapComponent);
+export const Map = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter<Props, typeof MapComponent>(MapComponent));

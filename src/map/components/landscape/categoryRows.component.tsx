@@ -73,9 +73,4 @@ function CategoryRows(props: Props) {
   );
 }
 
-export default React.memo(CategoryRows, (prevProps, nextProps) => {
-  return (
-    prevProps.filteredContent === nextProps.filteredContent &&
-    prevProps.zoomFactor === nextProps.zoomFactor
-  );
-});
+export default React.memo(CategoryRows);

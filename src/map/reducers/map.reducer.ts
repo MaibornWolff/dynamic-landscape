@@ -5,6 +5,7 @@ import {
   SETDETAILSERVICE,
   SETFILTER,
   SETZOOMFACTOR,
+  SHOWFILTEREDONLY,
 } from '../actions/map.actions';
 import {DataFilter, DemoData} from '../../assets/data/dataType';
 
@@ -12,6 +13,7 @@ export interface State {
   loading: boolean;
   content: DemoData[];
   filter: DataFilter;
+  showFilteredOnly: boolean;
   detailedService?: DemoData;
   zoomFactor: number;
 }
@@ -25,6 +27,7 @@ const initialState: State = {
     fulltext: [],
     keywords: [],
   },
+  showFilteredOnly: false,
   detailedService: undefined,
   zoomFactor: 1,
 };
@@ -45,6 +48,11 @@ export const Map = (state: State = initialState, action: MapActionTypes) => {
     case SETFILTER:
       return update(state, {
         filter: {$set: action.payload},
+      });
+
+    case SHOWFILTEREDONLY:
+      return update(state, {
+        showFilteredOnly: {$set: action.payload},
       });
 
     case SETZOOMFACTOR:
