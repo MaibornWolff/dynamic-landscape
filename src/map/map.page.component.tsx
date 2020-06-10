@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {match, Redirect} from 'react-router-dom';
+import {Redirect, match, matchPath} from 'react-router-dom';
 
 import {Grid, styled} from '@material-ui/core';
 import {DemoData, Providers} from '../assets/data/dataType';
@@ -83,6 +83,9 @@ export default class MapComponent extends React.Component<Props, State> {
         <FilterBarComponent
           open={this.state.filterBarOpen}
           toggleFilterBar={this.toggleFilterBar}
+          showShowFilteredOnlySwitch={
+            !!matchPath(this.props.location.pathname, '/landscape')
+          }
         />
         <Grid
           container

@@ -3,6 +3,7 @@ import {DemoData, DataFilter} from '../../assets/data/dataType';
 export const SETCONTENT = 'SETCONTENT';
 export const SETFILTER = 'SETFILTER';
 export const SETZOOMFACTOR = 'SETZOOMFACTOR';
+export const SHOWFILTEREDONLY = 'SHOWFILTEREDONLY';
 
 export interface SetContentAction {
   type: typeof SETCONTENT;
@@ -28,6 +29,20 @@ export function setFilter(filter: DataFilter): MapActionTypes {
   };
 }
 
+export interface ShowFilteredOnlyAction {
+  type: typeof SHOWFILTEREDONLY;
+  payload: boolean;
+}
+
+export function setShowFilteredOnly(
+  showFilteredOnly: boolean
+): ShowFilteredOnlyAction {
+  return {
+    type: SHOWFILTEREDONLY,
+    payload: showFilteredOnly,
+  };
+}
+
 export interface SetZoomFactorAction {
   type: typeof SETZOOMFACTOR;
   payload: number;
@@ -43,4 +58,5 @@ export function setZoomFactor(zoomFactor: number): MapActionTypes {
 export type MapActionTypes =
   | SetContentAction
   | SetFilterAction
+  | ShowFilteredOnlyAction
   | SetZoomFactorAction;
