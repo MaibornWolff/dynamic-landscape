@@ -9,6 +9,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Paper, {PaperProps} from '@material-ui/core/Paper';
 import Draggable from 'react-draggable';
 import {Grid, Slide, SlideProps, Typography, Divider} from '@material-ui/core';
+import LinkExternal from '@material-ui/core/Link';
+import {urls} from '../../externalURL';
 
 const Logo = require('./../../../assets/logos/CL_Logo.svg') as string;
 
@@ -106,6 +108,24 @@ export default function InfoModal(props: Props) {
                   MaibornWolff
                 </LinkExternal>{' '}
                 DevOps & Cloud Native team.
+                <Divider className={classes.Divider} />
+                MaibornWolff GmbH <br />
+                Theresienhöhe 13 <br />
+                80339 München <br /> <br />
+                Telefon:{' '}
+                <LinkExternal href="tel:004989544253000">
+                  +49 89 544 253 000
+                </LinkExternal>{' '}
+                <br />
+                E-Mail:{' '}
+                <LinkExternal href="mailto: info@maibornwolff.de">
+                  info@maibornwolff.de
+                </LinkExternal>{' '}
+                <br />
+                Internet:{' '}
+                <LinkExternal href={urls.maibornWolff} target="/blank">
+                  www.maibornwolff.de
+                </LinkExternal>
               </DialogContentText>
             </Grid>
           </Grid>
