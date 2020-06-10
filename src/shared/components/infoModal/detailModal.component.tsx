@@ -101,7 +101,11 @@ export default function InfoModal(props: Props) {
                 toolbox). Press the button between the two toolboxes to reset
                 the zoom.
                 <Divider className={classes.Divider} />
-                Made with ❤️ by the MaibornWolff DevOps & Cloud Native team.
+                Made with ❤️ by the{' '}
+                <LinkExternal href={urls.maibornWolff} target="/blank">
+                  MaibornWolff
+                </LinkExternal>{' '}
+                DevOps & Cloud Native team.
               </DialogContentText>
             </Grid>
           </Grid>
