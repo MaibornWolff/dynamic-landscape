@@ -1,10 +1,21 @@
 import {Box, Typography} from '@material-ui/core';
 import React from 'react';
+import {createStyles, makeStyles} from '@material-ui/core/styles';
 import {urls} from '../../../shared/externalURL';
 import LinkExternal from '@material-ui/core/Link';
 import {Link} from 'react-router-dom';
 
+const useStyles = makeStyles(() =>
+  createStyles({
+    link: {
+      textDecoration: 'none',
+      color: 'inherit',
+    },
+  })
+);
+
 export default function Footer() {
+  const classes = useStyles();
   return (
     <Box display="flex" justifyContent="center" m={1} p={1}>
       <Typography variant="caption" display="block" gutterBottom>
@@ -13,7 +24,7 @@ export default function Footer() {
           Maibornwolff
         </LinkExternal>
         {' − '}
-        <Link to="/admin" target="">
+        <Link to="/admin" target="" className={classes.link}>
           Login
         </Link>
       </Typography>

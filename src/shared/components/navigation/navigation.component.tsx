@@ -32,6 +32,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     logoCard: {
       flexGrow: 0,
+      textDecoration: 'none',
+      color: 'inherit',
     },
     logo: {
       height: 40,
@@ -44,6 +46,8 @@ const useStyles = makeStyles((theme: Theme) =>
       marginLeft: 10,
       fontSize: 'x-large',
       fontWeight: 500,
+      textDecoration: 'none',
+      color: 'inherit',
     },
   })
 );
@@ -54,10 +58,12 @@ export default function NavigationComponent(props: Props) {
     <>
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <div className={classes.logoCard}>
+          <Link to="/" className={classes.logoCard}>
             <img src={Logo} alt="Logo" className={classes.logo} />
-          </div>
-          <span className={classes.appName}>Cloud Landscape</span>
+          </Link>
+          <Link to="/" className={classes.appName}>
+            Cloud Landscape
+          </Link>
           <div className={classes.spacing} />
           <SearchBar />
           <div className={classes.spacing} />
