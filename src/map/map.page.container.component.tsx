@@ -16,10 +16,11 @@ import {
   setContent,
   setDetailService,
 } from './actions/map.actions';
-import MapComponent from './map.page.component';
+import MapComponent, {Props} from './map.page.component';
 
 import {DemoData} from '../assets/data/dataType';
 import {getCredentials} from '../admin/selectors/admin.selector';
+import {withRouter} from 'react-router';
 
 const mapStateToProps = (state: State) => ({
   loading: getLoadingStatus(state.Map),
@@ -39,4 +40,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   deleteDetailService: () => dispatch(deleteDetailService()),
 });
 
-export const Map = connect(mapStateToProps, mapDispatchToProps)(MapComponent);
+export const Map = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter<Props, typeof MapComponent>(MapComponent));

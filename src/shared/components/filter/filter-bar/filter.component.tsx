@@ -34,6 +34,7 @@ export interface Props {
   displayChips?: boolean;
   showFilteredOnly: boolean;
   setShowFilteredOnly: (showFilteredOnly: boolean) => void;
+  showShowFilteredOnlySwitch?: boolean;
 }
 
 const drawerWidth = 240;
@@ -220,18 +221,22 @@ export default function FilterComponentContainer(props: Props) {
         </List>
         <Divider />
 
-        <FormControlLabel
-          control={
-            <Switch
-              checked={props.showFilteredOnly}
-              onChange={handleChangeFilteredOnly}
-              color="primary"
+        {props.showShowFilteredOnlySwitch && (
+          <>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={props.showFilteredOnly}
+                  onChange={handleChangeFilteredOnly}
+                  color="primary"
+                />
+              }
+              label="Matching services only"
+              className={classes.switch}
             />
-          }
-          label="Matching services only"
-          className={classes.switch}
-        />
-        <Divider />
+            <Divider />
+          </>
+        )}
       </Drawer>
       <Paper elevation={3} className={classes.openButton}>
         <Tooltip title={'Open Searchbar'}>
