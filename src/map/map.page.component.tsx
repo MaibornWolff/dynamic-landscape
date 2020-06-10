@@ -13,10 +13,15 @@ import CacheRoute, {CacheSwitch} from 'react-router-cache-route';
 import Footer from './components/footer/footer.component';
 import {FilterBarComponent} from '../shared/components/filter/filter-bar/filter.container.component';
 import {History, Location} from 'history';
+import {
+  parse as parseQueryString,
+  stringify as stringifyQueryString,
+} from 'query-string';
+
+import {ObjectID} from 'mongodb';
 
 export interface Props {
   loading: boolean;
-  detailService: DemoData | undefined;
   filteredContent: DemoData[];
   contentSize: number;
   groupedContent: Map<Providers, Map<string, DemoData[]>>;
@@ -24,10 +29,9 @@ export interface Props {
   categories: string[];
   filterBar: boolean;
   setContent: (object: DemoData[]) => void;
-  setDetailService: (object: DemoData) => void;
-  deleteDetailService: () => void;
   zoomFactor: number;
   adminCredentials?: string;
+  findServiceById: (id: ObjectID | string) => DemoData | undefined;
   location: Location;
   history: History;
   match: match;
@@ -56,7 +60,23 @@ export default class MapComponent extends React.Component<Props, State> {
     });
   };
 
+  setDetailService = (detailService: DemoData) =>
+    this.props.history.replace({
+      ...this.props.location,
+      search: stringifyQueryString({serviceId: detailService._id}),
+    });
+
+  deleteDetailService = () =>
+    this.props.history.replace({...this.props.location, search: undefined});
+
+  findDetailService = () => {
+    const serviceId = parseQueryString(this.props.location.search)
+      .serviceId as string;
+    return serviceId && this.props.findServiceById(serviceId);
+  };
+
   public render() {
+    const detailService = this.findDetailService();
     return (
       <>
         {' '}
@@ -78,10 +98,10 @@ export default class MapComponent extends React.Component<Props, State> {
             transition: 'padding 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',
           }}
         >
-          {this.props.detailService && (
+          {detailService && (
             <DetailModal
-              service={this.props.detailService}
-              deleteDetailService={this.props.deleteDetailService}
+              service={detailService}
+              deleteDetailService={this.deleteDetailService}
               adminCredentials={this.props.adminCredentials}
               setContent={this.props.setContent}
             />
@@ -101,7 +121,7 @@ export default class MapComponent extends React.Component<Props, State> {
                         groupedContent={this.props.groupedContent}
                         providers={this.props.providers}
                         categories={this.props.categories}
-                        setDetailService={this.props.setDetailService}
+                        setDetailService={this.setDetailService}
                         zoomFactor={this.props.zoomFactor}
                       />
                     </CacheRoute>
@@ -109,7 +129,7 @@ export default class MapComponent extends React.Component<Props, State> {
                       <MapTable
                         filteredContent={this.props.filteredContent}
                         contentSize={this.props.contentSize}
-                        setDetailService={this.props.setDetailService}
+                        setDetailService={this.setDetailService}
                       />
                     </CacheRoute>
                     <Redirect to="/landscape" />

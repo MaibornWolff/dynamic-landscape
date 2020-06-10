@@ -8,12 +8,13 @@ import {Redirect, Route, Switch} from 'react-router';
 import EditService from './editservice/editservice.container.component';
 import {DemoData} from '../../assets/data/dataType';
 import {Alert} from '@material-ui/lab';
+import {ObjectID} from 'mongodb';
 
 export interface Props {
   credentials: string | undefined;
   setCredentials: (credentials: string) => void;
   loading: boolean;
-  findServiceById: (id: unknown) => DemoData | undefined;
+  findServiceById: (id: ObjectID | string) => DemoData | undefined;
 }
 
 const ContainerGrid = styled(Grid)({
@@ -21,7 +22,7 @@ const ContainerGrid = styled(Grid)({
 });
 
 export default function Admin(props: Props) {
-  const renderWrappedEditor = (credentials: string, serviceId: string) => {
+  const renderWrappedEditor = (credentials: string, serviceId: ObjectID) => {
     const service = props.findServiceById(serviceId);
     if (service) {
       return <EditService credentials={credentials} service={service} />;

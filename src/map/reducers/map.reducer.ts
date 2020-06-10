@@ -2,7 +2,6 @@ import update from 'immutability-helper';
 import {
   MapActionTypes,
   SETCONTENT,
-  SETDETAILSERVICE,
   SETFILTER,
   SETZOOMFACTOR,
   SHOWFILTEREDONLY,
@@ -14,7 +13,6 @@ export interface State {
   content: DemoData[];
   filter: DataFilter;
   showFilteredOnly: boolean;
-  detailedService?: DemoData;
   zoomFactor: number;
 }
 
@@ -28,7 +26,6 @@ const initialState: State = {
     keywords: [],
   },
   showFilteredOnly: false,
-  detailedService: undefined,
   zoomFactor: 1,
 };
 
@@ -38,11 +35,6 @@ export const Map = (state: State = initialState, action: MapActionTypes) => {
       return update(state, {
         content: {$set: action.payload},
         loading: {$set: false},
-      });
-
-    case SETDETAILSERVICE:
-      return update(state, {
-        detailedService: {$set: action.payload},
       });
 
     case SETFILTER:

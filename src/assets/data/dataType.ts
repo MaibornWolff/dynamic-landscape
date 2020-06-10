@@ -1,3 +1,5 @@
+import {ObjectID} from 'mongodb';
+
 export type DemoDataWithoutId = {
   provider: Providers;
   providerIcon: string;
@@ -7,11 +9,10 @@ export type DemoDataWithoutId = {
   img: string;
   description: string;
   keywords: string[];
-  // [key: string]: any;
 };
 
 export type DemoData = DemoDataWithoutId & {
-  _id: unknown;
+  _id: ObjectID;
 };
 
 export type Providers = string;

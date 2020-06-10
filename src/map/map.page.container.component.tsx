@@ -2,20 +2,16 @@ import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 import {State} from '../reducers';
 import {
-  getDetailService,
   getFilteredContent,
   getLoadingStatus,
   getZoomFactor,
   getContentSize,
+  findServiceById,
   getGroupedShowableContent,
   getShowableProviders,
   getShowableCategories,
 } from './selectors/map.selector';
-import {
-  deleteDetailService,
-  setContent,
-  setDetailService,
-} from './actions/map.actions';
+import {setContent} from './actions/map.actions';
 import MapComponent, {Props} from './map.page.component';
 
 import {DemoData} from '../assets/data/dataType';
@@ -27,17 +23,15 @@ const mapStateToProps = (state: State) => ({
   filteredContent: getFilteredContent(state.Map),
   contentSize: getContentSize(state.Map),
   groupedContent: getGroupedShowableContent(state.Map),
-  detailService: getDetailService(state.Map),
   providers: getShowableProviders(state.Map),
   categories: getShowableCategories(state.Map),
   zoomFactor: getZoomFactor(state.Map),
   adminCredentials: getCredentials(state.Admin),
+  findServiceById: findServiceById(state.Map),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setContent: (content: DemoData[]) => dispatch(setContent(content)),
-  setDetailService: (service: DemoData) => dispatch(setDetailService(service)),
-  deleteDetailService: () => dispatch(deleteDetailService()),
 });
 
 export const Map = connect(

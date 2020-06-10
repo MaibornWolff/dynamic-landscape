@@ -1,4 +1,5 @@
 import {State} from '../reducers/map.reducer';
+import {ObjectID} from 'mongodb';
 import {DataFilter, DemoData, Providers} from '../../assets/data/dataType';
 import {getToFilterValues, serviceFilter} from '../reducers/filterLogic';
 import {createSelector, Selector} from 'reselect';
@@ -82,11 +83,9 @@ export const getShowableCategories = createShowableSwitchingSelector(
 
 export const findServiceById = createSelector(
   getContent,
-  content => (id: unknown) => content.find(service => service._id === id)
+  content => (id: ObjectID | string) =>
+    content.find(service => service._id.toString() === id.toString())
 );
-
-export const getDetailService = (state: State): DemoData | undefined =>
-  state.detailedService;
 
 export const getZoomFactor = (state: State): number => state.zoomFactor;
 
