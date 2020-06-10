@@ -16,6 +16,10 @@ export const getFilteredContent = createSelector(
   getContent,
   (filter, content) => serviceFilter(content, filter)
 );
+
+export const getShowFilteredOnly = (state: State): boolean =>
+  state.showFilteredOnly;
+
 export const getContentSize = createSelector(
   getContent,
   (content: DemoData[]): number => content.length
