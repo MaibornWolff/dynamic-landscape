@@ -88,7 +88,7 @@ export default function NavigationComponent(props: Props) {
             </Link>
           )}
           <IconButton onClick={handleInfoOpen} className={classes.button}>
-            <InfoTwoTone className={classes.button} />
+            <InfoTwoTone className={classes.button} style={{fontSize: 30}} />
             <InfoModal open={infoOpen} handleClose={handleInfoOpen} />
           </IconButton>
           {/* for later IDEAS: <IconButton onClick={handleInfoOpen} className={classes.button}>
