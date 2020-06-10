@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Redirect} from 'react-router-dom';
+import {Redirect, match, matchPath} from 'react-router-dom';
 
 import {Grid, styled} from '@material-ui/core';
 import {DemoData, Providers} from '../assets/data/dataType';
@@ -12,6 +12,7 @@ import Header from './components/header/header.container.component';
 import CacheRoute, {CacheSwitch} from 'react-router-cache-route';
 import Footer from './components/footer/footer.component';
 import {FilterBarComponent} from '../shared/components/filter/filter-bar/filter.container.component';
+import {History, Location} from 'history';
 
 export interface Props {
   loading: boolean;
@@ -27,6 +28,9 @@ export interface Props {
   deleteDetailService: () => void;
   zoomFactor: number;
   adminCredentials?: string;
+  location: Location;
+  history: History;
+  match: match;
 }
 interface State {
   filterBarOpen: boolean;
@@ -59,6 +63,9 @@ export default class MapComponent extends React.Component<Props, State> {
         <FilterBarComponent
           open={this.state.filterBarOpen}
           toggleFilterBar={this.toggleFilterBar}
+          showShowFilteredOnlySwitch={
+            !!matchPath(this.props.location.pathname, '/landscape')
+          }
         />
         <Grid
           container

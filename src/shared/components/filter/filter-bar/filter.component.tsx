@@ -10,6 +10,7 @@ import {
   ListItem,
   List,
   Paper,
+  Switch,
 } from '@material-ui/core';
 import {
   DataFilter,
@@ -31,6 +32,9 @@ export interface Props {
   toggleFilterBar: () => void;
   open: boolean;
   displayChips?: boolean;
+  showFilteredOnly: boolean;
+  setShowFilteredOnly: (showFilteredOnly: boolean) => void;
+  showShowFilteredOnlySwitch?: boolean;
 }
 
 const drawerWidth = 240;
@@ -95,6 +99,9 @@ const useStyles = makeStyles({
     left: '-5px',
     marginTop: '6px',
   },
+  switch: {
+    margin: '10px 5px',
+  },
 });
 
 export default function FilterComponentContainer(props: Props) {
@@ -118,6 +125,10 @@ export default function FilterComponentContainer(props: Props) {
       });
     }
   };
+
+  const handleChangeFilteredOnly = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => props.setShowFilteredOnly(event.target.checked);
 
   return (
     <>
@@ -209,6 +220,23 @@ export default function FilterComponentContainer(props: Props) {
             })}
         </List>
         <Divider />
+
+        {props.showShowFilteredOnlySwitch && (
+          <>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={props.showFilteredOnly}
+                  onChange={handleChangeFilteredOnly}
+                  color="primary"
+                />
+              }
+              label="Matching services only"
+              className={classes.switch}
+            />
+            <Divider />
+          </>
+        )}
       </Drawer>
       <Paper elevation={3} className={classes.openButton}>
         <Tooltip title={'Open Searchbar'}>
