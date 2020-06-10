@@ -1,4 +1,5 @@
 import {State} from '../reducers/map.reducer';
+import {ObjectID} from 'mongodb';
 import {DataFilter, DemoData, Providers} from '../../assets/data/dataType';
 import {getToFilterValues, serviceFilter} from '../reducers/filterLogic';
 import {createSelector} from 'reselect';
@@ -42,7 +43,7 @@ export const getKeywords = createSelector(
 
 export const findServiceById = createSelector(
   getContent,
-  content => (id: unknown) => content.find(service => service._id === id)
+  content => (id: ObjectID) => content.find(service => service._id === id)
 );
 
 export const getZoomFactor = (state: State): number => state.zoomFactor;

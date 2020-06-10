@@ -18,6 +18,8 @@ import {
   stringify as stringifyQueryString,
 } from 'query-string';
 
+import {ObjectID} from 'mongodb';
+
 export interface Props {
   loading: boolean;
   filteredContent: DemoData[];
@@ -29,7 +31,7 @@ export interface Props {
   setContent: (object: DemoData[]) => void;
   zoomFactor: number;
   adminCredentials?: string;
-  findServiceById: (id: unknown) => DemoData | undefined;
+  findServiceById: (id: ObjectID) => DemoData | undefined;
   location: Location;
   history: History;
   match: match;
@@ -68,8 +70,9 @@ export default class MapComponent extends React.Component<Props, State> {
     this.props.history.replace({...this.props.location, search: undefined});
 
   findDetailService = () => {
-    const serviceId = parseQueryString(this.props.location.search).serviceId;
-    return serviceId && this.props.findServiceById(serviceId);
+    const serviceId = parseQueryString(this.props.location.search)
+      .serviceId as string;
+    return serviceId && this.props.findServiceById(serviceId as ObjectID);
   };
 
   public render() {
