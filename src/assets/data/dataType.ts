@@ -9,7 +9,6 @@ export type DemoDataWithoutId = {
   img: string;
   description: string;
   keywords: string[];
-  // [key: string]: any;
 };
 
 export type DemoData = DemoDataWithoutId & {

@@ -43,7 +43,8 @@ export const getKeywords = createSelector(
 
 export const findServiceById = createSelector(
   getContent,
-  content => (id: ObjectID) => content.find(service => service._id === id)
+  content => (id: ObjectID) =>
+    content.find(service => service._id.toString() === id.toString())
 );
 
 export const getZoomFactor = (state: State): number => state.zoomFactor;

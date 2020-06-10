@@ -71,7 +71,7 @@ export default class MapComponent extends React.Component<Props, State> {
 
   findDetailService = () => {
     const serviceId = parseQueryString(this.props.location.search)
-      .serviceId as string;
+      .serviceId as unknown;
     return serviceId && this.props.findServiceById(serviceId as ObjectID);
   };
 
