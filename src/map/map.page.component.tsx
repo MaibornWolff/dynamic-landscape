@@ -31,7 +31,7 @@ export interface Props {
   setContent: (object: DemoData[]) => void;
   zoomFactor: number;
   adminCredentials?: string;
-  findServiceById: (id: ObjectID) => DemoData | undefined;
+  findServiceById: (id: ObjectID | string) => DemoData | undefined;
   location: Location;
   history: History;
   match: match;
@@ -71,8 +71,8 @@ export default class MapComponent extends React.Component<Props, State> {
 
   findDetailService = () => {
     const serviceId = parseQueryString(this.props.location.search)
-      .serviceId as unknown;
-    return serviceId && this.props.findServiceById(serviceId as ObjectID);
+      .serviceId as string;
+    return serviceId && this.props.findServiceById(serviceId);
   };
 
   public render() {

@@ -14,7 +14,7 @@ export interface Props {
   credentials: string | undefined;
   setCredentials: (credentials: string) => void;
   loading: boolean;
-  findServiceById: (id: ObjectID) => DemoData | undefined;
+  findServiceById: (id: ObjectID | string) => DemoData | undefined;
 }
 
 const ContainerGrid = styled(Grid)({

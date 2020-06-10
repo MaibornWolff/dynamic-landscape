@@ -83,7 +83,7 @@ export const getShowableCategories = createShowableSwitchingSelector(
 
 export const findServiceById = createSelector(
   getContent,
-  content => (id: ObjectID) =>
+  content => (id: ObjectID | string) =>
     content.find(service => service._id.toString() === id.toString())
 );
 
