@@ -15,7 +15,7 @@ export default function ImageInput(props: Props) {
   const handleSave = (files: any) => {
     setFile(files);
     setOpen(false);
-    console.log(files);
+    console.log(file);
     alert(files[0].name + ' saved.');
   };
 
