@@ -27,6 +27,7 @@
     "history": "^4.10.1",
     "immutability-helper": "^3.0.2",
     "lodash": "^4.17.15",
+    "material-ui-dropzone": "^3.2.1",
     "mongodb-stitch-browser-sdk": "^4.8.0",
     "query-string": "^6.12.1",
     "react": "^16.13.1",

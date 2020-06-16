@@ -10,7 +10,7 @@ import {
 } from '../../map/selectors/map.selector';
 
 const mapStateToProps = (state: State) => ({
-  credentials: getCredentials(state.Admin),
+  credentials: getCredentials(state.Admin) || 'ddd',
   loading: getLoadingStatus(state.Map),
   findServiceById: findServiceById(state.Map),
 });

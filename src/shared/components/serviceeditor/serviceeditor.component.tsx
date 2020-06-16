@@ -2,6 +2,7 @@ import React from 'react';
 import {DemoData, DemoDataWithoutId} from '../../../assets/data/dataType';
 import {Grid, TextField} from '@material-ui/core';
 import {Autocomplete} from '@material-ui/lab';
+import ImageInput from './imageinput.component';
 
 export interface Props<ServiceType extends DemoDataWithoutId | DemoData> {
   service: ServiceType;
@@ -60,6 +61,9 @@ export default function ServiceEditor<
 
   return (
     <Grid container direction="column" alignContent="stretch" spacing={1}>
+      <Grid item xs={12}>
+        <ImageInput />
+      </Grid>
       <Grid item xs={12}>
         <TextField
           label="Name"
