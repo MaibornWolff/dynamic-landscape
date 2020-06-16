@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {IconButton, Tooltip} from '@material-ui/core';
 import {DemoData} from '../../../assets/data/dataType';
 import styled from 'styled-components';
-import LazyLoad from 'react-lazyload';
+import ServiceIcon from '../../../shared/components/serviceIcon/serviceIcon.component';
 
 interface Props {
   service: DemoData;
@@ -13,13 +13,6 @@ interface Props {
 }
 
 const ServiceIconButton = styled(IconButton)({padding: 3});
-const ServiceIcon = styled.img<{filtered: boolean; zoomFactor: number}>(
-  props => ({
-    height: 25 * props.zoomFactor,
-    width: 25 * props.zoomFactor,
-    opacity: props.filtered ? 0.15 : 1,
-  })
-);
 
 function ServiceButton(props: Props) {
   const buttonRef = React.createRef<HTMLButtonElement>();
@@ -42,14 +35,16 @@ function ServiceButton(props: Props) {
         onClick={setDetailService}
         ref={buttonRef}
       >
-        <LazyLoad height={25}>
-          <ServiceIcon
-            src={props.service.img}
-            alt={props.service.service}
-            filtered={props.isFiltered}
-            zoomFactor={props.zoomFactor}
-          />
-        </LazyLoad>
+        <ServiceIcon
+          src={props.service.img}
+          alt={props.service.service}
+          height={25 * props.zoomFactor}
+          style={{
+            height: 25 * props.zoomFactor,
+            width: 25 * props.zoomFactor,
+            opacity: props.isFiltered ? 0.15 : 1,
+          }}
+        />
       </ServiceIconButton>
     </Tooltip>
   );

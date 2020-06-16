@@ -75,7 +75,7 @@ export default function ServiceEditor<
       <Grid item md={8}>
         <h2>{props.title}</h2>
       </Grid>
-      <Grid item md={4} alignItems="center" justify="center">
+      <Grid item md={4}>
         <ImageInput />
       </Grid>
       <Grid item xs={12}>
