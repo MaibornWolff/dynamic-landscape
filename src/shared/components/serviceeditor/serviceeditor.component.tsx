@@ -4,6 +4,12 @@ import {Grid, TextField} from '@material-ui/core';
 import {Autocomplete} from '@material-ui/lab';
 import ImageSelect from './imageSelect.component';
 
+const defaultIcons = new Map([
+  ['Amazon', './img/logos/AWS/General/AWS_Simple_Icons_AWS_Cloud.svg'],
+  ['Google', './img/logos/Google/Extras/Google Cloud Platform.svg'],
+  ['Microsoft', './img/logos/Microsoft/CnE_Cloud/SVG/Azure_logo_icon_50.svg'],
+]);
+
 export interface Props<ServiceType extends DemoDataWithoutId | DemoData> {
   service: ServiceType;
   serviceChanged: (service: ServiceType) => void;
@@ -42,7 +48,12 @@ export default function ServiceEditor<
   const handleProviderChange = (
     event: React.ChangeEvent<{}>,
     value: string | null
-  ) => handleServiceChange({provider: value || ''});
+  ) =>
+    handleServiceChange({
+      provider: value || '',
+      img: (value && defaultIcons.get(value)) || '',
+      providerIcon: (value && defaultIcons.get(value)) || '',
+    });
 
   const handleKeywordsChange = (
     event: React.ChangeEvent<{}>,
