@@ -51,6 +51,21 @@ export async function checkAdminCredentials(credentials: string) {
     });
 }
 
+export async function uploadImage(
+  credentials: string,
+  path: string,
+  image: ArrayBuffer
+) {
+  return await client.auth
+    .loginWithCredential(new UserApiKeyCredential(credentials))
+    .then(() => {
+      client.callFunction('uploadImg', [path, image]);
+    })
+    .catch((err: Error) => {
+      console.log(err);
+    });
+}
+
 export async function addNewService(
   credentials: string,
   service: DemoDataWithoutId
