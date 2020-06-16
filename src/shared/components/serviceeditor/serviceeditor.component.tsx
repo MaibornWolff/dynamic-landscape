@@ -2,6 +2,7 @@ import React from 'react';
 import {DemoData, DemoDataWithoutId} from '../../../assets/data/dataType';
 import {Grid, TextField} from '@material-ui/core';
 import {Autocomplete} from '@material-ui/lab';
+import ImageInput from './imageinput.component';
 import ImageSelect from './imageSelect.component';
 
 const defaultIcons = new Map([
@@ -11,6 +12,7 @@ const defaultIcons = new Map([
 ]);
 
 export interface Props<ServiceType extends DemoDataWithoutId | DemoData> {
+  title: string;
   service: ServiceType;
   serviceChanged: (service: ServiceType) => void;
   categories: string[];
@@ -69,7 +71,13 @@ export default function ServiceEditor<
     handleServiceChange({providerIcon});
 
   return (
-    <Grid container direction="column" alignContent="stretch" spacing={1}>
+    <Grid container alignContent="stretch" spacing={1}>
+      <Grid item md={8}>
+        <h2>{props.title}</h2>
+      </Grid>
+      <Grid item md={4} alignItems="center" justify="center">
+        <ImageInput />
+      </Grid>
       <Grid item xs={12}>
         <TextField
           label="Name"
