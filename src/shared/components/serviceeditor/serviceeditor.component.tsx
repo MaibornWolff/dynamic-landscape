@@ -5,6 +5,7 @@ import {Autocomplete} from '@material-ui/lab';
 import ImageInput from './imageinput.component';
 
 export interface Props<ServiceType extends DemoDataWithoutId | DemoData> {
+  title: string;
   service: ServiceType;
   serviceChanged: (service: ServiceType) => void;
   categories: string[];
@@ -60,8 +61,11 @@ export default function ServiceEditor<
   ) => handleServiceChange({providerIcon: event.target.value});
 
   return (
-    <Grid container direction="column" alignContent="stretch" spacing={1}>
-      <Grid item xs={12}>
+    <Grid container alignContent="stretch" spacing={1}>
+      <Grid item md={8}>
+        <h2>{props.title}</h2>
+      </Grid>
+      <Grid item md={4} alignItems="center" justify="center">
         <ImageInput />
       </Grid>
       <Grid item xs={12}>

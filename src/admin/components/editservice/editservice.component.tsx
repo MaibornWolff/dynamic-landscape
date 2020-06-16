@@ -44,8 +44,8 @@ export default function EditService(props: Props) {
   return (
     <Grid item xs={11} sm={10} md={9}>
       <Container>
-        <h2>Edit service</h2>
         <ServiceEditor
+          title="Edit service"
           service={service}
           serviceChanged={setService}
           categories={props.categories}

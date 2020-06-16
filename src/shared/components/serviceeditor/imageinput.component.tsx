@@ -24,8 +24,15 @@ export default function ImageInput(props: Props) {
   };
 
   return (
-    <div>
-      <Button onClick={handleOpen}>Upload new Icons</Button>
+    <>
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={handleOpen}
+        style={{marginTop: 30, float: 'right'}}
+      >
+        Upload new Icons
+      </Button>
       <DropzoneDialog
         open={open}
         onSave={handleSave}
@@ -36,6 +43,6 @@ export default function ImageInput(props: Props) {
         dialogTitle="Upload Icon to S3 Bucket"
         submitButtonText="S3 upload"
       />
-    </div>
+    </>
   );
 }

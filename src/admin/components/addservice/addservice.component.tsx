@@ -67,8 +67,8 @@ export default function AddService(props: Props) {
   return (
     <Grid item xs={11} sm={10} md={9}>
       <Container>
-        <h2>Add a new service</h2>
         <ServiceEditor
+          title="Add a new service"
           service={service}
           serviceChanged={setService}
           categories={props.categories}
