@@ -30,7 +30,7 @@ const views: Array<{name: string; path: string; icon: SvgIconComponent}> = [
 const useStyles = makeStyles(() =>
   createStyles({
     button: {
-      //color: '#ffffff',
+      // color: '#ffffff',
     },
     buttonDisabled: {
       color: '#048488 !important',

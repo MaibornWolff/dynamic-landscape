@@ -2,9 +2,7 @@ import React from 'react';
 import {DropzoneDialog} from 'material-ui-dropzone';
 import Button from '@material-ui/core/Button';
 
-interface Props {}
-
-export default function ImageInput(props: Props) {
+export default function ImageInput() {
   const [open, setOpen] = React.useState(false);
   const [file, setFile] = React.useState('NULL');
 
