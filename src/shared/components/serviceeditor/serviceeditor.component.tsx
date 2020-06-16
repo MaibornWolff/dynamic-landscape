@@ -3,6 +3,13 @@ import {DemoData, DemoDataWithoutId} from '../../../assets/data/dataType';
 import {Grid, TextField} from '@material-ui/core';
 import {Autocomplete} from '@material-ui/lab';
 import ImageInput from './imageinput.component';
+import ImageSelect from './imageSelect.component';
+
+const defaultIcons = new Map([
+  ['Amazon', './img/logos/AWS/General/AWS_Simple_Icons_AWS_Cloud.svg'],
+  ['Google', './img/logos/Google/Extras/Google Cloud Platform.svg'],
+  ['Microsoft', './img/logos/Microsoft/CnE_Cloud/SVG/Azure_logo_icon_50.svg'],
+]);
 
 export interface Props<ServiceType extends DemoDataWithoutId | DemoData> {
   title: string;
@@ -43,7 +50,12 @@ export default function ServiceEditor<
   const handleProviderChange = (
     event: React.ChangeEvent<{}>,
     value: string | null
-  ) => handleServiceChange({provider: value || ''});
+  ) =>
+    handleServiceChange({
+      provider: value || '',
+      img: (value && defaultIcons.get(value)) || '',
+      providerIcon: (value && defaultIcons.get(value)) || '',
+    });
 
   const handleKeywordsChange = (
     event: React.ChangeEvent<{}>,
@@ -53,12 +65,10 @@ export default function ServiceEditor<
   const handleWeblinkChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     handleServiceChange({webLink: event.target.value});
 
-  const handleImgChange = (event: React.ChangeEvent<HTMLInputElement>) =>
-    handleServiceChange({img: event.target.value});
+  const handleImgChange = (img: string) => handleServiceChange({img});
 
-  const handleProviderIconChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => handleServiceChange({providerIcon: event.target.value});
+  const handleProviderIconChange = (providerIcon: string) =>
+    handleServiceChange({providerIcon});
 
   return (
     <Grid container alignContent="stretch" spacing={1}>
@@ -145,21 +155,25 @@ export default function ServiceEditor<
         />
       </Grid>
       <Grid item xs={12}>
-        <TextField
-          label="Icon"
-          value={props.service.img}
-          onChange={handleImgChange}
-          disabled={props.disabled}
-          fullWidth
+        <ImageSelect
+          textFieldProps={{
+            label: 'Icon',
+            disabled: props.disabled,
+            fullWidth: true,
+          }}
+          imagePath={props.service.img}
+          onImagePathChanged={handleImgChange}
         />
       </Grid>
       <Grid item xs={12}>
-        <TextField
-          label="Provider icon"
-          value={props.service.providerIcon}
-          onChange={handleProviderIconChange}
-          disabled={props.disabled}
-          fullWidth
+        <ImageSelect
+          textFieldProps={{
+            label: 'Provider icon',
+            disabled: props.disabled,
+            fullWidth: true,
+          }}
+          imagePath={props.service.providerIcon}
+          onImagePathChanged={handleProviderIconChange}
         />
       </Grid>
     </Grid>
