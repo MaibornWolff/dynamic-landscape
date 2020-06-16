@@ -22,6 +22,7 @@ import {
 import WebIcon from '@material-ui/icons/Web';
 import DeleteDialog from './deleteDialog.component';
 import {useHistory} from 'react-router';
+import ServiceIcon from '../../../shared/components/serviceIcon/serviceIcon.component';
 
 interface Props {
   service: DemoData;
@@ -100,7 +101,7 @@ export default function DetailModal(props: Props) {
             alignItems="center"
           >
             <Grid item>
-              <img
+              <ServiceIcon
                 src={props.service.img}
                 alt="Service Icon"
                 className={classes.icon}

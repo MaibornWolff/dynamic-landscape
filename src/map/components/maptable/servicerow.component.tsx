@@ -4,7 +4,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import {Link} from '@material-ui/core';
 import {DemoData} from '../../../assets/data/dataType';
-import LazyLoad from 'react-lazyload';
+import ServiceIcon from '../../../shared/components/serviceIcon/serviceIcon.component';
 
 interface Props {
   service: DemoData;
@@ -34,13 +34,11 @@ function ServiceRow(props: Props) {
   return (
     <TableRow hover onClick={setDetailService} className={classes.tableRow}>
       <TableCell>
-        <LazyLoad height={30}>
-          <img
-            src={props.service.img}
-            alt={props.service.service}
-            className={classes.tableIcon}
-          />
-        </LazyLoad>
+        <ServiceIcon
+          src={props.service.img}
+          alt={props.service.service}
+          className={classes.tableIcon}
+        />
       </TableCell>
       <TableCell>{props.service.service}</TableCell>
       <TableCell component="th" scope="row">
