@@ -77,7 +77,6 @@ export default function DetailModal(props: Props) {
   };
   const handleEdit = () => {
     history.push(`/admin/edit/${props.service._id}`);
-    handleClose();
   };
 
   return (

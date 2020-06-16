@@ -32,7 +32,7 @@ export function serviceFilter(
     return services;
   }
 
-  //filter provider
+  // filter provider
   if (Array.isArray(filterSet.provider) && filterSet.provider.length) {
     filtered = true;
     services = services.filter((s: DemoData) =>
@@ -50,9 +50,7 @@ export function serviceFilter(
     ) {
       filtered = true;
       services = services.filter((s: DemoData) => {
-        const serviceValues = s[filter as DataFilter_only_arrays] as Array<
-          string
-        >;
+        const serviceValues = s[filter as DataFilter_only_arrays] as string[];
         const filterValues = filterSet[
           filter as keyof typeof filterSet
         ] as string[];
@@ -64,23 +62,22 @@ export function serviceFilter(
 
   if (filterSet.fulltext.length) {
     filtered = true;
-    console.log('fulltext');
     services = services.filter((service: DemoData) => {
-      for (let i = 0; i < filterSet.fulltext.length; i++) {
+      for (const fulltext of filterSet.fulltext) {
         for (const property in service) {
-          const content = service[property as keyof DemoData];
-          if (
-            typeof content === 'string' &&
-            content.includes(filterSet.fulltext[i])
-          ) {
-            console.log('accept');
-            return true;
+          if (service[property as keyof DemoData]) {
+            const content = service[property as keyof DemoData];
+            if (
+              typeof content === 'string' &&
+              content.toLowerCase().includes(fulltext.toLowerCase())
+            ) {
+              return true;
+            }
           }
         }
       }
       return false;
     });
   }
-  console.log(services);
   return filtered ? services : [];
 }
