@@ -78,7 +78,10 @@ export default function NavigationComponent(props: Props) {
             Cloud Landscape
           </Link>
           <div className={classes.spacing} />
-          <SearchBar />
+          <div style={{width: '40%'}}>
+            <SearchBar />
+          </div>
+
           <div className={classes.spacing} />
           {props.adminCredentials && (
             <Link to="/admin/add">

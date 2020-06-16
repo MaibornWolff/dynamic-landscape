@@ -21,7 +21,8 @@ import {
 import {SearchBar} from '../SearchBar/SearchBar.container.component';
 import {IconButton, Tooltip} from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import SearchIcon from '@material-ui/icons/Search';
+
+import FilterListSharpIcon from '@material-ui/icons/FilterListSharp';
 
 const Logo = require('./../../../../assets/logos/CL_Logo.svg') as string;
 
@@ -231,7 +232,7 @@ export default function FilterComponentContainer(props: Props) {
                   color="primary"
                 />
               }
-              label="Matching services only"
+              label="Show only filtered"
               className={classes.switch}
             />
             <Divider />
@@ -241,7 +242,7 @@ export default function FilterComponentContainer(props: Props) {
       <Paper elevation={3} className={classes.openButton}>
         <Tooltip title={'Open Searchbar'}>
           <IconButton onClick={props.toggleFilterBar}>
-            <SearchIcon />
+            <FilterListSharpIcon />
           </IconButton>
         </Tooltip>
       </Paper>
