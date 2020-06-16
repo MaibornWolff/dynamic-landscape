@@ -7,6 +7,7 @@ import fetchAllServices, {
   updateService,
 } from '../../../shared/mongodbConnection';
 import {useHistory} from 'react-router-dom';
+import ImageInput from '../../../shared/components/serviceeditor/imageinput.component';
 
 export interface Props {
   categories: string[];
@@ -44,6 +45,7 @@ export default function EditService(props: Props) {
   return (
     <Grid item xs={11} sm={10} md={9}>
       <Container>
+        <ImageInput credentials={props.credentials} />
         <ServiceEditor
           title="Edit service"
           service={service}
