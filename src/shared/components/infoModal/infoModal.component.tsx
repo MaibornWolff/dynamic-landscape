@@ -102,13 +102,21 @@ export default function InfoModal(props: Props) {
                 either zoom everything (left toolbox) or only the text (right
                 toolbox). Press the button between the two toolboxes to reset
                 the zoom.
-                <Divider className={classes.Divider} />
-                Made with ❤️ by the{' '}
+              </DialogContentText>
+              <Divider className={classes.Divider} />
+              <DialogContentText>
+                Made with{' '}
+                <span role="img" aria-label="Love">
+                  ❤️{' '}
+                </span>
+                by the{' '}
                 <LinkExternal href={urls.maibornWolff} target="/blank">
                   MaibornWolff
                 </LinkExternal>{' '}
                 DevOps & Cloud Native team.
-                <Divider className={classes.Divider} />
+              </DialogContentText>
+              <Divider className={classes.Divider} />
+              <DialogContentText>
                 MaibornWolff GmbH <br />
                 Theresienhöhe 13 <br />
                 80339 München <br /> <br />

@@ -14,7 +14,7 @@ import LinkExternal from '@material-ui/core/Link';
 import {urls} from '../../externalURL';
 import {SearchBar} from '../filter/SearchBar/SearchBar.container.component';
 import {Link} from 'react-router-dom';
-import InfoModal from './../infoModal/detailModal.component';
+import InfoModal from './../infoModal/infoModal.component';
 
 const Logo = require('./../../../assets/logos/CL_Logo.svg') as string;
 interface Props {
