@@ -38,6 +38,7 @@ const useStyles = makeStyles(theme => ({
   },
   inputRoot: {
     color: 'inherit',
+    width: '100%',
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
@@ -45,9 +46,6 @@ const useStyles = makeStyles(theme => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
     width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
-    },
   },
 }));
 
@@ -75,7 +73,7 @@ export default function SearchBarComponentContainer(props: Props) {
         <SearchIcon />
       </div>
       <InputBase
-        placeholder="Search…"
+        placeholder="Search… (e.g. API Gateway)"
         classes={{
           root: classes.inputRoot,
           input: classes.inputInput,
