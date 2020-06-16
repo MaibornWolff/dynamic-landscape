@@ -50,14 +50,6 @@ export default function ImageSelect(props: Props) {
   const shownImgPath = convertToShownImgPath(props.imagePath);
   return (
     <Grid container>
-      <Grid item xs={11}>
-        <TextField
-          value={shownImgPath}
-          onChange={handleImgPathChange}
-          fullWidth
-          {...props.textFieldProps}
-        />
-      </Grid>
       <Grid item xs={1}>
         {imgNotFound ? (
           <span className={classes.notFound}>Not found!</span>
@@ -73,6 +65,14 @@ export default function ImageSelect(props: Props) {
             className={classes.icon}
           />
         )}
+      </Grid>
+      <Grid item xs={11}>
+        <TextField
+          value={shownImgPath}
+          onChange={handleImgPathChange}
+          fullWidth
+          {...props.textFieldProps}
+        />
       </Grid>
     </Grid>
   );
