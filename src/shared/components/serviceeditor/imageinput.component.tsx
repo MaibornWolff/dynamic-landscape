@@ -41,7 +41,6 @@ export default function ImageInput(props: Props) {
       <DropzoneDialog
         open={open}
         onSave={handleSave}
-        // acceptedFiles={['image/jpeg', 'image/png', 'image/bmp', 'image/svg']}
         showPreviews={true}
         maxFileSize={5000000}
         onClose={handleClose}
