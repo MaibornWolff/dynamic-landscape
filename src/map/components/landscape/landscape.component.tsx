@@ -33,6 +33,10 @@ const useStyles = makeStyles((theme: Theme) =>
       color: 'white',
       margin: 0,
     },
+    emptytable: {
+      margin: 0,
+      textAlign: 'center',
+    },
     headerContentSize: {
       color: 'white',
       margin: 0,
@@ -86,7 +90,15 @@ export default function Landscape(props: Props) {
           />
         ) : (
           <TableRow>
-            <TableCell>Empty</TableCell>
+            <TableCell colSpan={providers.length + 1}>
+              <Typography
+                variant="h6"
+                gutterBottom
+                className={classes.emptytable}
+              >
+                No Services found.
+              </Typography>
+            </TableCell>
           </TableRow>
         )}
       </TableBody>

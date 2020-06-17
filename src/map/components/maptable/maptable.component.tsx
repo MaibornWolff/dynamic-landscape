@@ -34,6 +34,10 @@ const useStyles = makeStyles((theme: Theme) =>
       color: 'white',
       margin: 0,
     },
+    emptytable: {
+      margin: 0,
+      textAlign: 'center',
+    },
     headerContentSize: {
       color: 'white',
       margin: 0,
@@ -53,9 +57,6 @@ export default function MapTable(props: Props) {
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
-
-  const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
@@ -137,16 +138,15 @@ export default function MapTable(props: Props) {
         ))}
         {!rows.length && (
           <TableRow>
-            <TableCell>Empty</TableCell>
-          </TableRow>
-        )}
-        {emptyRows > 0 && (
-          <TableRow
-            style={{
-              height: 49 * (!rows.length ? emptyRows : emptyRows - 1),
-            }}
-          >
-            <TableCell colSpan={6} />
+            <TableCell colSpan={5}>
+              <Typography
+                variant="h6"
+                gutterBottom
+                className={classes.emptytable}
+              >
+                No Services found.
+              </Typography>
+            </TableCell>
           </TableRow>
         )}
       </TableBody>
