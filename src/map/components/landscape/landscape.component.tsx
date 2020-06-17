@@ -23,10 +23,12 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     table: {
       minWidth: 100,
+      tableLayout: 'fixed',
     },
     header: {
       backgroundColor: theme.palette.primary.main,
     },
+    firstRow: {width: '15%'},
     headerTitle: {
       color: 'white',
       margin: 0,
@@ -48,7 +50,7 @@ export default function Landscape(props: Props) {
     <Table className={classes.table} size="small">
       <TableHead className={classes.header}>
         <TableRow>
-          <TableCell>
+          <TableCell className={classes.firstRow}>
             {props.filteredContent.length !== props.contentSize && (
               <Typography
                 variant="subtitle1"

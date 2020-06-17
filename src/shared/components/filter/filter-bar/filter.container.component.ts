@@ -4,6 +4,7 @@ import FilterComponentContainer from './filter.component';
 import {
   setFilter,
   setShowFilteredOnly,
+  resetFilter,
 } from '../../../../map/actions/map.actions';
 import {
   getFilter,
@@ -23,6 +24,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setFilter: (filter: DataFilter) => dispatch(setFilter(filter)),
   setShowFilteredOnly: (showFilteredOnly: boolean) =>
     dispatch(setShowFilteredOnly(showFilteredOnly)),
+  resetFilter: () => dispatch(resetFilter()),
 });
 
 export const FilterBarComponent = connect(

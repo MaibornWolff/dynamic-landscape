@@ -52,7 +52,7 @@ export default function MapTable(props: Props) {
   };
 
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(9);
+  const [rowsPerPage, setRowsPerPage] = React.useState(25);
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);

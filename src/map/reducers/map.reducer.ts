@@ -5,6 +5,7 @@ import {
   SETFILTER,
   SETZOOMFACTOR,
   SHOWFILTEREDONLY,
+  RESETFILTER,
 } from '../actions/map.actions';
 import {DataFilter, DemoData} from '../../assets/data/dataType';
 
@@ -40,6 +41,11 @@ export const Map = (state: State = initialState, action: MapActionTypes) => {
     case SETFILTER:
       return update(state, {
         filter: {$set: action.payload},
+      });
+
+    case RESETFILTER:
+      return update(state, {
+        filter: {$set: initialState.filter},
       });
 
     case SHOWFILTEREDONLY:
