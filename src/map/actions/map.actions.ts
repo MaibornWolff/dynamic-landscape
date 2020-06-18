@@ -2,6 +2,7 @@ import {DemoData, DataFilter} from '../../assets/data/dataType';
 
 export const SETCONTENT = 'SETCONTENT';
 export const SETFILTER = 'SETFILTER';
+export const RESETFILTER = 'RESETFILTER';
 export const SETZOOMFACTOR = 'SETZOOMFACTOR';
 export const SHOWFILTEREDONLY = 'SHOWFILTEREDONLY';
 
@@ -26,6 +27,16 @@ export function setFilter(filter: DataFilter): MapActionTypes {
   return {
     type: SETFILTER,
     payload: filter,
+  };
+}
+
+export interface ResetFilterAction {
+  type: typeof RESETFILTER;
+}
+
+export function resetFilter(): MapActionTypes {
+  return {
+    type: RESETFILTER,
   };
 }
 
@@ -59,4 +70,5 @@ export type MapActionTypes =
   | SetContentAction
   | SetFilterAction
   | ShowFilteredOnlyAction
-  | SetZoomFactorAction;
+  | SetZoomFactorAction
+  | ResetFilterAction;

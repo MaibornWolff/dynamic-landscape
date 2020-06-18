@@ -11,6 +11,7 @@ import {
   List,
   Paper,
   Switch,
+  Button,
 } from '@material-ui/core';
 import {
   DataFilter,
@@ -21,7 +22,7 @@ import {
 import {SearchBar} from '../SearchBar/SearchBar.container.component';
 import {IconButton, Tooltip} from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-
+import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListSharpIcon from '@material-ui/icons/FilterListSharp';
 
 const Logo = require('./../../../../assets/logos/CL_Logo.svg') as string;
@@ -30,6 +31,7 @@ export interface Props {
   filter: DataFilter;
   possibleFilterValues: ServiceFeatures;
   setFilter: (filter: DataFilter) => void;
+  resetFilter: () => void;
   toggleFilterBar: () => void;
   open: boolean;
   displayChips?: boolean;
@@ -86,10 +88,28 @@ const useStyles = makeStyles({
   menuitem: {
     padding: '0px 15px',
   },
+  menuitemTitle: {
+    padding: '10px 15px 0px 15px',
+  },
   menulist: {
-    maxHeight: '300px',
+    maxHeight: '315px',
     overflow: 'auto',
     scrollBehavior: 'smooth',
+  },
+  scrollShadowWrapper: {
+    position: 'relative',
+  },
+  scrollShadow: {
+    boxShadow: 'inset 0px -50px 20px -30px #ffffff',
+    height: '30px',
+    width: '100%',
+    position: 'absolute',
+    bottom: 0,
+  },
+  removeButton: {
+    color: '#6d6d6d',
+    width: 200,
+    margin: '18px auto',
   },
   closeIcon: {
     float: 'right',
@@ -156,11 +176,10 @@ export default function FilterComponentContainer(props: Props) {
           <SearchBar />
         </Box>
         <Divider />
-
+        <Typography variant="caption" className={classes.menuitemTitle}>
+          Provider
+        </Typography>
         <List className={classes.menulist}>
-          <Typography variant="caption" className={classes.menuitem}>
-            Provider
-          </Typography>
           {props.possibleFilterValues.provider
             .sort()
             .map((provider: Providers, i: number) => {
@@ -187,39 +206,41 @@ export default function FilterComponentContainer(props: Props) {
               );
             })}
         </List>
+
         <Divider />
-
-        <List className={classes.menulist}>
-          <Typography variant="caption" className={classes.menuitem}>
-            Categories
-          </Typography>
-
-          {props.possibleFilterValues.category
-            .sort()
-            .map((category: string, i: number) => {
-              return (
-                <ListItem key={i} button className={classes.menuitem}>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={props.filter.category.some(
-                          v => v === category
-                        )}
-                        onChange={handleChangeCheckbox(
-                          'category',
-                          category as string
-                        )}
-                        value={category}
-                        color="primary"
-                        size="small"
-                      />
-                    }
-                    label={category}
-                  />
-                </ListItem>
-              );
-            })}
-        </List>
+        <Typography variant="caption" className={classes.menuitemTitle}>
+          Categories
+        </Typography>
+        <div className={classes.scrollShadowWrapper}>
+          <List className={classes.menulist}>
+            {props.possibleFilterValues.category
+              .sort()
+              .map((category: string, i: number) => {
+                return (
+                  <ListItem key={i} button className={classes.menuitem}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={props.filter.category.some(
+                            v => v === category
+                          )}
+                          onChange={handleChangeCheckbox(
+                            'category',
+                            category as string
+                          )}
+                          value={category}
+                          color="primary"
+                          size="small"
+                        />
+                      }
+                      label={category}
+                    />
+                  </ListItem>
+                );
+              })}
+          </List>
+          <span className={classes.scrollShadow} />
+        </div>
         <Divider />
 
         {props.showShowFilteredOnlySwitch && (
@@ -238,6 +259,16 @@ export default function FilterComponentContainer(props: Props) {
             <Divider />
           </>
         )}
+
+        <Button
+          variant="outlined"
+          size="small"
+          startIcon={<DeleteIcon />}
+          className={classes.removeButton}
+          onClick={props.resetFilter}
+        >
+          remove all filters
+        </Button>
       </Drawer>
       <Paper elevation={3} className={classes.openButton}>
         <Tooltip title={'Open Searchbar'}>

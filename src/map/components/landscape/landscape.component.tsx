@@ -23,13 +23,19 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     table: {
       minWidth: 100,
+      tableLayout: 'fixed',
     },
     header: {
       backgroundColor: theme.palette.primary.main,
     },
+    firstRow: {width: '15%'},
     headerTitle: {
       color: 'white',
       margin: 0,
+    },
+    emptytable: {
+      margin: 0,
+      textAlign: 'center',
     },
     headerContentSize: {
       color: 'white',
@@ -48,7 +54,7 @@ export default function Landscape(props: Props) {
     <Table className={classes.table} size="small">
       <TableHead className={classes.header}>
         <TableRow>
-          <TableCell>
+          <TableCell className={classes.firstRow}>
             {props.filteredContent.length !== props.contentSize && (
               <Typography
                 variant="subtitle1"
@@ -84,7 +90,15 @@ export default function Landscape(props: Props) {
           />
         ) : (
           <TableRow>
-            <TableCell>Empty</TableCell>
+            <TableCell colSpan={providers.length + 1}>
+              <Typography
+                variant="h6"
+                gutterBottom
+                className={classes.emptytable}
+              >
+                No Services found.
+              </Typography>
+            </TableCell>
           </TableRow>
         )}
       </TableBody>
