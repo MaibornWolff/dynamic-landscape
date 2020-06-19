@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -57,6 +57,8 @@ export default function MapTable(props: Props) {
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
+
+  useEffect(() => setPage(0), [rows]);
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
