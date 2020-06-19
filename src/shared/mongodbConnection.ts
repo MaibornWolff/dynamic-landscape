@@ -66,6 +66,15 @@ export async function uploadImage(
     });
 }
 
+export async function getAvailableImages(credentials: string) {
+  return await client.auth
+    .loginWithCredential(new UserApiKeyCredential(credentials))
+    .then(() => client.callFunction('getAvailableImages', []))
+    .then(response =>
+      response.Contents.map((object: {Key: string}) => object.Key)
+    );
+}
+
 export async function addNewService(
   credentials: string,
   service: DemoDataWithoutId

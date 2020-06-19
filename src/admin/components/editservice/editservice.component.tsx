@@ -16,6 +16,8 @@ export interface Props {
   setContent: (services: DemoData[]) => void;
   credentials: string;
   service: DemoData;
+  availableImages: string[];
+  setAvailableImages: (availableImages: string[]) => void;
 }
 
 const Container = styled.div({
@@ -45,7 +47,10 @@ export default function EditService(props: Props) {
   return (
     <Grid item xs={11} sm={10} md={9}>
       <Container>
-        <ImageInput credentials={props.credentials} />
+        <ImageInput
+          credentials={props.credentials}
+          setAvailableImages={props.setAvailableImages}
+        />
         <ServiceEditor
           title="Edit service"
           service={service}
@@ -54,6 +59,7 @@ export default function EditService(props: Props) {
           providers={props.providers}
           keywords={props.keywords}
           disabled={waiting}
+          availableImages={props.availableImages}
         />
         <Button
           variant="contained"

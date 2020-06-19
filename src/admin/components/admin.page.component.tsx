@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Grid} from '@material-ui/core';
 import styled from 'styled-components';
 import Login from './login/login.component';
@@ -9,12 +9,14 @@ import EditService from './editservice/editservice.container.component';
 import {DemoData} from '../../assets/data/dataType';
 import {Alert} from '@material-ui/lab';
 import {ObjectID} from 'mongodb';
+import {getAvailableImages as fetchAvailableImages} from '../../shared/mongodbConnection';
 
 export interface Props {
   credentials: string | undefined;
   setCredentials: (credentials: string) => void;
   loading: boolean;
   findServiceById: (id: ObjectID | string) => DemoData | undefined;
+  setAvailableImages: (availableImages: string[]) => void;
 }
 
 const ContainerGrid = styled(Grid)({
@@ -30,6 +32,16 @@ export default function Admin(props: Props) {
       return <Alert severity="error">No service with that ID</Alert>;
     }
   };
+
+  useEffect(() => {
+    if (props.credentials) {
+      fetchAvailableImages(props.credentials)
+        .then(props.setAvailableImages)
+        .catch((err: Error) => {
+          console.log(err);
+        });
+    }
+  }, [props.credentials, props.setAvailableImages]);
 
   const closureCredentials = props.credentials;
   return (
