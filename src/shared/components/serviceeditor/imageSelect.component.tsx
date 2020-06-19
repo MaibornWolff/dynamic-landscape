@@ -1,19 +1,24 @@
 import React from 'react';
 import {Grid, TextField, TextFieldProps} from '@material-ui/core';
 import ServiceIcon from '../serviceIcon/serviceIcon.component';
+import {Autocomplete} from '@material-ui/lab';
 
 const PATH_PREFIX = './img/logos/';
-const PATH_PREFIX_REGEX = /^[.][/\\]img[/\\]logos[/\\](.*)$/;
+const PATH_PREFIX_REGEX = /^[.]?[/\\]?img[/\\]logos[/\\](.*)$/;
 
 export interface Props {
   textFieldProps: TextFieldProps;
   onImagePathChanged: (img: string) => void;
   imagePath: string;
+  availableImages: string[];
+  disabled?: boolean;
 }
 
 export default function ImageSelect(props: Props) {
-  const handleImgPathChange = (event: React.ChangeEvent<HTMLInputElement>) =>
-    props.onImagePathChanged(convertFromShownImgPath(event.target.value));
+  const handleImgPathChange = (
+    event: React.ChangeEvent<{}>,
+    value: string | null
+  ) => props.onImagePathChanged(value ? convertFromShownImgPath(value) : '');
 
   const convertFromShownImgPath = (shownPath: string) =>
     PATH_PREFIX + shownPath;
@@ -40,11 +45,17 @@ export default function ImageSelect(props: Props) {
         />
       </Grid>
       <Grid item xs={11}>
-        <TextField
-          value={shownImgPath}
+        <Autocomplete<string>
+          options={props.availableImages.map(convertToShownImgPath)}
+          value={shownImgPath || null}
+          renderInput={params => (
+            <TextField {...params} {...props.textFieldProps} />
+          )}
           onChange={handleImgPathChange}
+          disabled={props.disabled}
           fullWidth
-          {...props.textFieldProps}
+          autoSelect
+          autoComplete
         />
       </Grid>
     </Grid>

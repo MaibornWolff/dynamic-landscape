@@ -18,6 +18,7 @@ export interface Props<ServiceType extends DemoDataWithoutId | DemoData> {
   providers: string[];
   keywords: string[];
   disabled?: boolean;
+  availableImages: string[];
 }
 
 export default function ServiceEditor<
@@ -154,22 +155,24 @@ export default function ServiceEditor<
         <ImageSelect
           textFieldProps={{
             label: 'Icon',
-            disabled: props.disabled,
             fullWidth: true,
           }}
+          disabled={props.disabled}
           imagePath={props.service.img}
           onImagePathChanged={handleImgChange}
+          availableImages={props.availableImages}
         />
       </Grid>
       <Grid item xs={12}>
         <ImageSelect
           textFieldProps={{
             label: 'Provider icon',
-            disabled: props.disabled,
             fullWidth: true,
           }}
+          disabled={props.disabled}
           imagePath={props.service.providerIcon}
           onImagePathChanged={handleProviderIconChange}
+          availableImages={props.availableImages}
         />
       </Grid>
     </Grid>

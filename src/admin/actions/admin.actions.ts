@@ -1,4 +1,5 @@
 export const SETCREDENTIALS = 'SETCREDENTIALS';
+export const SETAVAILABLEIMAGES = 'SETAVAILABLEIMAGES';
 
 export interface SetCredentialsAction {
   type: typeof SETCREDENTIALS;
@@ -12,4 +13,16 @@ export function setCredentials(credentials: string): AdminActionTypes {
   };
 }
 
-export type AdminActionTypes = SetCredentialsAction;
+export interface SetAvailableImagesAction {
+  type: typeof SETAVAILABLEIMAGES;
+  payload: string[];
+}
+
+export function setAvailableImages(images: string[]): AdminActionTypes {
+  return {
+    type: SETAVAILABLEIMAGES,
+    payload: images,
+  };
+}
+
+export type AdminActionTypes = SetCredentialsAction | SetAvailableImagesAction;
