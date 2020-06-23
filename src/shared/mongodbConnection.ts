@@ -109,3 +109,19 @@ export async function updateService(credentials: string, service: DemoData) {
         )
     );
 }
+
+export async function createMongoDBBackup(credentials: string) {
+  return await client.auth
+    .loginWithCredential(new UserApiKeyCredential(credentials))
+    .then(() => client.callFunction('backupMongoDB', []))
+    .then(response =>
+      alert(
+        'MongoDB was successfully backuped to S3 with ' +
+          response +
+          ' services. (path: backup/mongodbBackup.json)'
+      )
+    )
+    .catch(e => {
+      alert(e);
+    });
+}
