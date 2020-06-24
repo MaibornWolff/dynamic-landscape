@@ -1,4 +1,10 @@
-import {createStyles, Grid, makeStyles} from '@material-ui/core';
+import {
+  createStyles,
+  Grid,
+  makeStyles,
+  useTheme,
+  useMediaQuery,
+} from '@material-ui/core';
 import React from 'react';
 import {FilterIconChips} from '../../../shared/components/filter/FilterIconChips/FilterIconChips.container.component';
 import ViewSwitch from '../../../shared/components/viewswitch/viewswitch.container.component';
@@ -24,6 +30,8 @@ export interface Props {
 
 export default function Header(props: Props) {
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
   return (
     <Grid
       container
@@ -40,7 +48,7 @@ export default function Header(props: Props) {
         />
       </Grid>
       <Grid item xs={6} md={4}>
-        {props.location.pathname === '/landscape' && <Zoom />}
+        {props.location.pathname === '/landscape' && matches && <Zoom />}
       </Grid>
       <ViewSwitch />
     </Grid>

@@ -18,6 +18,7 @@ import {SearchBar} from '../filter/SearchBar/SearchBar.container.component';
 import {Link} from 'react-router-dom';
 import InfoModal from './../infoModal/infoModal.component';
 import {createMongoDBBackup} from '../../mongodbConnection';
+import {Hidden} from '@material-ui/core';
 
 const Logo = require('./../../../assets/logos/CL_Logo.svg') as string;
 interface Props {
@@ -31,6 +32,9 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.primary.main,
       zIndex: theme.zIndex.drawer + 1,
       flexGrow: 1,
+      whiteSpace: 'nowrap',
+      textOverflow: 'ellipsis',
+      overflow: 'hidden',
     },
     menuButton: {
       marginRight: theme.spacing(2),
@@ -60,6 +64,14 @@ const useStyles = makeStyles((theme: Theme) =>
       textDecoration: 'none',
       color: 'inherit',
     },
+    searchBar: {
+      [theme.breakpoints.up('xs')]: {
+        width: '40%',
+      },
+      [theme.breakpoints.down('xs')]: {
+        width: '60%',
+      },
+    },
   })
 );
 
@@ -83,31 +95,39 @@ export default function NavigationComponent(props: Props) {
           <Link to="/" className={classes.logoCard}>
             <img src={Logo} alt="Logo" className={classes.logo} />
           </Link>
-          <Link to="/" className={classes.appName}>
-            Cloud Landscape
-          </Link>
+          <Hidden xsDown>
+            <Link to="/" className={classes.appName}>
+              Cloud Landscape
+            </Link>
+          </Hidden>
           <div className={classes.spacing} />
-          <div style={{width: '40%'}}>
+          <div className={classes.searchBar}>
             <SearchBar />
           </div>
-
           <div className={classes.spacing} />
-          {props.adminCredentials && (
+          <Hidden xsDown>
             <>
-              <Tooltip title="Create MongoDB Backup" aria-label="add">
-                <IconButton onClick={handleDBBackup} className={classes.button}>
-                  <RestorePageIcon className={classes.button} />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title="Add new Service" aria-label="add">
-                <Link to="/admin/add">
-                  <IconButton className={classes.button}>
-                    <AddToPhotos className={classes.button} />
-                  </IconButton>
-                </Link>
-              </Tooltip>
+              {props.adminCredentials && (
+                <>
+                  <Tooltip title="Create MongoDB Backup" aria-label="add">
+                    <IconButton
+                      onClick={handleDBBackup}
+                      className={classes.button}
+                    >
+                      <RestorePageIcon className={classes.button} />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Add new Service" aria-label="add">
+                    <Link to="/admin/add">
+                      <IconButton className={classes.button}>
+                        <AddToPhotos className={classes.button} />
+                      </IconButton>
+                    </Link>
+                  </Tooltip>
+                </>
+              )}
             </>
-          )}
+          </Hidden>
           <IconButton onClick={handleInfoOpen} className={classes.button}>
             <InfoTwoTone className={classes.button} style={{fontSize: 30}} />
             <InfoModal open={infoOpen} handleClose={handleInfoOpen} />
@@ -115,15 +135,17 @@ export default function NavigationComponent(props: Props) {
           {/* for later IDEAS: <IconButton onClick={handleInfoOpen} className={classes.button}>
             <ShareIcon className={classes.button} />
           </IconButton> */}
-          <LinkExternal
-            href={urls.github}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <IconButton className={classes.button}>
-              <GitHubIcon className={classes.button} />
-            </IconButton>
-          </LinkExternal>
+          <Hidden xsDown>
+            <LinkExternal
+              href={urls.github}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <IconButton className={classes.button}>
+                <GitHubIcon className={classes.button} />
+              </IconButton>
+            </LinkExternal>
+          </Hidden>
         </Toolbar>
       </AppBar>
     </>

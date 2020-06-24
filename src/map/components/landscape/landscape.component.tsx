@@ -22,7 +22,7 @@ interface Props {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     table: {
-      minWidth: 100,
+      minWidth: '500px',
       tableLayout: 'fixed',
     },
     header: {

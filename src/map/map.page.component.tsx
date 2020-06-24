@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Redirect, match, matchPath} from 'react-router-dom';
 
-import {Grid, styled} from '@material-ui/core';
+import {Grid, styled, withWidth, isWidthUp} from '@material-ui/core';
 import {DemoData, Providers} from '../assets/data/dataType';
 import DetailModal from './components/detailModal/detailModal.component';
 import Loading from '../shared/components/laoding/loading.component';
@@ -45,7 +45,7 @@ const StyledPaper = styled(Paper)({
   overflowX: 'auto',
 });
 
-export default class MapComponent extends React.Component<Props, State> {
+class MapComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {filterBarOpen: false};
@@ -115,15 +115,17 @@ export default class MapComponent extends React.Component<Props, State> {
                 <StyledPaper>
                   <CacheSwitch>
                     <CacheRoute path="/landscape">
-                      <Landscape
-                        filteredContent={this.props.filteredContent}
-                        contentSize={this.props.contentSize}
-                        groupedContent={this.props.groupedContent}
-                        providers={this.props.providers}
-                        categories={this.props.categories}
-                        setDetailService={this.setDetailService}
-                        zoomFactor={this.props.zoomFactor}
-                      />
+                      <div style={{overflow: 'auto'}}>
+                        <Landscape
+                          filteredContent={this.props.filteredContent}
+                          contentSize={this.props.contentSize}
+                          groupedContent={this.props.groupedContent}
+                          providers={this.props.providers}
+                          categories={this.props.categories}
+                          setDetailService={this.setDetailService}
+                          zoomFactor={this.props.zoomFactor}
+                        />
+                      </div>
                     </CacheRoute>
                     <CacheRoute path="/table">
                       <MapTable
@@ -132,7 +134,11 @@ export default class MapComponent extends React.Component<Props, State> {
                         setDetailService={this.setDetailService}
                       />
                     </CacheRoute>
-                    <Redirect to="/landscape" />
+                    {isWidthUp('sm', this.props.width) ? (
+                      <Redirect to="/landscape" />
+                    ) : (
+                      <Redirect to="/table" />
+                    )}
                   </CacheSwitch>
                 </StyledPaper>
               </Grid>
@@ -146,3 +152,5 @@ export default class MapComponent extends React.Component<Props, State> {
     );
   }
 }
+
+export default withWidth()(MapComponent);

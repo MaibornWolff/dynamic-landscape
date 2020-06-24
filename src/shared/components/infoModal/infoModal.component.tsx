@@ -8,7 +8,14 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Paper, {PaperProps} from '@material-ui/core/Paper';
 import Draggable from 'react-draggable';
-import {Grid, Slide, SlideProps, Typography, Divider} from '@material-ui/core';
+import {
+  Grid,
+  Slide,
+  SlideProps,
+  Typography,
+  Divider,
+  Hidden,
+} from '@material-ui/core';
 import LinkExternal from '@material-ui/core/Link';
 import {urls} from '../../externalURL';
 
@@ -78,11 +85,13 @@ export default function InfoModal(props: Props) {
             <Grid item>
               <img src={Logo} alt="Logo" className={classes.icon} />
             </Grid>
-            <Grid item>
-              <Typography variant="h3" component="h2">
-                CloudLandscape
-              </Typography>
-            </Grid>
+            <Hidden xsDown>
+              <Grid item>
+                <Typography variant="h3" component="h2">
+                  CloudLandscape
+                </Typography>
+              </Grid>
+            </Hidden>
           </Grid>
         </DialogTitle>
         <DialogContent>
@@ -105,11 +114,11 @@ export default function InfoModal(props: Props) {
               </DialogContentText>
               <Divider className={classes.Divider} />
               <DialogContentText>
-                Made with{' '}
+                Made with&nbsp;
                 <span role="img" aria-label="Love">
-                  ❤️{' '}
+                  {'❤️'}
                 </span>
-                by the{' '}
+                &nbsp; by the
                 <LinkExternal href={urls.maibornWolff} target="/blank">
                   MaibornWolff
                 </LinkExternal>{' '}
