@@ -26,7 +26,7 @@ const Container = styled.div({
   alignItems: 'stretch',
 });
 
-const emptyService = {
+const emptyService: DemoDataWithoutId = {
   service: '',
   category: [],
   provider: '',
@@ -35,6 +35,7 @@ const emptyService = {
   keywords: [],
   providerIcon: '',
   webLink: '',
+  status: 'published',
 };
 
 export default function AddService(props: Props) {
