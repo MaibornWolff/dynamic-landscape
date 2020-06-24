@@ -5,7 +5,12 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import {TableFooter, TablePagination, Typography} from '@material-ui/core';
+import {
+  TableFooter,
+  TablePagination,
+  Typography,
+  Hidden,
+} from '@material-ui/core';
 import {DemoData} from '../../../assets/data/dataType';
 import TablePaginationActions from './paginationActions.component';
 import ServiceRow from './servicerow.component';
@@ -98,15 +103,17 @@ export default function MapTable(props: Props) {
               Service
             </Typography>
           </TableCell>
-          <TableCell>
-            <Typography
-              variant="h6"
-              gutterBottom
-              className={classes.headerTitle}
-            >
-              Provider
-            </Typography>
-          </TableCell>
+          <Hidden xsDown>
+            <TableCell>
+              <Typography
+                variant="h6"
+                gutterBottom
+                className={classes.headerTitle}
+              >
+                Provider
+              </Typography>
+            </TableCell>
+          </Hidden>
           <TableCell>
             <Typography
               variant="h6"
@@ -116,15 +123,17 @@ export default function MapTable(props: Props) {
               Category
             </Typography>
           </TableCell>
-          <TableCell>
-            <Typography
-              variant="h6"
-              gutterBottom
-              className={classes.headerTitle}
-            >
-              Website
-            </Typography>
-          </TableCell>
+          <Hidden xsDown>
+            <TableCell>
+              <Typography
+                variant="h6"
+                gutterBottom
+                className={classes.headerTitle}
+              >
+                Website
+              </Typography>
+            </TableCell>
+          </Hidden>
         </TableRow>
       </TableHead>
       <TableBody>

@@ -6,9 +6,14 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Paper, {PaperProps} from '@material-ui/core/Paper';
-import Draggable from 'react-draggable';
-import {Grid, Slide, SlideProps, Typography, Divider} from '@material-ui/core';
+import {
+  Grid,
+  Slide,
+  SlideProps,
+  Typography,
+  Divider,
+  Hidden,
+} from '@material-ui/core';
 import LinkExternal from '@material-ui/core/Link';
 import {urls} from '../../externalURL';
 
@@ -44,14 +49,6 @@ const Transition = React.forwardRef<unknown, SlideProps>((props, ref) => {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-function PaperComponent(props: PaperProps) {
-  return (
-    <Draggable cancel={'[class*="MuiDialogContent-root"]'}>
-      <Paper {...props} />
-    </Draggable>
-  );
-}
-
 export default function InfoModal(props: Props) {
   const classes = useStyles();
 
@@ -60,7 +57,6 @@ export default function InfoModal(props: Props) {
       <Dialog
         open={props.open}
         onClose={props.handleClose}
-        PaperComponent={PaperComponent}
         aria-labelledby="draggable-dialog-title"
         className={classes.dialog}
         TransitionComponent={Transition}
@@ -78,11 +74,13 @@ export default function InfoModal(props: Props) {
             <Grid item>
               <img src={Logo} alt="Logo" className={classes.icon} />
             </Grid>
-            <Grid item>
-              <Typography variant="h3" component="h2">
-                CloudLandscape
-              </Typography>
-            </Grid>
+            <Hidden xsDown>
+              <Grid item>
+                <Typography variant="h3" component="h2">
+                  CloudLandscape
+                </Typography>
+              </Grid>
+            </Hidden>
           </Grid>
         </DialogTitle>
         <DialogContent>
@@ -105,11 +103,11 @@ export default function InfoModal(props: Props) {
               </DialogContentText>
               <Divider className={classes.Divider} />
               <DialogContentText>
-                Made with{' '}
+                Made with&nbsp;
                 <span role="img" aria-label="Love">
-                  ❤️{' '}
+                  {'❤️'}
                 </span>
-                by the{' '}
+                &nbsp; by the
                 <LinkExternal href={urls.maibornWolff} target="/blank">
                   MaibornWolff
                 </LinkExternal>{' '}

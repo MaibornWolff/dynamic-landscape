@@ -2,7 +2,7 @@ import React from 'react';
 import {createStyles, makeStyles} from '@material-ui/core/styles';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-import {Link} from '@material-ui/core';
+import {Link, Hidden} from '@material-ui/core';
 import {DemoData} from '../../../assets/data/dataType';
 import ServiceIcon from '../../../shared/components/serviceIcon/serviceIcon.component';
 
@@ -41,15 +41,19 @@ function ServiceRow(props: Props) {
         />
       </TableCell>
       <TableCell>{props.service.service}</TableCell>
-      <TableCell component="th" scope="row">
-        {props.service.provider}
-      </TableCell>
+      <Hidden xsDown>
+        <TableCell component="th" scope="row">
+          {props.service.provider}
+        </TableCell>
+      </Hidden>
       <TableCell>{props.service.category.join(' | ')}</TableCell>
-      <TableCell>
-        <Link href={props.service.webLink} target="_blank" rel="noreferrer">
-          {props.service.webLink.split('/')[2]}
-        </Link>
-      </TableCell>
+      <Hidden xsDown>
+        <TableCell>
+          <Link href={props.service.webLink} target="_blank" rel="noreferrer">
+            {props.service.webLink.split('/')[2]}
+          </Link>
+        </TableCell>
+      </Hidden>
     </TableRow>
   );
 }
