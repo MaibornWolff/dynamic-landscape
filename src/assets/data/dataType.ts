@@ -1,5 +1,7 @@
 import {ObjectID} from 'mongodb';
 
+export type ServiceStatus = 'published' | 'review' | 'deleted';
+
 export type ServiceWithoutId = {
   provider: Providers;
   providerIcon: string;
@@ -9,6 +11,7 @@ export type ServiceWithoutId = {
   img: string;
   description: string;
   keywords: string[];
+  status: ServiceStatus;
 };
 
 export type Service = ServiceWithoutId & {
