@@ -19,7 +19,7 @@ export interface Props {
   loading: boolean;
   findServiceById: (id: ObjectID | string) => Service | undefined;
   setAvailableImages: (availableImages: string[]) => void;
-  setContent: (services: DemoData[]) => void;
+  setContent: (services: Service[]) => void;
 }
 
 const ContainerGrid = styled(Grid)({
@@ -47,7 +47,7 @@ export default function Admin(props: Props) {
         .then(props.setContent)
         .catch(err => console.error(err));
     }
-  }, [props.credentials, props.setAvailableImages]);
+  }, [props.credentials, props.setAvailableImages, props.setContent]);
 
   const closureCredentials = props.credentials;
   return (
