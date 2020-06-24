@@ -6,15 +6,15 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import {Typography} from '@material-ui/core';
-import {DemoData, Providers} from '../../../assets/data/dataType';
+import {Service, Providers} from '../../../assets/data/dataType';
 import CategoryRow from './categoryRows.component';
 
 interface Props {
-  setDetailService: (service: DemoData) => void;
+  setDetailService: (service: Service) => void;
   providers: Providers[];
   categories: string[];
-  groupedContent: Map<Providers, Map<string, DemoData[]>>;
-  filteredContent: DemoData[];
+  groupedContent: Map<Providers, Map<string, Service[]>>;
+  filteredContent: Service[];
   contentSize: number;
   zoomFactor: number;
 }

@@ -3,12 +3,12 @@ import {createStyles, makeStyles} from '@material-ui/core/styles';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import {Link, Hidden} from '@material-ui/core';
-import {DemoData} from '../../../assets/data/dataType';
+import {Service} from '../../../assets/data/dataType';
 import ServiceIcon from '../../../shared/components/serviceIcon/serviceIcon.component';
 
 interface Props {
-  service: DemoData;
-  setDetailService: (service: DemoData) => void;
+  service: Service;
+  setDetailService: (service: Service) => void;
 }
 
 const useStyles = makeStyles(() =>

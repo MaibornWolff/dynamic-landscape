@@ -1,4 +1,4 @@
-import {DemoData, DataFilter} from '../../assets/data/dataType';
+import {Service, DataFilter} from '../../assets/data/dataType';
 
 export const SETCONTENT = 'SETCONTENT';
 export const SETFILTER = 'SETFILTER';
@@ -8,10 +8,10 @@ export const SHOWFILTEREDONLY = 'SHOWFILTEREDONLY';
 
 export interface SetContentAction {
   type: typeof SETCONTENT;
-  payload: DemoData[];
+  payload: Service[];
 }
 
-export function setContent(value: DemoData[]): MapActionTypes {
+export function setContent(value: Service[]): MapActionTypes {
   return {
     type: SETCONTENT,
     payload: value,

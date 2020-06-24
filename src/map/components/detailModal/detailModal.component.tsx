@@ -6,7 +6,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import {DemoData} from '../../../assets/data/dataType';
+import {Service} from '../../../assets/data/dataType';
 import {
   Grid,
   List,
@@ -23,10 +23,10 @@ import {useHistory} from 'react-router';
 import ServiceIcon from '../../../shared/components/serviceIcon/serviceIcon.component';
 
 interface Props {
-  service: DemoData;
+  service: Service;
   deleteDetailService: () => void;
   adminCredentials?: string;
-  setContent: (services: DemoData[]) => void;
+  setContent: (services: Service[]) => void;
 }
 
 const useStyles = makeStyles(() =>

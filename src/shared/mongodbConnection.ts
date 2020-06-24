@@ -1,4 +1,4 @@
-import {DemoData, DemoDataWithoutId} from '../assets/data/dataType';
+import {Service, ServiceWithoutId} from '../assets/data/dataType';
 import {
   RemoteMongoClient,
   Stitch,
@@ -26,16 +26,16 @@ export default async function fetchAllServices(
   if (cache && !force && createdBy && createdBy + 86400000 > Date.now()) {
     return JSON.parse(cache);
   } else {
-    let returnDoc = [] as DemoData[];
+    let returnDoc = [] as Service[];
     await client.auth
       .loginWithCredential(credential)
       .then(() =>
         db
-          .collection<DemoData>(COLLECTION)
+          .collection<Service>(COLLECTION)
           .find(publishedOnly ? {status: 'published'} : {})
           .toArray()
       )
-      .then((docs: DemoData[]) => {
+      .then((docs: Service[]) => {
         console.log('[MongoDB Stitch] Connected to Stitch');
         returnDoc = docs;
         sessionStorage.setItem('serviceContent', JSON.stringify(returnDoc));
@@ -85,32 +85,30 @@ export async function getAvailableImages(credentials: string) {
 
 export async function addNewService(
   credentials: string,
-  service: DemoDataWithoutId
+  service: ServiceWithoutId
 ) {
   return await client.auth
     .loginWithCredential(new UserApiKeyCredential(credentials))
-    .then(() =>
-      db.collection<DemoDataWithoutId>(COLLECTION).insertOne(service)
-    );
+    .then(() => db.collection<ServiceWithoutId>(COLLECTION).insertOne(service));
 }
 
-export async function deleteService(credentials: string, service: DemoData) {
+export async function deleteService(credentials: string, service: Service) {
   return await client.auth
     .loginWithCredential(new UserApiKeyCredential(credentials))
     .then(() =>
       db
-        .collection<DemoData>(COLLECTION)
+        .collection<Service>(COLLECTION)
         .deleteOne({_id: {$oid: (service._id as string | object).toString()}})
     );
 }
 
-export async function updateService(credentials: string, service: DemoData) {
+export async function updateService(credentials: string, service: Service) {
   const {_id: id, ...serviceWithoutId} = service;
   return await client.auth
     .loginWithCredential(new UserApiKeyCredential(credentials))
     .then(() =>
       db
-        .collection<DemoData>(COLLECTION)
+        .collection<Service>(COLLECTION)
         .findOneAndReplace(
           {_id: {$oid: (id as string | object).toString()}},
           serviceWithoutId
