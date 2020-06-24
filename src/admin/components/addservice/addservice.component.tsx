@@ -26,7 +26,7 @@ const Container = styled.div({
   alignItems: 'stretch',
 });
 
-const emptyService: DemoDataWithoutId = {
+const emptyService: ServiceWithoutId = {
   service: '',
   category: [],
   provider: '',
