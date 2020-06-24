@@ -17,7 +17,10 @@ const credential = new UserApiKeyCredential(
   '7jcwcGl6aSKf0oSXiW8Wb8AbLZwFkr2YHSrHcSVnDWEhXektnxJ8TipzrkDucVbj'
 );
 
-export default async function fetchAllServices(force = false) {
+export default async function fetchAllServices(
+  force = false,
+  publishedOnly = true
+) {
   const cache = sessionStorage.getItem('serviceContent');
   const createdBy = Number(sessionStorage.getItem('createdBy'));
   if (cache && !force && createdBy && createdBy + 86400000 > Date.now()) {
@@ -26,7 +29,12 @@ export default async function fetchAllServices(force = false) {
     let returnDoc = [] as DemoData[];
     await client.auth
       .loginWithCredential(credential)
-      .then(() => db.collection<DemoData>(COLLECTION).find({}).toArray())
+      .then(() =>
+        db
+          .collection<DemoData>(COLLECTION)
+          .find(publishedOnly ? {status: 'published'} : {})
+          .toArray()
+      )
       .then((docs: DemoData[]) => {
         console.log('[MongoDB Stitch] Connected to Stitch');
         returnDoc = docs;
