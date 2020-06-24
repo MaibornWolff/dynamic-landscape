@@ -2,7 +2,9 @@ import React from 'react';
 import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
+import RestorePageIcon from '@material-ui/icons/RestorePage';
 import {
   GitHub as GitHubIcon,
   AddToPhotos,
@@ -15,6 +17,7 @@ import {urls} from '../../externalURL';
 import {SearchBar} from '../filter/SearchBar/SearchBar.container.component';
 import {Link} from 'react-router-dom';
 import InfoModal from './../infoModal/infoModal.component';
+import {createMongoDBBackup} from '../../mongodbConnection';
 
 const Logo = require('./../../../assets/logos/CL_Logo.svg') as string;
 interface Props {
@@ -67,6 +70,12 @@ export default function NavigationComponent(props: Props) {
     setInfoOpen(!infoOpen);
   };
 
+  const handleDBBackup = () => {
+    if (props.adminCredentials) {
+      createMongoDBBackup(props.adminCredentials);
+    }
+  };
+
   return (
     <>
       <AppBar position="fixed" className={classes.appBar}>
@@ -84,11 +93,20 @@ export default function NavigationComponent(props: Props) {
 
           <div className={classes.spacing} />
           {props.adminCredentials && (
-            <Link to="/admin/add">
-              <IconButton className={classes.button}>
-                <AddToPhotos className={classes.button} />
-              </IconButton>
-            </Link>
+            <>
+              <Tooltip title="Create MongoDB Backup" aria-label="add">
+                <IconButton onClick={handleDBBackup} className={classes.button}>
+                  <RestorePageIcon className={classes.button} />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Add new Service" aria-label="add">
+                <Link to="/admin/add">
+                  <IconButton className={classes.button}>
+                    <AddToPhotos className={classes.button} />
+                  </IconButton>
+                </Link>
+              </Tooltip>
+            </>
           )}
           <IconButton onClick={handleInfoOpen} className={classes.button}>
             <InfoTwoTone className={classes.button} style={{fontSize: 30}} />
