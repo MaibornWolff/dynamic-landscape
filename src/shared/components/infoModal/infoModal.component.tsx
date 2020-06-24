@@ -6,8 +6,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Paper, {PaperProps} from '@material-ui/core/Paper';
-import Draggable from 'react-draggable';
 import {
   Grid,
   Slide,
@@ -51,14 +49,6 @@ const Transition = React.forwardRef<unknown, SlideProps>((props, ref) => {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-function PaperComponent(props: PaperProps) {
-  return (
-    <Draggable cancel={'[class*="MuiDialogContent-root"]'}>
-      <Paper {...props} />
-    </Draggable>
-  );
-}
-
 export default function InfoModal(props: Props) {
   const classes = useStyles();
 
@@ -67,7 +57,6 @@ export default function InfoModal(props: Props) {
       <Dialog
         open={props.open}
         onClose={props.handleClose}
-        PaperComponent={PaperComponent}
         aria-labelledby="draggable-dialog-title"
         className={classes.dialog}
         TransitionComponent={Transition}
