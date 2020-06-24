@@ -35,7 +35,7 @@ export default function DeleteDialog(props: Props) {
   const handleDelete = () => {
     setDeleting(true);
     deleteServiceInDb(props.adminCredentials, props.service)
-      .then(() => fetchAllServices(true)) // force reload
+      .then(() => fetchAllServices(true, props.adminCredentials)) // force reload
       .then(services => {
         props.setContent(services);
         setDeleting(false);

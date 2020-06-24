@@ -52,7 +52,7 @@ export default function AddService(props: Props) {
     };
     setService(serviceWithDefaultImgs);
     addNewService(props.credentials, serviceWithDefaultImgs)
-      .then(() => fetchAllServices(true)) // force fetch
+      .then(() => fetchAllServices(true, props.credentials)) // force fetch
       .then(services => props.setContent(services))
       .catch(err => console.error(err))
       .finally(() => {

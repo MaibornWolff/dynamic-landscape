@@ -19,7 +19,7 @@ const credential = new UserApiKeyCredential(
 
 export default async function fetchAllServices(
   force = false,
-  publishedOnly = true
+  adminCredentials?: string
 ) {
   const cache = sessionStorage.getItem('serviceContent');
   const createdBy = Number(sessionStorage.getItem('createdBy'));
@@ -28,11 +28,15 @@ export default async function fetchAllServices(
   } else {
     let returnDoc = [] as DemoData[];
     await client.auth
-      .loginWithCredential(credential)
+      .loginWithCredential(
+        adminCredentials
+          ? new UserApiKeyCredential(adminCredentials)
+          : credential
+      )
       .then(() =>
         db
           .collection<DemoData>(COLLECTION)
-          .find(publishedOnly ? {status: 'published'} : {})
+          .find(adminCredentials ? {} : {status: 'published'})
           .toArray()
       )
       .then((docs: DemoData[]) => {
