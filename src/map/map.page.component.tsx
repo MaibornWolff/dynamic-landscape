@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Redirect, match, matchPath} from 'react-router-dom';
 
 import {Grid, styled, withWidth, isWidthUp} from '@material-ui/core';
-import {DemoData, Providers} from '../assets/data/dataType';
+import {Service, Providers} from '../assets/data/dataType';
 import DetailModal from './components/detailModal/detailModal.component';
 import Loading from '../shared/components/laoding/loading.component';
 import MapTable from './components/maptable/maptable.component';
@@ -22,16 +22,16 @@ import {ObjectID} from 'mongodb';
 
 export interface Props {
   loading: boolean;
-  filteredContent: DemoData[];
+  filteredContent: Service[];
   contentSize: number;
-  groupedContent: Map<Providers, Map<string, DemoData[]>>;
+  groupedContent: Map<Providers, Map<string, Service[]>>;
   providers: Providers[];
   categories: string[];
   filterBar: boolean;
-  setContent: (object: DemoData[]) => void;
+  setContent: (object: Service[]) => void;
   zoomFactor: number;
   adminCredentials?: string;
-  findServiceById: (id: ObjectID | string) => DemoData | undefined;
+  findServiceById: (id: ObjectID | string) => Service | undefined;
   location: Location;
   history: History;
   match: match;
@@ -60,7 +60,7 @@ class MapComponent extends React.Component<Props, State> {
     });
   };
 
-  setDetailService = (detailService: DemoData) =>
+  setDetailService = (detailService: Service) =>
     this.props.history.replace({
       ...this.props.location,
       search: stringifyQueryString({serviceId: detailService._id}),

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ServiceEditor from '../../../shared/components/serviceeditor/serviceeditor.component';
-import {DemoData} from '../../../assets/data/dataType';
+import {Service} from '../../../assets/data/dataType';
 import styled from 'styled-components';
 import {Button, CircularProgress, Grid} from '@material-ui/core';
 import fetchAllServices, {
@@ -13,9 +13,9 @@ export interface Props {
   categories: string[];
   providers: string[];
   keywords: string[];
-  setContent: (services: DemoData[]) => void;
+  setContent: (services: Service[]) => void;
   credentials: string;
-  service: DemoData;
+  service: Service;
   availableImages: string[];
   setAvailableImages: (availableImages: string[]) => void;
 }
@@ -28,7 +28,7 @@ const Container = styled.div({
 });
 
 export default function EditService(props: Props) {
-  const [service, setService] = React.useState<DemoData>(props.service);
+  const [service, setService] = React.useState<Service>(props.service);
   const [waiting, setWaiting] = React.useState<boolean>(false);
   const history = useHistory();
 

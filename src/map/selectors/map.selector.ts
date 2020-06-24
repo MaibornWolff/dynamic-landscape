@@ -1,6 +1,6 @@
 import {State} from '../reducers/map.reducer';
 import {ObjectID} from 'mongodb';
-import {DataFilter, DemoData, Providers} from '../../assets/data/dataType';
+import {DataFilter, Service, Providers} from '../../assets/data/dataType';
 import {getToFilterValues, serviceFilter} from '../reducers/filterLogic';
 import {createSelector, Selector} from 'reselect';
 
@@ -8,7 +8,7 @@ export const getLoadingStatus = (state: State): boolean => {
   return state.loading;
 };
 
-export const getContent = (state: State): DemoData[] => state.content;
+export const getContent = (state: State): Service[] => state.content;
 
 export const getFilter = (state: State): DataFilter => state.filter;
 
@@ -23,7 +23,7 @@ export const getShowFilteredOnly = (state: State): boolean =>
 
 export const getContentSize = createSelector(
   getContent,
-  (content: DemoData[]): number => content.length
+  (content: Service[]): number => content.length
 );
 
 export const getPossibleFilterValues = createSelector(getContent, content =>
@@ -89,15 +89,15 @@ export const findServiceById = createSelector(
 
 export const getZoomFactor = (state: State): number => state.zoomFactor;
 
-const groupContent = (content: DemoData[]) => {
+const groupContent = (content: Service[]) => {
   return content.reduce(
     (
-      providersMap: Map<Providers, Map<string, DemoData[]>>,
-      service: DemoData
+      providersMap: Map<Providers, Map<string, Service[]>>,
+      service: Service
     ) => {
       // get the map with all categories for the provider of service
       const categoriesMap =
-        providersMap.get(service.provider) || new Map<string, DemoData[]>();
+        providersMap.get(service.provider) || new Map<string, Service[]>();
       // add the service to every category group it belongs to
       service.category.forEach(category => {
         const group = categoriesMap.get(category) || [];

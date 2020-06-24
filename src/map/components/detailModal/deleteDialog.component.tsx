@@ -5,7 +5,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import {DemoData} from '../../../assets/data/dataType';
+import {Service} from '../../../assets/data/dataType';
 import {createStyles, makeStyles} from '@material-ui/core/styles';
 import {CircularProgress} from '@material-ui/core';
 import fetchAllServices, {
@@ -13,11 +13,11 @@ import fetchAllServices, {
 } from '../../../shared/mongodbConnection';
 
 interface Props {
-  service: DemoData;
+  service: Service;
   open: boolean;
   onClose: (didDelete: boolean) => void;
   adminCredentials: string;
-  setContent: (services: DemoData[]) => void;
+  setContent: (services: Service[]) => void;
 }
 
 const useStyles = makeStyles(() =>

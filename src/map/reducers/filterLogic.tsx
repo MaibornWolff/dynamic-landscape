@@ -1,12 +1,12 @@
 import {
-  DemoData,
+  Service,
   DataFilter,
   DataFilter_only_arrays,
   ServiceFeatures,
 } from '../../assets/data/dataType';
 
 // Create a list of Unique Values to filter on
-export function getToFilterValues(services: DemoData[]): ServiceFeatures {
+export function getToFilterValues(services: Service[]): ServiceFeatures {
   const provider = new Set(services.map(service => service.provider));
   const category = new Set(services.flatMap(service => service.category));
   const keywords = new Set(services.flatMap(service => service.keywords));
@@ -19,9 +19,9 @@ export function getToFilterValues(services: DemoData[]): ServiceFeatures {
 }
 
 export function serviceFilter(
-  services: DemoData[],
+  services: Service[],
   filterSet: DataFilter
-): DemoData[] {
+): Service[] {
   let filtered = false;
 
   if (
@@ -35,7 +35,7 @@ export function serviceFilter(
   // filter provider
   if (Array.isArray(filterSet.provider) && filterSet.provider.length) {
     filtered = true;
-    services = services.filter((s: DemoData) =>
+    services = services.filter((s: Service) =>
       filterSet.provider.includes(s.provider)
     );
   }
@@ -49,7 +49,7 @@ export function serviceFilter(
       Array.isArray(services[0][filter as DataFilter_only_arrays])
     ) {
       filtered = true;
-      services = services.filter((s: DemoData) => {
+      services = services.filter((s: Service) => {
         const serviceValues = s[filter as DataFilter_only_arrays] as string[];
         const filterValues = filterSet[
           filter as keyof typeof filterSet
@@ -62,11 +62,11 @@ export function serviceFilter(
 
   if (filterSet.fulltext.length) {
     filtered = true;
-    services = services.filter((service: DemoData) => {
+    services = services.filter((service: Service) => {
       for (const fulltext of filterSet.fulltext) {
         for (const property in service) {
-          if (service[property as keyof DemoData]) {
-            const content = service[property as keyof DemoData];
+          if (service[property as keyof Service]) {
+            const content = service[property as keyof Service];
             if (
               typeof content === 'string' &&
               content.toLowerCase().includes(fulltext.toLowerCase())

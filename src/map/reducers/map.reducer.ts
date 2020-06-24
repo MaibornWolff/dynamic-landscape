@@ -7,11 +7,11 @@ import {
   SHOWFILTEREDONLY,
   RESETFILTER,
 } from '../actions/map.actions';
-import {DataFilter, DemoData} from '../../assets/data/dataType';
+import {DataFilter, Service} from '../../assets/data/dataType';
 
 export interface State {
   loading: boolean;
-  content: DemoData[];
+  content: Service[];
   filter: DataFilter;
   showFilteredOnly: boolean;
   zoomFactor: number;

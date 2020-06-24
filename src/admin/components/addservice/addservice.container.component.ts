@@ -7,7 +7,7 @@ import {
   getProviders,
 } from '../../../map/selectors/map.selector';
 import {Dispatch} from 'redux';
-import {DemoData} from '../../../assets/data/dataType';
+import {Service} from '../../../assets/data/dataType';
 import {setContent} from '../../../map/actions/map.actions';
 import {setAvailableImages} from '../../actions/admin.actions';
 import {getAvailableImages} from '../../selectors/admin.selector';
@@ -20,7 +20,7 @@ const mapStateToProps = (state: State) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setContent: (services: DemoData[]) => dispatch(setContent(services)),
+  setContent: (services: Service[]) => dispatch(setContent(services)),
   setAvailableImages: (availableImages: string[]) =>
     dispatch(setAvailableImages(availableImages)),
 });

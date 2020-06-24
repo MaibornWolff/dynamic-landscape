@@ -14,14 +14,14 @@ import {Navigation} from './shared/components/navigation/navigation.container.co
 import StyleWrapper from './shared/components/styleWrapper';
 import {Admin} from './admin/components/admin.page.container.component';
 import fetchAllServices from './shared/mongodbConnection';
-import {DemoData} from './assets/data/dataType';
+import {Service} from './assets/data/dataType';
 import {setContent} from './map/actions/map.actions';
 
 const App: React.FC = () => {
   const store = configureStore();
 
   React.useEffect(() => {
-    fetchAllServices().then((data: DemoData[]) =>
+    fetchAllServices().then((data: Service[]) =>
       store.dispatch(setContent(data))
     );
   });

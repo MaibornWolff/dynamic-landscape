@@ -2,7 +2,7 @@ import {ObjectID} from 'mongodb';
 
 export type ServiceStatus = 'published' | 'review' | 'deleted';
 
-export type DemoDataWithoutId = {
+export type ServiceWithoutId = {
   provider: Providers;
   providerIcon: string;
   category: string[];
@@ -14,7 +14,7 @@ export type DemoDataWithoutId = {
   status: ServiceStatus;
 };
 
-export type DemoData = DemoDataWithoutId & {
+export type Service = ServiceWithoutId & {
   _id: ObjectID;
 };
 
