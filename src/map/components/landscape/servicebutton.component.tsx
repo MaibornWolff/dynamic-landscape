@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {IconButton, Tooltip} from '@material-ui/core';
-import {DemoData} from '../../../assets/data/dataType';
+import {Service} from '../../../assets/data/dataType';
 import styled from 'styled-components';
 import ServiceIcon from '../../../shared/components/serviceIcon/serviceIcon.component';
 
 interface Props {
-  service: DemoData;
-  setDetailService: (service: DemoData) => void;
+  service: Service;
+  setDetailService: (service: Service) => void;
   isFiltered: boolean;
   zoomFactor: number;
   shouldScroll: boolean;

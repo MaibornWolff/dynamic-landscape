@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ServiceEditor from '../../../shared/components/serviceeditor/serviceeditor.component';
-import {DemoData, DemoDataWithoutId} from '../../../assets/data/dataType';
+import {Service, ServiceWithoutId} from '../../../assets/data/dataType';
 import styled from 'styled-components';
 import {Button, CircularProgress, Grid} from '@material-ui/core';
 import fetchAllServices, {
@@ -13,7 +13,7 @@ export interface Props {
   categories: string[];
   providers: string[];
   keywords: string[];
-  setContent: (services: DemoData[]) => void;
+  setContent: (services: Service[]) => void;
   credentials: string;
   availableImages: string[];
   setAvailableImages: (availableImages: string[]) => void;
@@ -38,7 +38,7 @@ const emptyService = {
 };
 
 export default function AddService(props: Props) {
-  const [service, setService] = React.useState<DemoDataWithoutId>(emptyService);
+  const [service, setService] = React.useState<ServiceWithoutId>(emptyService);
   const [waiting, setWaiting] = React.useState<boolean>(false);
   const history = useHistory();
 

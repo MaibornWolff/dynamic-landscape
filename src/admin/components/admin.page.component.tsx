@@ -6,7 +6,7 @@ import AddService from './addservice/addservice.container.component';
 import Loading from '../../shared/components/laoding/loading.component';
 import {Redirect, Route, Switch} from 'react-router';
 import EditService from './editservice/editservice.container.component';
-import {DemoData} from '../../assets/data/dataType';
+import {Service} from '../../assets/data/dataType';
 import {Alert} from '@material-ui/lab';
 import {ObjectID} from 'mongodb';
 import {getAvailableImages as fetchAvailableImages} from '../../shared/mongodbConnection';
@@ -15,7 +15,7 @@ export interface Props {
   credentials: string | undefined;
   setCredentials: (credentials: string) => void;
   loading: boolean;
-  findServiceById: (id: ObjectID | string) => DemoData | undefined;
+  findServiceById: (id: ObjectID | string) => Service | undefined;
   setAvailableImages: (availableImages: string[]) => void;
 }
 

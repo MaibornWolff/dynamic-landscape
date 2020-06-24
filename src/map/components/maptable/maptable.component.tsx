@@ -11,14 +11,14 @@ import {
   Typography,
   Hidden,
 } from '@material-ui/core';
-import {DemoData} from '../../../assets/data/dataType';
+import {Service} from '../../../assets/data/dataType';
 import TablePaginationActions from './paginationActions.component';
 import ServiceRow from './servicerow.component';
 
 interface Props {
-  filteredContent: DemoData[];
+  filteredContent: Service[];
   contentSize: number;
-  setDetailService: (service: DemoData) => void;
+  setDetailService: (service: Service) => void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -56,7 +56,7 @@ export default function MapTable(props: Props) {
   const rows = props.filteredContent;
   const contentSize = props.contentSize;
 
-  const setDetailService = (service: DemoData) => {
+  const setDetailService = (service: Service) => {
     props.setDetailService(service);
   };
 

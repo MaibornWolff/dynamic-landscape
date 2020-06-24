@@ -1,5 +1,5 @@
 import React from 'react';
-import {DemoData, DemoDataWithoutId} from '../../../assets/data/dataType';
+import {Service, ServiceWithoutId} from '../../../assets/data/dataType';
 import {Grid, TextField} from '@material-ui/core';
 import {Autocomplete} from '@material-ui/lab';
 import ImageSelect from './imageSelect.component';
@@ -10,7 +10,7 @@ const defaultIcons = new Map([
   ['Microsoft', './img/logos/Microsoft/CnE_Cloud/SVG/Azure_logo_icon_50.svg'],
 ]);
 
-export interface Props<ServiceType extends DemoDataWithoutId | DemoData> {
+export interface Props<ServiceType extends ServiceWithoutId | Service> {
   title: string;
   service: ServiceType;
   serviceChanged: (service: ServiceType) => void;
@@ -22,9 +22,9 @@ export interface Props<ServiceType extends DemoDataWithoutId | DemoData> {
 }
 
 export default function ServiceEditor<
-  ServiceType extends DemoDataWithoutId | DemoData
+  ServiceType extends ServiceWithoutId | Service
 >(props: Props<ServiceType>) {
-  const handleServiceChange = (changedAttributes: Partial<DemoData>) =>
+  const handleServiceChange = (changedAttributes: Partial<Service>) =>
     props.serviceChanged({
       ...props.service,
       ...changedAttributes,

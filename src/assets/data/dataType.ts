@@ -1,6 +1,6 @@
 import {ObjectID} from 'mongodb';
 
-export type DemoDataWithoutId = {
+export type ServiceWithoutId = {
   provider: Providers;
   providerIcon: string;
   category: string[];
@@ -11,7 +11,7 @@ export type DemoDataWithoutId = {
   keywords: string[];
 };
 
-export type DemoData = DemoDataWithoutId & {
+export type Service = ServiceWithoutId & {
   _id: ObjectID;
 };
 

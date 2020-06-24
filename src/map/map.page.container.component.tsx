@@ -14,7 +14,7 @@ import {
 import {setContent} from './actions/map.actions';
 import MapComponent, {Props} from './map.page.component';
 
-import {DemoData} from '../assets/data/dataType';
+import {Service} from '../assets/data/dataType';
 import {getCredentials} from '../admin/selectors/admin.selector';
 import {withRouter} from 'react-router';
 
@@ -31,7 +31,7 @@ const mapStateToProps = (state: State) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setContent: (content: DemoData[]) => dispatch(setContent(content)),
+  setContent: (content: Service[]) => dispatch(setContent(content)),
 });
 
 export const Map = connect(
