@@ -43,11 +43,17 @@ To build the front-end application for production, follow the steps below:
 
 ### Functionality overview
 
-At the top of the page you will find the search input. The search runs using the logical “AND” so an item has to match all of the entered keywords. In order to zoom the contents of the page use the zoom buttons to the left of the search bar. You can either zoom everything (left toolbox) or only the text (right toolbox). Press the button between the two toolboxes to reset the zoom.
+The Cloud Landscape comes with two views: a Table- and a Landscape View.
+The toggle button on the right top allows to switch between both.
+![Cloud Landscape View ](./docs/screenshots/landscapeView.png)
+![Cloud Landscape Table View](./docs/screenshots/tableView.png)
 
-![Cloud Landscape](./docs/screenshots/landscapeView.png)
+At the top of the page you will find the search input. The search runs using the logical “AND” so an item has to match all of the entered keywords.
+The filter icon on the very left, expandes a fitler menu. More granular filters can be set here.
+
 ![Cloud Landscape Filter](./docs/screenshots/filter.png)
 
+In order to zoom the contents of the landscape view use the zoom bar to the left of the view toggle button.
 If you click on any of the icons the page will show the detailed view of the selected service.
 
 ![Cloud Landscape Detail View](./docs/screenshots/detailView.png)
