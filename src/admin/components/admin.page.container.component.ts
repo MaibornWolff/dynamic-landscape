@@ -8,6 +8,8 @@ import {
   findServiceById,
   getLoadingStatus,
 } from '../../map/selectors/map.selector';
+import {Service} from '../../assets/data/dataType';
+import {setContent} from '../../map/actions/map.actions';
 
 const mapStateToProps = (state: State) => ({
   credentials: getCredentials(state.Admin),
@@ -20,6 +22,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(setCredentials(credentials)),
   setAvailableImages: (availableImages: string[]) =>
     dispatch(setAvailableImages(availableImages)),
+  setContent: (services: Service[]) => dispatch(setContent(services)),
 });
 
 export const Admin = connect(mapStateToProps, mapDispatchToProps)(AdminWrapped);

@@ -9,7 +9,9 @@ import EditService from './editservice/editservice.container.component';
 import {Service} from '../../assets/data/dataType';
 import {Alert} from '@material-ui/lab';
 import {ObjectID} from 'mongodb';
-import {getAvailableImages as fetchAvailableImages} from '../../shared/mongodbConnection';
+import fetchAllServices, {
+  getAvailableImages as fetchAvailableImages,
+} from '../../shared/mongodbConnection';
 
 export interface Props {
   credentials: string | undefined;
@@ -17,6 +19,7 @@ export interface Props {
   loading: boolean;
   findServiceById: (id: ObjectID | string) => Service | undefined;
   setAvailableImages: (availableImages: string[]) => void;
+  setContent: (services: Service[]) => void;
 }
 
 const ContainerGrid = styled(Grid)({
@@ -40,8 +43,11 @@ export default function Admin(props: Props) {
         .catch((err: Error) => {
           console.log(err);
         });
+      fetchAllServices(true, props.credentials)
+        .then(props.setContent)
+        .catch(err => console.error(err));
     }
-  }, [props.credentials, props.setAvailableImages]);
+  }, [props.credentials, props.setAvailableImages, props.setContent]);
 
   const closureCredentials = props.credentials;
   return (
