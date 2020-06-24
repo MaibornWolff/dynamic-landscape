@@ -118,7 +118,7 @@ export async function createMongoDBBackup(credentials: string) {
       alert(
         'MongoDB was successfully backuped to S3 with ' +
           response +
-          ' services. (path: backup/mongodbBackup.json)'
+          ' services. (path: backup/serviceBackup_[DATE].json'
       )
     )
     .catch(e => {
