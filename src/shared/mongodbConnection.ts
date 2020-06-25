@@ -97,12 +97,17 @@ export async function addNewService(
 }
 
 export async function deleteService(credentials: string, service: Service) {
+  const {_id: id, ...serviceWithoutId} = service;
+  serviceWithoutId.status = 'deleted';
   return await client.auth
     .loginWithCredential(new UserApiKeyCredential(credentials))
     .then(() =>
       db
         .collection<Service>(COLLECTION)
-        .deleteOne({_id: {$oid: (service._id as string | object).toString()}})
+        .findOneAndReplace(
+          {_id: {$oid: (id as string | object).toString()}},
+          serviceWithoutId
+        )
     );
 }
 
