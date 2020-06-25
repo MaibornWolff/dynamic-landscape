@@ -3,7 +3,9 @@ import LazyLoad from 'react-lazyload';
 
 const Logo = require('./../../../assets/logos/placeholder.svg') as string;
 
-export default function ServiceIcon(props: ImgHTMLAttributes<any>) {
+export default function ServiceIcon(
+  props: React.ImgHTMLAttributes<HTMLElement>
+) {
   const [defaultIcon, setDefaultIcon] = useState(false);
   const handleDefault = () => {
     setDefaultIcon(true);

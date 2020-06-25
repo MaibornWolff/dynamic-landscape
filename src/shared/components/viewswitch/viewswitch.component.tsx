@@ -42,7 +42,7 @@ export default function ViewSwitch(props: Props) {
   const classes = useStyles();
   const history = useHistory();
 
-  const handleChange = (even: Record<string, any>, path: string) => {
+  const handleChange = (even: React.MouseEvent<HTMLElement>, path: string) => {
     history.push(path);
   };
 
