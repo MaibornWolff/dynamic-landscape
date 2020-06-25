@@ -1,6 +1,5 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const Realm = require('realm');
 
 const baseURL = 'https://cloud.google.com';
 
@@ -18,41 +17,51 @@ const db = client
   .getServiceClient(RemoteMongoClient.factory, 'DynamicLandscape_Service')
   .db(DATABASE);
 
-const credential = new ServerApiKeyCredential(
-  'c1b3C2hiAl422vh0PEH3PNr2q6nq57mXRZzE0XPOpvT9PnvwaTp7BbnxsbtOkrhm' //admin!!!
-);
-
 init = async function () {
-  const currentServicesAuth = await client.auth.loginWithCredential(credential);
+  const readline = require('readline');
 
-  // await db.collection(COLLECTION).deleteMany({test: true});
-  const currentServices = await db.collection(COLLECTION).find({}).toArray();
-
-  let services = await fetch();
-
-  const newServices = services.filter(service => {
-    return (
-      currentServices.filter(currentService => {
-        return (
-          currentService.service === service.service ||
-          // && currentService.status !== 'review'
-          currentService.webLink === service.webLink
-        );
-      }).length === 0
-    );
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
   });
 
-  console.log(services.length);
-  console.log(newServices.length);
-  if (newServices.length > 0) {
-    try {
-      const write = await db.collection(COLLECTION).insertMany(newServices);
-      console.log(write);
-    } catch (error) {
-      console.log(error);
+  rl.question('Enter the Stich Admin API-KEY? ', async key => {
+    console.log('Key:', key);
+    rl.close();
+
+    const credential = new ServerApiKeyCredential(key);
+
+    const currentServicesAuth = await client.auth.loginWithCredential(
+      credential
+    );
+
+    const currentServices = await db.collection(COLLECTION).find({}).toArray();
+
+    let services = await fetch();
+
+    const newServices = services.filter(service => {
+      return (
+        currentServices.filter(currentService => {
+          return (
+            currentService.service === service.service ||
+            currentService.webLink === service.webLink
+          );
+        }).length === 0
+      );
+    });
+
+    console.log('Found Services', services.length);
+    console.log('New Services to insert', newServices.length);
+    if (newServices.length > 0) {
+      try {
+        const write = await db.collection(COLLECTION).insertMany(newServices);
+        console.log(write);
+      } catch (error) {
+        console.log(error);
+      }
     }
-  }
-  client.close();
+    client.close();
+  });
 };
 
 getHTML = async url => {
