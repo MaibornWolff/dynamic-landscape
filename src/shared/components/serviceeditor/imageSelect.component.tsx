@@ -37,7 +37,7 @@ export default function ImageSelect(props: Props) {
         <ServiceIcon
           height={45}
           src={
-            props.imagePath.startsWith('.')
+            props.imagePath && props.imagePath.startsWith('.')
               ? props.imagePath.substring(1)
               : props.imagePath
           }
