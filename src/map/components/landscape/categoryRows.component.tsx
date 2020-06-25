@@ -1,15 +1,15 @@
 import React from 'react';
 import ServiceButton from './servicebutton.component';
-import {DemoData, Providers} from '../../../assets/data/dataType';
+import {Service, Providers} from '../../../assets/data/dataType';
 import {createStyles, TableCell, TableRow} from '@material-ui/core';
 import {makeStyles} from '@material-ui/styles';
 
 interface Props {
-  setDetailService: (service: DemoData) => void;
+  setDetailService: (service: Service) => void;
   providers: Providers[];
   categories: string[];
-  groupedContent: Map<Providers, Map<string, DemoData[]>>;
-  filteredContent: DemoData[];
+  groupedContent: Map<Providers, Map<string, Service[]>>;
+  filteredContent: Service[];
   zoomFactor: number;
 }
 
@@ -31,9 +31,9 @@ function CategoryRows(props: Props) {
   const getServicesByProviderAndCategory = (
     provider: Providers,
     category: string
-  ): DemoData[] => props.groupedContent.get(provider)?.get(category) || [];
+  ): Service[] => props.groupedContent.get(provider)?.get(category) || [];
 
-  const isServiceFiltered = (service: DemoData): boolean =>
+  const isServiceFiltered = (service: Service): boolean =>
     !props.filteredContent.includes(service);
 
   let noUnfilteredServiceYet = true;

@@ -1,6 +1,18 @@
 import React from 'react';
-import {DemoData, DemoDataWithoutId} from '../../../assets/data/dataType';
-import {Grid, TextField} from '@material-ui/core';
+import {
+  ServiceStatus,
+  Service,
+  ServiceWithoutId,
+} from '../../../assets/data/dataType';
+import {
+  Grid,
+  TextField,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  FormHelperText,
+} from '@material-ui/core';
 import {Autocomplete} from '@material-ui/lab';
 import ImageSelect from './imageSelect.component';
 
@@ -10,7 +22,7 @@ const defaultIcons = new Map([
   ['Microsoft', './img/logos/Microsoft/CnE_Cloud/SVG/Azure_logo_icon_50.svg'],
 ]);
 
-export interface Props<ServiceType extends DemoDataWithoutId | DemoData> {
+export interface Props<ServiceType extends ServiceWithoutId | Service> {
   title: string;
   service: ServiceType;
   serviceChanged: (service: ServiceType) => void;
@@ -22,9 +34,9 @@ export interface Props<ServiceType extends DemoDataWithoutId | DemoData> {
 }
 
 export default function ServiceEditor<
-  ServiceType extends DemoDataWithoutId | DemoData
+  ServiceType extends ServiceWithoutId | Service
 >(props: Props<ServiceType>) {
-  const handleServiceChange = (changedAttributes: Partial<DemoData>) =>
+  const handleServiceChange = (changedAttributes: Partial<Service>) =>
     props.serviceChanged({
       ...props.service,
       ...changedAttributes,
@@ -33,6 +45,13 @@ export default function ServiceEditor<
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     handleServiceChange({
       service: event.target.value,
+    });
+
+  const handleStatusChange = (
+    event: React.ChangeEvent<{name?: string | undefined; value: unknown}>
+  ) =>
+    handleServiceChange({
+      status: event.target.value as ServiceStatus,
     });
 
   const handleDescriptionChange = (
@@ -81,8 +100,25 @@ export default function ServiceEditor<
           value={props.service.service}
           onChange={handleNameChange}
           disabled={props.disabled}
-          fullWidth
+          style={{width: '70%', paddingRight: 30}}
         />
+        <FormControl>
+          <InputLabel shrink id="status-select">
+            Status
+          </InputLabel>
+          <Select
+            labelId="status-select"
+            value={props.service.status}
+            onChange={handleStatusChange}
+          >
+            <MenuItem value={'published'}>published</MenuItem>
+            <MenuItem value={'review'}>review</MenuItem>
+            <MenuItem value={'deleted'}>deleted</MenuItem>
+          </Select>
+          <FormHelperText>
+            Only published Services are displayed.
+          </FormHelperText>
+        </FormControl>
       </Grid>
       <Grid item xs={12}>
         <TextField

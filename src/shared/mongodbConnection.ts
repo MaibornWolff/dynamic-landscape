@@ -1,4 +1,4 @@
-import {DemoData, DemoDataWithoutId} from '../assets/data/dataType';
+import {Service, ServiceWithoutId} from '../assets/data/dataType';
 import {
   RemoteMongoClient,
   Stitch,
@@ -17,17 +17,29 @@ const credential = new UserApiKeyCredential(
   '7jcwcGl6aSKf0oSXiW8Wb8AbLZwFkr2YHSrHcSVnDWEhXektnxJ8TipzrkDucVbj'
 );
 
-export default async function fetchAllServices(force = false) {
+export default async function fetchAllServices(
+  force = false,
+  adminCredentials?: string
+) {
   const cache = sessionStorage.getItem('serviceContent');
   const createdBy = Number(sessionStorage.getItem('createdBy'));
   if (cache && !force && createdBy && createdBy + 86400000 > Date.now()) {
     return JSON.parse(cache);
   } else {
-    let returnDoc = [] as DemoData[];
+    let returnDoc = [] as Service[];
     await client.auth
-      .loginWithCredential(credential)
-      .then(() => db.collection<DemoData>(COLLECTION).find({}).toArray())
-      .then((docs: DemoData[]) => {
+      .loginWithCredential(
+        adminCredentials
+          ? new UserApiKeyCredential(adminCredentials)
+          : credential
+      )
+      .then(() =>
+        db
+          .collection<Service>(COLLECTION)
+          .find(adminCredentials ? {} : {status: 'published'})
+          .toArray()
+      )
+      .then((docs: Service[]) => {
         console.log('[MongoDB Stitch] Connected to Stitch');
         returnDoc = docs;
         sessionStorage.setItem('serviceContent', JSON.stringify(returnDoc));
@@ -77,32 +89,35 @@ export async function getAvailableImages(credentials: string) {
 
 export async function addNewService(
   credentials: string,
-  service: DemoDataWithoutId
+  service: ServiceWithoutId
 ) {
   return await client.auth
     .loginWithCredential(new UserApiKeyCredential(credentials))
-    .then(() =>
-      db.collection<DemoDataWithoutId>(COLLECTION).insertOne(service)
-    );
+    .then(() => db.collection<ServiceWithoutId>(COLLECTION).insertOne(service));
 }
 
-export async function deleteService(credentials: string, service: DemoData) {
+export async function deleteService(credentials: string, service: Service) {
+  const {_id: id, ...serviceWithoutId} = service;
+  serviceWithoutId.status = 'deleted';
   return await client.auth
     .loginWithCredential(new UserApiKeyCredential(credentials))
     .then(() =>
       db
-        .collection<DemoData>(COLLECTION)
-        .deleteOne({_id: {$oid: (service._id as string | object).toString()}})
+        .collection<Service>(COLLECTION)
+        .findOneAndReplace(
+          {_id: {$oid: (id as string | object).toString()}},
+          serviceWithoutId
+        )
     );
 }
 
-export async function updateService(credentials: string, service: DemoData) {
+export async function updateService(credentials: string, service: Service) {
   const {_id: id, ...serviceWithoutId} = service;
   return await client.auth
     .loginWithCredential(new UserApiKeyCredential(credentials))
     .then(() =>
       db
-        .collection<DemoData>(COLLECTION)
+        .collection<Service>(COLLECTION)
         .findOneAndReplace(
           {_id: {$oid: (id as string | object).toString()}},
           serviceWithoutId

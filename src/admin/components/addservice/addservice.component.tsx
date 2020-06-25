@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ServiceEditor from '../../../shared/components/serviceeditor/serviceeditor.component';
-import {DemoData, DemoDataWithoutId} from '../../../assets/data/dataType';
+import {Service, ServiceWithoutId} from '../../../assets/data/dataType';
 import styled from 'styled-components';
 import {Button, CircularProgress, Grid} from '@material-ui/core';
 import fetchAllServices, {
@@ -13,7 +13,7 @@ export interface Props {
   categories: string[];
   providers: string[];
   keywords: string[];
-  setContent: (services: DemoData[]) => void;
+  setContent: (services: Service[]) => void;
   credentials: string;
   availableImages: string[];
   setAvailableImages: (availableImages: string[]) => void;
@@ -26,7 +26,7 @@ const Container = styled.div({
   alignItems: 'stretch',
 });
 
-const emptyService = {
+const emptyService: ServiceWithoutId = {
   service: '',
   category: [],
   provider: '',
@@ -35,10 +35,11 @@ const emptyService = {
   keywords: [],
   providerIcon: '',
   webLink: '',
+  status: 'published',
 };
 
 export default function AddService(props: Props) {
-  const [service, setService] = React.useState<DemoDataWithoutId>(emptyService);
+  const [service, setService] = React.useState<ServiceWithoutId>(emptyService);
   const [waiting, setWaiting] = React.useState<boolean>(false);
   const history = useHistory();
 
@@ -51,7 +52,7 @@ export default function AddService(props: Props) {
     };
     setService(serviceWithDefaultImgs);
     addNewService(props.credentials, serviceWithDefaultImgs)
-      .then(() => fetchAllServices(true)) // force fetch
+      .then(() => fetchAllServices(true, props.credentials)) // force fetch
       .then(services => props.setContent(services))
       .catch(err => console.error(err))
       .finally(() => {
