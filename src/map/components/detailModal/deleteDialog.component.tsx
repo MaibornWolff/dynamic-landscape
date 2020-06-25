@@ -66,7 +66,7 @@ export default function DeleteDialog(props: Props) {
             <DialogContentText>
               The service is NOT deleted from the database. Only the status is
               set to deleted and the service is no longer displayed publicly.
-              you sure you want to proceed?
+              Are you sure you want to proceed?
             </DialogContentText>
           </DialogContent>
           <DialogActions>
