@@ -64,9 +64,9 @@ export default function DeleteDialog(props: Props) {
           </DialogTitle>
           <DialogContent>
             <DialogContentText>
-              The service will be deleted from the database and not be available
-              to the visitors of the site any more. This can not be undone. Are
-              you sure you want to proceed?
+              The service is NOT deleted from the database. Only the status is
+              set to deleted and the service is no longer displayed publicly.
+              Are you sure you want to proceed?
             </DialogContentText>
           </DialogContent>
           <DialogActions>

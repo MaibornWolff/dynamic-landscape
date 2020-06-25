@@ -57,7 +57,7 @@ export default function SearchBarComponentContainer(props: Props) {
     setText(event.target.value);
   };
 
-  const keyPress = (e: any) => {
+  const keyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.keyCode === 13 || e.keyCode === 32) {
       props.setFilter({
         ...props.filter,

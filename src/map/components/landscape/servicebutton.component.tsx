@@ -70,6 +70,7 @@ export default React.memo(ServiceButton, (prevProps, nextProps) => {
   return (
     prevProps.isFiltered === nextProps.isFiltered &&
     prevProps.zoomFactor === nextProps.zoomFactor &&
+    prevProps.service.status === nextProps.service.status &&
     prevProps.shouldScroll === nextProps.shouldScroll
   );
 });
