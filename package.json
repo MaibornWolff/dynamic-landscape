@@ -39,7 +39,7 @@
     "react-router-cache-route": "^1.10.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
-    "realm": "10.0.0-beta.12",
+    "realm": "10.0.0-beta.13",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
