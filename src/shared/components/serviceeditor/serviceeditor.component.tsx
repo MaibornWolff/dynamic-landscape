@@ -131,7 +131,7 @@ export default function ServiceEditor<
         />
       </Grid>
       <Grid item xs={12}>
-        <Autocomplete<string>
+        <Autocomplete<string, true, undefined, true>
           multiple
           options={props.categories}
           value={props.service.category}
@@ -150,7 +150,7 @@ export default function ServiceEditor<
         />
       </Grid>
       <Grid item xs={12}>
-        <Autocomplete<string>
+        <Autocomplete<string, undefined, undefined, true>
           options={props.providers}
           value={props.service.provider}
           renderInput={params => (
@@ -164,7 +164,7 @@ export default function ServiceEditor<
         />
       </Grid>
       <Grid item xs={12}>
-        <Autocomplete<string>
+        <Autocomplete<string, true, undefined, true>
           multiple
           options={props.keywords}
           value={props.service.keywords}

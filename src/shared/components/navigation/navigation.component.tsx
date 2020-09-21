@@ -21,7 +21,7 @@ import {createMongoDBBackup} from '../../mongodbConnection';
 import {Hidden} from '@material-ui/core';
 
 const Logo = require('./../../../assets/logos/CL_Logo.svg') as string;
-interface Props {
+export interface Props {
   adminCredentials?: string;
 }
 
