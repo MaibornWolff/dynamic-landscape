@@ -107,7 +107,7 @@ export default function InfoModal(props: Props) {
                 <span role="img" aria-label="Love">
                   {'❤️'}
                 </span>
-                &nbsp; by the
+                &nbsp;by the{' '}
                 <LinkExternal href={urls.maibornWolff} target="/blank">
                   MaibornWolff
                 </LinkExternal>{' '}
