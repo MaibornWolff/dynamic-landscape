@@ -29,7 +29,7 @@
     "material-ui-dropzone": "^3.5.0",
     "mongodb": "^3.6.2",
     "mongodb-stitch-browser-sdk": "^4.8.0",
-    "query-string": "^6.13.2",
+    "query-string": "^6.13.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-draggable": "^4.4.3",
