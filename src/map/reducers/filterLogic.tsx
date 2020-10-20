@@ -7,9 +7,16 @@ import {
 
 // Create a list of Unique Values to filter on
 export function getToFilterValues(services: Service[]): ServiceFeatures {
-  const provider = new Set(services.map(service => service.provider));
-  const category = new Set(services.flatMap(service => service.category));
-  const keywords = new Set(services.flatMap(service => service.keywords));
+  const definedFilter: <T>(item: T) => boolean = item => !!item;
+  const provider = new Set(
+    services.map(service => service.provider).filter(definedFilter)
+  );
+  const category = new Set(
+    services.flatMap(service => service.category).filter(definedFilter)
+  );
+  const keywords = new Set(
+    services.flatMap(service => service.keywords).filter(definedFilter)
+  );
 
   return {
     provider: Array.from(provider),
