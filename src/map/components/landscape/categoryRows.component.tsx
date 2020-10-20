@@ -3,6 +3,7 @@ import ServiceButton from './servicebutton.component';
 import {Service, Providers} from '../../../assets/data/dataType';
 import {createStyles, TableCell, TableRow} from '@material-ui/core';
 import {makeStyles} from '@material-ui/styles';
+import {sortBy} from 'lodash';
 
 interface Props {
   setDetailService: (service: Service) => void;
@@ -31,7 +32,11 @@ function CategoryRows(props: Props) {
   const getServicesByProviderAndCategory = (
     provider: Providers,
     category: string
-  ): Service[] => props.groupedContent.get(provider)?.get(category) || [];
+  ): Service[] =>
+    sortBy(
+      props.groupedContent.get(provider)?.get(category),
+      service => service.service
+    ) || [];
 
   const isServiceFiltered = (service: Service): boolean =>
     !props.filteredContent.includes(service);
