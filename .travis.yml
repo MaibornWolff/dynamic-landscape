@@ -15,7 +15,7 @@ jobs:
       install: npm install
       script: npm run build
     - stage: deploy
-      if: (branch = master) AND (type != pull_request)
+      if: (branch = main) AND (type != pull_request)
       install: npm install
       script: npm run build
       deploy:
@@ -29,4 +29,4 @@ jobs:
         local_dir: build
         on:
           repo: MaibornWolff/cloud-landscape
-          branch: master
+          branch: main
