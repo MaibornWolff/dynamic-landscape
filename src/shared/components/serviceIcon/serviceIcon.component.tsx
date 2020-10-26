@@ -1,7 +1,7 @@
-import React, {useState, useEffect, ImgHTMLAttributes} from 'react';
+import React, {useState, useEffect} from 'react';
 import LazyLoad from 'react-lazyload';
 
-const Logo = require('./../../../assets/logos/placeholder.svg') as string;
+import Logo from './../../../assets/logos/placeholder.svg';
 
 export default function ServiceIcon(
   props: React.ImgHTMLAttributes<HTMLElement>

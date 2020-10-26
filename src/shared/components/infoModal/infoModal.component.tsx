@@ -17,7 +17,7 @@ import {
 import LinkExternal from '@material-ui/core/Link';
 import {urls} from '../../externalURL';
 
-const Logo = require('./../../../assets/logos/CL_Logo.svg') as string;
+import Logo from './../../../assets/logos/CL_Logo.svg';
 
 interface Props {
   open: boolean;

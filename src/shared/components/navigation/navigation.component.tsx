@@ -20,7 +20,7 @@ import InfoModal from './../infoModal/infoModal.component';
 import {createMongoDBBackup} from '../../mongodbConnection';
 import {Hidden} from '@material-ui/core';
 
-const Logo = require('./../../../assets/logos/CL_Logo.svg') as string;
+import Logo from './../../../assets/logos/CL_Logo.svg';
 export interface Props {
   adminCredentials?: string;
 }

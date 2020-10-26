@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core';
 import {urls} from '../../externalURL';
 
-const Logo = require('./../../../assets/logos/CL_Logo.svg') as string;
+import Logo from './../../../assets/logos/CL_Logo.svg';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -25,7 +25,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListSharpIcon from '@material-ui/icons/FilterListSharp';
 
-const Logo = require('./../../../../assets/logos/CL_Logo.svg') as string;
+import Logo from './../../../../assets/logos/CL_Logo.svg';
 
 export interface Props {
   filter: DataFilter;
