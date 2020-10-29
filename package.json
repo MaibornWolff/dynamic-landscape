@@ -68,7 +68,7 @@
     "@types/jest": "^26.0.15",
     "@types/lodash": "^4.14.162",
     "@types/mongodb": "^3.5.31",
-    "@types/node": "^14.14.3",
+    "@types/node": "^14.14.6",
     "@types/query-string": "^6.3.0",
     "@types/react": "^16.9.53",
     "@types/react-dom": "16.9.8",
