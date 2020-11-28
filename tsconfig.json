@@ -4,7 +4,12 @@
     "rootDir": ".",
     "outDir": "build",
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext", "es6"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext",
+      "es6"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -16,9 +21,20 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react",
-    "typeRoots": ["node_modules/@types", "types"]
+    "jsx": "react-jsx",
+    "typeRoots": [
+      "node_modules/@types",
+      "types"
+    ]
   },
-  "include": ["src/**/*.ts", "test/**/*.ts"],
-  "exclude": ["node_modules", "build", "scripts", "webpack"]
+  "include": [
+    "src/**/*.ts",
+    "test/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    "scripts",
+    "webpack"
+  ]
 }
